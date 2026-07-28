@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  html,body{margin:0;padding:0;background:#0A0A0D;}
+  body{font-family:'DM Sans',sans-serif;color:#F2F2F4;-webkit-font-smoothing:antialiased;}
+  a{color:#F2F2F4;text-decoration:none;}
+  a:hover{color:#4F7CFF;}
+  details summary::-webkit-details-marker{display:none;}
+  image-slot[data-avatar]::part(empty){color:transparent;overflow:hidden;padding:0;}
+  #hero h1 br{display:none;}
+  @media(min-width:820px){#hero h1 br{display:inline;}}
+</style>
+</helmet>
+<div style="background:#0A0A0D;color:#F2F2F4;font-family:'DM Sans',sans-serif;line-height:1.5;">
+
+<!-- HERO -->
+<header id="hero" data-screen-label="Hero" style="background:radial-gradient(ellipse 90% 60% at 50% -10%, rgba(79,124,255,0.14), rgba(79,124,255,0) 70%), #0A0A0D;padding:clamp(72px,12vw,140px) 24px clamp(64px,9vw,110px);">
+  <div style="max-width:920px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px;">
+    <div style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:999px;background:rgba(79,124,255,0.07);border:1px solid rgba(79,124,255,0.28);font-size:12.5px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#D6DAE6;white-space:nowrap;">
+      <span style="font-size:14px;line-height:1;">🏅</span>La comunidad #1 para diseñadores web
+    </div>
+    <h1 style="margin:0;font-size:clamp(30px,4.8vw,44px);font-weight:600;letter-spacing:-0.02em;line-height:1.15;text-wrap:pretty;">Conseguí tu primer cliente de diseño web<br>en 30 días y escalá a $1000/mes</h1>
+    <p style="margin:0;max-width:600px;font-size:clamp(16px,2.2vw,19px);color:#A0A0AB;text-wrap:pretty;">Aprendé a crear webs con IA y conseguí clientes que te paguen por ellas. Sin experiencia previa y sin prospectar en frío.</p>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:8px;">
+      <a href="https://walink.co/49czl9" target="_blank" rel="noopener" style="display:inline-block;background:#4F7CFF;color:#FFFFFF;font-weight:600;font-size:17px;padding:16px 32px;border-radius:10px;" style-hover="background:#3E68E8;color:#FFFFFF;">Quiero entrar en la comunidad</a>
+      <span style="font-size:13px;color:#8B8B96;">Respondo personalmente cada mensaje</span>
+    </div>
+    <sc-if value="{{ showHeroVideo }}" hint-placeholder-val="{{ true }}">
+      <div style="width:100%;max-width:760px;margin-top:24px;background:#101014;border:1px solid #1E1E26;border-radius:14px;overflow:hidden;position:relative;aspect-ratio:16/9;">
+        <iframe src="https://www.loom.com/embed/42872e71533348b2a016449282b83d09" frameborder="0" webkitallowfullscreen="{{ true }}" mozallowfullscreen="{{ true }}" allowFullScreen="{{ true }}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;display:block;"></iframe>
+      </div>
+    </sc-if>
+  </div>
+</header>
+
+<!-- IDENTIFICACIÓN -->
+<section id="identificacion" data-screen-label="Identificación" style="padding:clamp(64px,10vw,120px) 24px;border-top:1px solid #16161C;">
+  <div style="max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:40px;">
+    <h2 style="margin:0;font-size:clamp(26px,3.6vw,38px);font-weight:600;letter-spacing:-0.015em;text-align:center;text-wrap:pretty;">Si estás acá, probablemente te pase esto</h2>
+    <div style="display:flex;flex-direction:column;gap:0;">
+      <sc-for list="{{ dolores }}" as="d" hint-placeholder-count="4">
+        <div style="display:flex;gap:18px;align-items:flex-start;padding:22px 4px;border-top:1px solid #1E1E26;">
+          <div style="flex:none;width:38px;height:38px;border-radius:10px;border:1px solid #1E1E26;display:flex;align-items:center;justify-content:center;color:#4F7CFF;font-size:15px;font-weight:500;">{{ d.icon }}</div>
+          <p style="margin:0;padding-top:7px;font-size:16.5px;color:#C9C9D1;text-wrap:pretty;">{{ d.text }}</p>
+        </div>
+      </sc-for>
+    </div>
+    <p style="margin:0;text-align:center;font-size:clamp(19px,2.6vw,23px);font-weight:600;letter-spacing:-0.01em;">Todos empezamos ahí. La diferencia es el sistema.</p>
+  </div>
+</section>
+
+<!-- PRUEBA SOCIAL -->
+<section id="comunidad" data-screen-label="Prueba social" style="padding:clamp(64px,10vw,120px) 24px;border-top:1px solid #16161C;">
+  <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:40px;">
+    <h2 style="margin:0;font-size:clamp(26px,3.6vw,38px);font-weight:600;letter-spacing:-0.015em;text-align:center;text-wrap:pretty;">Lo que pasa adentro todos los días</h2>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:28px;">
+      <div ref="{{ capRef }}" style="position:relative;width:100%;overflow:hidden;max-height:{{ capMaxHeight }};transition:max-height 0.6s ease;">
+        <div style="columns:300px 3;column-gap:20px;">
+          <sc-for list="{{ capturas }}" as="c" hint-placeholder-count="14">
+            <div style="break-inside:avoid;margin:0 0 20px;border:1px solid #1E1E26;border-radius:12px;overflow:hidden;background:#101014;padding:0;line-height:0;font-size:0;">
+              <div style="aspect-ratio:{{ c.ratio }};line-height:0;font-size:0;"><image-slot id="{{ c.id }}" shape="rect" fit="cover" placeholder="{{ c.label }}"></image-slot></div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="position:absolute;bottom:0;left:0;right:0;height:160px;background:linear-gradient(rgba(10,10,13,0), #0A0A0D);pointer-events:none;display:{{ fadeDisplay }};"></div>
+      </div>
+      <button onClick="{{ toggleCapturas }}" style="all:unset;box-sizing:border-box;display:flex;align-items:center;gap:10px;cursor:pointer;font-family:inherit;background:transparent;border:1px solid #2A2A34;color:#F2F2F4;font-weight:600;font-size:15px;padding:13px 26px;border-radius:10px;" style-hover="border-color:#4F7CFF;color:#4F7CFF;">
+        <span>{{ verMasLabel }}</span>
+        <span style="display:inline-flex;transform:rotate({{ arrowRot }});transition:transform 0.4s ease;font-size:13px;color:#4F7CFF;">↓</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTADOS -->
+<section id="resultados" data-screen-label="Resultados" style="padding:clamp(64px,10vw,120px) 24px;border-top:1px solid #16161C;">
+  <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:40px;">
+    <h2 style="margin:0;font-size:clamp(26px,3.6vw,38px);font-weight:600;letter-spacing:-0.015em;text-align:center;text-wrap:pretty;">Resultados de nuestros miembros</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px;">
+      <sc-for list="{{ testimonios }}" as="t" hint-placeholder-count="3">
+        <article style="display:{{ t.display }};opacity:{{ t.opacity }};transition:opacity 0.5s ease {{ t.delay }};background:#101014;border:1px solid #1E1E26;border-radius:14px;padding:24px;">
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:40px;height:40px;flex:none;"><image-slot id="{{ t.avatarId }}" src="{{ t.avatarSrc }}" fit="cover" shape="circle" placeholder=" " data-avatar="true"></image-slot></div>
+              <div style="display:flex;flex-direction:column;">
+                <span style="font-weight:700;font-size:15px;">{{ t.nombre }}</span>
+                <span style="font-size:12.5px;color:#8B8B96;">Miembro de WDN</span>
+              </div>
+            </div>
+            <p style="margin:0;font-weight:700;font-size:17px;letter-spacing:-0.01em;line-height:1.3;min-height:2.6em;">{{ t.resultado }}</p>
+            <sc-if value="{{ t.hasEmbed }}" hint-placeholder-val="{{ false }}">
+              <div style="width:100%;max-width:{{ t.embedMaxWidth }};margin:0 auto;aspect-ratio:{{ t.embedRatio }};border-radius:10px;overflow:hidden;background:#0A0A0D;border:1px solid #1E1E26;">
+                <iframe src="{{ t.embedSrc }}" style="width:100%;height:100%;border:0;display:block;" allow="encrypted-media; picture-in-picture" allowFullScreen="{{ true }}"></iframe>
+              </div>
+            </sc-if>
+            <sc-if value="{{ t.playing }}" hint-placeholder-val="{{ false }}">
+              <div style="width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#0A0A0D;">
+                <iframe src="{{ t.iframeSrc }}" style="width:100%;height:100%;border:0;display:block;" allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen="{{ true }}"></iframe>
+              </div>
+            </sc-if>
+            <sc-if value="{{ t.notPlaying }}" hint-placeholder-val="{{ true }}">
+              <div onClick="{{ t.playClick }}" data-video-url="{{ t.videoUrl }}" style="position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#0A0A0D;border:1px solid #1E1E26;cursor:pointer;">
+                <image-slot id="{{ t.thumbId }}" shape="rect" placeholder="miniatura del video"></image-slot>
+                <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);transition:background 0.3s ease;pointer-events:none;" style-hover="background:rgba(0,0,0,0.15);"></div>
+                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:#4F7CFF;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+                  <div style="width:0;height:0;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:15px solid #FFFFFF;margin-left:4px;"></div>
+                </div>
+              </div>
+            </sc-if>
+            <p style="margin:0;font-size:14.5px;color:#A0A0AB;font-style:italic;text-wrap:pretty;">{{ t.cita }}</p>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+    <div style="display:{{ verMasTestimoniosDisplay }};justify-content:center;">
+      <button onClick="{{ toggleResultados }}" style="all:unset;box-sizing:border-box;display:flex;align-items:center;gap:10px;cursor:pointer;font-family:inherit;background:transparent;border:1px solid #2A2A34;color:#F2F2F4;font-weight:600;font-size:15px;padding:13px 26px;border-radius:10px;" style-hover="border-color:#4F7CFF;color:#4F7CFF;">
+        <span>{{ verMasTestimoniosLabel }}</span>
+        <span style="display:inline-flex;transform:rotate({{ resArrowRot }});transition:transform 0.4s ease;font-size:13px;color:#4F7CFF;">↓</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- QUIÉN SOY -->
+<section id="quien-soy" data-screen-label="Quién soy" style="padding:clamp(64px,10vw,120px) 24px;border-top:1px solid #16161C;">
+  <div style="max-width:920px;margin:0 auto;display:flex;flex-wrap:wrap;gap:clamp(32px,5vw,56px);align-items:center;">
+    <div style="flex:1 1 280px;max-width:360px;aspect-ratio:3/4;"><image-slot id="foto-gino" shape="rounded" radius="16" placeholder="foto vertical de Gino"></image-slot></div>
+    <div style="flex:1 1 320px;display:flex;flex-direction:column;gap:20px;">
+      <h2 style="margin:0;font-size:clamp(26px,3.6vw,38px);font-weight:600;letter-spacing:-0.015em;">Hola, soy Gino</h2>
+      <p style="margin:0;font-size:16.5px;color:#C9C9D1;text-wrap:pretty;">Hace [CONFIRMAR] años estaba exactamente donde estás vos. Hoy trabajé con más de [CONFIRMAR] clientes de todo el mundo y facturo con diseño web todos los meses. No enseño teoría — enseño lo que uso.</p>
+      <div style="display:flex;gap:clamp(24px,4vw,48px);flex-wrap:wrap;margin-top:8px;">
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <span style="font-size:clamp(28px,4vw,38px);font-weight:700;color:#4F7CFF;letter-spacing:-0.02em;">+80</span>
+          <span style="font-size:13px;color:#8B8B96;">clientes cerrados</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <span style="font-size:clamp(28px,4vw,38px);font-weight:700;color:#4F7CFF;letter-spacing:-0.02em;">+250</span>
+          <span style="font-size:13px;color:#8B8B96;">miembros en la comunidad</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <span style="font-size:clamp(28px,4vw,38px);font-weight:700;color:#4F7CFF;letter-spacing:-0.02em;">+10</span>
+          <span style="font-size:13px;color:#8B8B96;">países</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TODO LO QUE RECIBÍS -->
+<section id="recibis" data-screen-label="Todo lo que recibís" style="padding:clamp(64px,10vw,120px) 24px;border-top:1px solid #16161C;">
+  <div style="max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:40px;">
+    <h2 style="margin:0;font-size:clamp(26px,3.6vw,38px);font-weight:600;letter-spacing:-0.015em;text-align:center;text-wrap:pretty;">Todo lo que recibís cuando entrás.</h2>
+    <div style="display:flex;flex-direction:column;">
+      <sc-for list="{{ entregables }}" as="e" hint-placeholder-count="7">
+        <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:baseline;padding:26px 4px;border-top:1px solid #1E1E26;">
+          <span style="flex:none;width:44px;font-size:15px;color:#5A5A64;font-weight:500;">{{ e.num }}</span>
+          <div style="flex:1 1 320px;display:flex;flex-direction:column;gap:6px;">
+            <span style="font-weight:600;font-size:17px;letter-spacing:-0.01em;">{{ e.titulo }}</span>
+            <span style="font-size:15px;color:#A0A0AB;text-wrap:pretty;">{{ e.desc }}</span>
+          </div>
+          <span style="flex:none;font-size:11.5px;letter-spacing:0.12em;color:#8B8B96;font-weight:500;">{{ e.cat }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- PLANES -->
+<section id="planes" data-screen-label="Planes" style="padding:clamp(64px,10vw,120px) 24px;border-top:1px solid #16161C;">
+  <div style="max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:48px;">
+    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;">
+      <span style="font-size:12px;letter-spacing:0.16em;color:#4F7CFF;font-weight:600;">PLANES</span>
+      <h2 style="margin:0;font-size:clamp(26px,3.8vw,40px);font-weight:600;letter-spacing:-0.015em;text-wrap:pretty;">Elegí cómo querés entrar</h2>
+      <p style="margin:0;max-width:520px;font-size:16px;color:#A0A0AB;text-wrap:pretty;">Los dos te dan acceso a la comunidad. El anual te desbloquea todo desde el día uno.</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;gap:24px;padding-top:14px;">
+      <!-- CARD ANUAL (primero en el DOM: queda arriba al apilarse en mobile) -->
+      <article style="position:relative;flex:1 1 320px;max-width:400px;background:#101016;border:1px solid #4F7CFF;border-radius:16px;padding:44px 32px 32px;display:flex;flex-direction:column;gap:18px;margin-top:-14px;margin-bottom:-14px;box-sizing:border-box;">
+        <span style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:#4F7CFF;color:#FFFFFF;font-size:11px;letter-spacing:0.12em;font-weight:600;padding:6px 14px;border-radius:999px;white-space:nowrap;">EL MÁS ELEGIDO</span>
+        <span style="font-size:17px;font-weight:600;">Anual</span>
+        <div style="display:flex;align-items:baseline;gap:6px;">
+          <span style="font-size:clamp(40px,6vw,52px);font-weight:700;letter-spacing:-0.02em;line-height:1;">$199</span>
+          <span style="font-size:15px;color:#8B8B96;">/año</span>
+        </div>
+        <span style="font-size:14px;color:#4F7CFF;font-weight:500;">te sale $16,58 por mes · ahorrás 57%</span>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:6px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="flex:none;color:#4F7CFF;font-size:14px;padding-top:2px;">✓</span><span style="font-size:15px;color:#C9C9D1;">Todo el contenido desbloqueado desde el día uno</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="flex:none;color:#4F7CFF;font-size:14px;padding-top:2px;">✓</span><span style="font-size:15px;color:#C9C9D1;">Llamada 1:1 de bienvenida conmigo</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="flex:none;color:#4F7CFF;font-size:14px;padding-top:2px;">✓</span><span style="font-size:15px;color:#C9C9D1;">Acceso a la bolsa de trabajo de la comunidad</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="flex:none;color:#4F7CFF;font-size:14px;padding-top:2px;">✓</span><span style="font-size:15px;color:#C9C9D1;">Precio congelado de por vida</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="flex:none;color:#4F7CFF;font-size:14px;padding-top:2px;">✓</span><span style="font-size:15px;color:#C9C9D1;">[CONFIRMAR: línea sobre el primer cliente]</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="flex:none;color:#4F7CFF;font-size:14px;padding-top:2px;">✓</span><span style="font-size:15px;color:#C9C9D1;">Todo lo del plan mensual</span></div>
+        </div>
+        <a href="https://walink.co/wi1rei" target="_blank" rel="noopener" style="display:block;margin-top:auto;box-sizing:border-box;width:100%;background:#4F7CFF;color:#FFFFFF;font-weight:600;font-size:16px;padding:15px 24px;border-radius:10px;text-align:center;" style-hover="background:#3E68E8;color:#FFFFFF;">Empezar anual</a>
+      </article>
+      <!-- CARD MENSUAL -->
+      <article style="flex:1 1 320px;max-width:400px;background:#0A0A0D;border:1px solid #1E1E26;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:18px;box-sizing:border-box;">
+        <span style="font-size:17px;font-weight:600;">Mensual</span>
+        <div style="display:flex;align-items:baseline;gap:6px;">
+          <span style="font-size:clamp(40px,6vw,52px);font-weight:700;letter-spacing:-0.02em;line-height:1;">$39</span>
+          <span style="font-size:15px;color:#8B8B96;">/mes</span>
+        </div>
+        <span style="font-size:14px;color:#8B8B96;">Cancelás cuando quieras</span>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:6px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="flex:none;color:#8B8B96;font-size:14px;padding-top:2px;">✓</span><span style="font-size:15px;color:#C9C9D1;">Acceso a la comunidad y networking</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="flex:none;color:#8B8B96;font-size:14px;padding-top:2px;">✓</span><span style="font-size:15px;color:#C9C9D1;">Módulos que se desbloquean por nivel</span></div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="flex:none;color:#8B8B96;font-size:14px;padding-top:2px;">✓</span><span style="font-size:15px;color:#C9C9D1;">Clases y llamadas en vivo semanales</span></div>
+        </div>
+        <a href="https://walink.co/4eoc35" target="_blank" rel="noopener" style="display:block;margin-top:auto;box-sizing:border-box;width:100%;background:transparent;color:#F2F2F4;font-weight:600;font-size:16px;padding:15px 24px;border-radius:10px;text-align:center;border:1px solid #2A2A34;" style-hover="border-color:#4F7CFF;color:#4F7CFF;">Empezar mensual</a>
+      </article>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;">
+      <span style="font-size:13.5px;color:#8B8B96;text-wrap:pretty;">Pagás por Mercado Pago o transferencia, en pesos o en dólares. Te escribo y te doy el acceso el mismo día.</span>
+      <span style="font-size:12px;color:#5A5A64;">Garantía de 7 días. Si no es para vos, te devuelvo el 100%.</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" data-screen-label="FAQ" style="padding:clamp(64px,10vw,120px) 24px;border-top:1px solid #16161C;">
+  <div style="max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:40px;">
+    <h2 style="margin:0;font-size:clamp(26px,3.6vw,38px);font-weight:600;letter-spacing:-0.015em;text-align:center;">Preguntas frecuentes</h2>
+    <div style="display:flex;flex-direction:column;">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="8">
+        <div style="border-top:1px solid #1E1E26;">
+          <button onClick="{{ f.toggle }}" style="all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:center;gap:16px;width:100%;padding:20px 4px;cursor:pointer;font-family:inherit;">
+            <span style="font-size:16.5px;font-weight:500;color:#F2F2F4;">{{ f.q }}</span>
+            <span style="flex:none;font-size:20px;color:#4F7CFF;font-weight:400;">{{ f.symbol }}</span>
+          </button>
+          <div style="display:{{ f.answerDisplay }};padding:0 4px 22px;">
+            <p style="margin:0;font-size:15px;color:#A0A0AB;text-wrap:pretty;">{{ f.a }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta-final" data-screen-label="CTA final" style="background:radial-gradient(ellipse 90% 70% at 50% 110%, rgba(79,124,255,0.14), rgba(79,124,255,0) 70%), #0A0A0D;padding:clamp(80px,12vw,140px) 24px;border-top:1px solid #16161C;">
+  <div style="max-width:640px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;">
+    <h2 style="margin:0;font-size:clamp(28px,4.4vw,44px);font-weight:600;letter-spacing:-0.02em;text-wrap:pretty;">Tu primer cliente está más cerca de lo que pensás</h2>
+    <p style="margin:0;font-size:17px;color:#A0A0AB;">Entrás hoy, empezás hoy.</p>
+    <a href="https://walink.co/49czl9" target="_blank" rel="noopener" style="display:inline-block;background:#4F7CFF;color:#FFFFFF;font-weight:600;font-size:17px;padding:16px 32px;border-radius:10px;margin-top:10px;" style-hover="background:#3E68E8;color:#FFFFFF;">Quiero entrar en la comunidad</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer" data-screen-label="Footer" style="border-top:1px solid #16161C;padding:32px 24px;">
+  <div style="max-width:1120px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;">
+    <span style="font-weight:600;font-size:15px;">Web Design Network</span>
+    <span style="font-size:13px;color:#8B8B96;">© 2026 Web Design Network</span>
+    <div style="display:flex;gap:20px;">
+      <a href="#" style="font-size:13px;color:#8B8B96;" style-hover="color:#4F7CFF;">Términos</a>
+      <a href="#" style="font-size:13px;color:#8B8B96;" style-hover="color:#4F7CFF;">Privacidad</a>
+    </div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;showHeroVideo&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Hero&quot;},
+  &quot;testimonialCount&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;2&quot;, &quot;3&quot;], &quot;default&quot;: &quot;3&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Resultados&quot;}
+}">
+class Component extends DCLogic {
+  state = { open: -1, capExpanded: false, capMaxH: "640px", resExpanded: false, resShown: false, playing: {}, capRatios: {} };
+  componentDidMount() {
+    // mide el ratio natural de cada captura cargada para que el alto de la card salga de la imagen
+    const watch = () => {
+      for (let i = 1; i <= 13; i++) {
+        const id = "post-" + i;
+        const slot = document.querySelector('image-slot[id="' + id + '"]');
+        if (!slot || slot._wdnWatched) continue;
+        slot._wdnWatched = true;
+        const measure = () => {
+          const img = slot.shadowRoot && slot.shadowRoot.querySelector(".frame img");
+          if (!img) return;
+          const apply = () => {
+            if (!img.naturalWidth) return;
+            const r = img.naturalWidth + " / " + img.naturalHeight;
+            if (this.state.capRatios[id] !== r) {
+              // el contenedor pasa a tener el ratio natural: resetear pan/zoom guardado para mostrar la imagen entera
+              if (slot._view && (slot._view.s !== 1 || slot._view.x !== 0 || slot._view.y !== 0)) {
+                slot._view = { s: 1, x: 0, y: 0 };
+                if (slot._commitView) slot._commitView();
+              }
+              this.setState(s => ({ capRatios: { ...s.capRatios, [id]: r } }), () => {
+                // re-render del slot una vez que el wrapper ya tiene el ratio natural
+                setTimeout(() => { if (slot._render) slot._render(); }, 50);
+              });
+            }
+          };
+          if (img.complete && img.naturalWidth) apply();
+          img.addEventListener("load", apply);
+        };
+        new MutationObserver(measure).observe(slot, { attributes: true, attributeFilter: ["data-filled"] });
+        measure();
+      }
+    };
+    watch();
+    const t = setInterval(watch, 1000);
+    setTimeout(() => clearInterval(t), 10000);
+  }
+  _raf2 = (fn) => {
+    let done = false;
+    const run = () => { if (!done) { done = true; fn(); } };
+    requestAnimationFrame(() => requestAnimationFrame(run));
+    setTimeout(run, 80);
+  };
+  toggleResultados = () => {
+    if (!this.state.resExpanded) {
+      this.setState({ resExpanded: true, resShown: false });
+      this._raf2(() => this.setState({ resShown: true }));
+    } else {
+      this.setState({ resExpanded: false, resShown: false });
+      const h2 = document.querySelector("#resultados h2");
+      if (h2) window.scrollTo({ top: h2.getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" });
+    }
+  };
+  toggleCapturas = () => {
+    const el = this.capRef && this.capRef.current;
+    if (!el) return;
+    clearTimeout(this._capT);
+    if (!this.state.capExpanded) {
+      this.setState({ capExpanded: true, capMaxH: el.scrollHeight + "px" });
+      this._capT = setTimeout(() => { if (this.state.capExpanded) this.setState({ capMaxH: "none" }); }, 650);
+    } else {
+      this.setState({ capMaxH: el.scrollHeight + "px" });
+      this._raf2(() => this.setState({ capExpanded: false, capMaxH: "640px" }));
+      const h2 = document.querySelector("#comunidad h2");
+      if (h2) window.scrollTo({ top: h2.getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" });
+    }
+  };
+  renderVals() {
+    this.capRef = this.capRef || React.createRef();
+    const emptyRatios = ["16/10", "4/5", "1/1", "16/9", "3/4", "16/10", "2/3", "16/9", "4/5", "1/1", "16/10", "3/4", "16/9"];
+    const capturas = emptyRatios.map((fallback, i) => {
+      const id = "post-" + (i + 1);
+      // el alto sale de la imagen cargada (ratio natural); el fallback solo da alto mínimo al placeholder vacío
+      return { id, ratio: this.state.capRatios[id] || fallback, label: "screenshot " + (i + 1) + " — se muestra completo" };
+    });
+    const showHeroVideo = this.props.showHeroVideo ?? true;
+    const count = parseInt(this.props.testimonialCount ?? "3", 10);
+    const dolores = [
+      { icon: "✕", text: "Mandaste decenas de mensajes en frío y nadie te respondió" },
+      { icon: "$", text: "Sabés diseñar, pero no sabés cómo conseguir que te paguen por eso" },
+      { icon: "?", text: "Ves gente cobrando $1000 por webs y no entendés qué hacen distinto" },
+      { icon: "↺", text: "Cada mes arrancás de cero, sin saber de dónde va a salir el próximo cliente" },
+    ];
+    const resVisible = count;
+    const titulares = [
+      "[Titular del resultado 1]", "[Titular del resultado 2]", "[Titular del resultado 3]", "[Titular del resultado 4]",
+      "[Titular del resultado 5]", "[Titular del resultado 6]", "[Titular del resultado 7]",
+    ];
+    // testimonios con video ya cargado: se embeben directo (sin miniatura). ratio "9/16" = vertical
+    const embeds = {
+      0: {
+        src: "https://www.loom.com/embed/082b1db400a04356ba7b9a8ec9e0d29c", ratio: "9/16",
+        nombre: "Joel Soria", avatar: "./uploads/joel.jpg",
+        resultado: "Consiguió su primer cliente en menos de dos semanas",
+        cita: "“Había mandado más de 2000 mensajes en frío antes de entrar en la comunidad.”",
+      },
+      1: {
+        src: "https://www.loom.com/embed/4cfbc98beb8049868fe1bd28ff62e237", ratio: "9/16",
+        nombre: "Tomás Espinosa", avatar: "./uploads/tomas-espinosa.jpeg",
+        resultado: "Cerró su primer cliente en menos de 21 días",
+        cita: "“Era un estudiante de programación frustrado.”",
+      },
+      2: {
+        src: "https://www.loom.com/embed/a6dc1746e5a54f359814dd58e0d96ddd", ratio: "9/16",
+        nombre: "Mateo Narducci", avatar: "./uploads/mateo.jpg",
+        resultado: "10/10 la comunidad, estaba un poco perdido antes de entrar",
+        cita: "“Entré en la comunidad hace poco y me ordenó muchísimo. Me gustó que la gente está toda en la misma.”",
+      },
+      3: {
+        src: "https://www.loom.com/embed/9a4682e75e354d8298f2e5594d867069", ratio: "16/9",
+        nombre: "Lorena Castro", avatar: "./uploads/lorena-castro.jpg",
+        resultado: "Cerró su primer cliente en Framer gracias a la comunidad",
+        cita: "“La comunidad me ayudó mucho a poder organizar mis ideas.”",
+      },
+      4: {
+        src: "https://www.loom.com/embed/dd68f0cfa64a4e519f8397ed00472b40", ratio: "16/9",
+        nombre: "Carol", avatar: "./uploads/carol.jpg",
+        resultado: "Diseñadora UX/UI",
+        cita: "“Era lo que necesitaba.”",
+      },
+      5: {
+        src: "https://www.loom.com/embed/c13c82b228ef4cacb0915d9f84f1eca2", ratio: "16/9",
+        nombre: "Franco Fucinelli", avatar: "./uploads/franco.jpg",
+        resultado: "La comunidad está genial, no sabía que había ese intercambio",
+        cita: "“Me terminó convenciendo que hay un mix de clases grabadas y llamadas en vivo.”",
+      },
+      6: {
+        src: "https://www.loom.com/embed/5ab9846079cd4193b8ce0413c6ea8fca", ratio: "16/9",
+        nombre: "Hernán Bugner", avatar: "./uploads/hernan.jpg",
+        resultado: "Consiguió su primer cliente: una nutricionista italiana",
+        cita: "“Valoro mucho que la formación no se queda solo en diseño web, también te prepara para la vida real.”",
+      },
+    };
+    const testimoniosAll = titulares.map((resultado, i) => {
+      const playingUrl = this.state.playing[i];
+      const hidden = i >= resVisible;
+      const embed = embeds[i];
+      return {
+        avatarId: "avatar-" + (i + 1), thumbId: "thumb-" + (i + 1),
+        avatarSrc: (embed && embed.avatar) || "",
+        nombre: (embed && embed.nombre) || "[Nombre]",
+        resultado: (embed && embed.resultado) || resultado,
+        cita: (embed && embed.cita) || "“Cita corta de ejemplo, una o dos líneas del testimonio.”",
+        videoUrl: "",
+        hasEmbed: !!embed, embedSrc: embed ? embed.src : "", embedRatio: embed ? embed.ratio : "16/9",
+        embedMaxWidth: embed && embed.ratio === "9/16" ? "300px" : "100%",
+        playing: !embed && !!playingUrl, notPlaying: !embed && !playingUrl, iframeSrc: playingUrl || "",
+        display: hidden && !this.state.resExpanded ? "none" : "block",
+        opacity: hidden && !this.state.resShown ? 0 : 1,
+        delay: hidden ? ((i - resVisible) * 0.08).toFixed(2) + "s" : "0s",
+        playClick: (e) => {
+          const url = e.currentTarget.getAttribute("data-video-url");
+          if (!url) return;
+          const sep = url.includes("?") ? "&" : "?";
+          this.setState(s => ({ playing: { ...s.playing, [i]: url + sep + "autoplay=1" } }));
+        },
+      };
+    });
+    const hiddenCount = Math.max(0, testimoniosAll.length - resVisible);
+    const entregables = [
+      { num: "01", titulo: "10 módulos progresivos · +100 clases", desc: "De mentalidad y fundamentos hasta escalar a $1000/mes. Cada clase termina con un ejercicio que aplicás con un cliente real, no con teoría.", cat: "FORMACIÓN" },
+      { num: "02", titulo: "Webs con IA desde cero", desc: "Aprendés a construir webs que se venden aunque nunca hayas diseñado nada. Claude, Framer y el flujo exacto que uso para entregar rápido y cobrar más.", cat: "FORMACIÓN" },
+      { num: "03", titulo: "El Sistema Go Live", desc: "El método con el que cerrás tu primer cliente sin experiencia previa y sin prospección en frío.", cat: "FORMACIÓN" },
+      { num: "04", titulo: "Mentorías en vivo todas las semanas", desc: "Lunes técnica + negocio, miércoles ventas. Q&A sobre tu caso real, todas grabadas y disponibles para siempre.", cat: "COMUNIDAD" },
+      { num: "05", titulo: "Bolsa de trabajo de la comunidad", desc: "Proyectos reales que publico yo y otros miembros. Tus primeros clientes sin depender solo de tu propia prospección.", cat: "OPORTUNIDADES" },
+      { num: "06", titulo: "Kit comercial completo", desc: "Script de venta, documento de propuesta, secuencia de WhatsApp, contratos y propuestas ganadoras.", cat: "DOCUMENTOS" },
+      { num: "07", titulo: "Comunidad privada + feedback real", desc: "Gente en tu misma situación con la que compartís avances y trabas. Subís tu web o tu propuesta y recibís feedback concreto, no likes vacíos.", cat: "FEEDBACK" },
+    ];
+    const checks = ["Todos los módulos y clases", "Mentorías en vivo semanales", "Kit comercial completo", "Comunidad privada y feedback"];
+    const preguntas = [
+      "¿Necesito experiencia previa para arrancar?",
+      "¿Cuánto tardo en conseguir mi primer cliente?",
+      "¿Qué incluye exactamente mi acceso a la comunidad?",
+      "¿Hay llamadas en vivo? ¿Cuándo son?",
+      "¿Cómo pago? ¿Puedo pagar en pesos?",
+      "¿El acceso es para siempre o tengo que pagar todos los meses?",
+      "¿Puedo pedir feedback de mi web o mis propuestas?",
+      "¿Es solo contenido grabado o hay acompañamiento real?",
+    ];
+    const faqs = preguntas.map((q, i) => ({
+      q,
+      a: "[Respuesta de ejemplo — escribila vos después.]",
+      symbol: this.state.open === i ? "–" : "+",
+      answerDisplay: this.state.open === i ? "block" : "none",
+      toggle: () => this.setState(s => ({ open: s.open === i ? -1 : i })),
+    }));
+    return {
+      showHeroVideo, dolores, testimonios: testimoniosAll, entregables, checks, faqs,
+      toggleResultados: this.toggleResultados,
+      verMasTestimoniosDisplay: hiddenCount === 0 ? "none" : "flex",
+      verMasTestimoniosLabel: this.state.resExpanded ? "Ver menos" : ("Ver " + hiddenCount + (hiddenCount === 1 ? " testimonio más" : " testimonios más")),
+      resArrowRot: this.state.resExpanded ? "180deg" : "0deg",
+      capturas, capRef: this.capRef, capMaxHeight: this.state.capMaxH, toggleCapturas: this.toggleCapturas,
+      fadeDisplay: this.state.capExpanded ? "none" : "block",
+      verMasLabel: this.state.capExpanded ? "Ver menos" : "Ver más capturas",
+      arrowRot: this.state.capExpanded ? "180deg" : "0deg",
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c ' *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"http://127.0.0.1:4321/uploads/joel.jpg\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} \" \"http://127.0.0.1:4321/uploads/tomas-espinosa.jpeg\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} \" \"http://127.0.0.1:4321/uploads/mateo.jpg\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"http://127.0.0.1:4321/uploads/lorena-castro.jpg\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"http://127.0.0.1:4321/uploads/carol.jpg\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} \" \"http://127.0.0.1:4321/uploads/franco.jpg\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} \" \"http://127.0.0.1:4321/uploads/hernan.jpg\")"
+    ]
+  }
+}
