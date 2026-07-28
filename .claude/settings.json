@@ -8,7 +8,12 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"http://127.0.0.1:4321/uploads/lorena-castro.jpg\")",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"http://127.0.0.1:4321/uploads/carol.jpg\")",
       "Bash(curl -s -o /dev/null -w \"%{http_code} \" \"http://127.0.0.1:4321/uploads/franco.jpg\")",
-      "Bash(curl -s -o /dev/null -w \"%{http_code} \" \"http://127.0.0.1:4321/uploads/hernan.jpg\")"
+      "Bash(curl -s -o /dev/null -w \"%{http_code} \" \"http://127.0.0.1:4321/uploads/hernan.jpg\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" https://landing-wdn.vercel.app/)",
+      "Bash(curl -s https://landing-wdn.vercel.app/)",
+      "Bash(curl -s -o /dev/null -w \"support.js %{http_code}\\\\n\" https://landing-wdn.vercel.app/support.js)",
+      "Bash(curl -s -o /dev/null -w \"joel.jpg %{http_code}\\\\n\" https://landing-wdn.vercel.app/uploads/joel.jpg)",
+      "Bash(curl -s -o /dev/null -w \"local favicon %{http_code}\\\\n\" \"http://127.0.0.1:4321/uploads/favicon.png\")"
     ]
   }
 }
