@@ -48,9 +48,14 @@
   .about-grid{display:grid;grid-template-columns:1fr minmax(260px,340px) 1fr;gap:clamp(28px,4vw,56px);align-items:center;}
   .about-col{display:flex;flex-direction:column;gap:clamp(28px,4vw,44px);}
   @media(max-width:940px){
-    .about-grid{grid-template-columns:1fr;max-width:520px;margin:0 auto;}
-    .about-media{order:-1;}
-    .about-col{gap:32px;}
+    /* una columna con la foto arriba; los datos pasan a dos por fila */
+    .about-grid{grid-template-columns:1fr;max-width:640px;margin:0 auto;gap:36px;}
+    .about-media{order:-1;max-width:300px;margin:0 auto;width:100%;}
+    .about-col{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 24px;}
+  }
+  @media(max-width:560px){
+    .about-col{grid-template-columns:1fr;gap:26px;}
+    .about-media{max-width:240px;}
   }
 
   /* bento grid de entregables: 6 columnas en desktop, cada card declara su span */
