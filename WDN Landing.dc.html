@@ -283,7 +283,7 @@
             <p style="margin:0;font-weight:700;font-size:17px;letter-spacing:-0.01em;line-height:1.3;min-height:2.6em;">{{ t.resultado }}</p>
             <sc-if value="{{ t.hasEmbed }}" hint-placeholder-val="{{ false }}">
               <div style="width:100%;max-width:{{ t.embedMaxWidth }};margin:0 auto;aspect-ratio:{{ t.embedRatio }};border-radius:10px;overflow:hidden;background:#0A0A0D;border:1px solid #1E1E26;">
-                <iframe src="{{ t.embedSrc }}" style="width:100%;height:100%;border:0;display:block;" allow="encrypted-media; picture-in-picture" allowFullScreen="{{ true }}"></iframe>
+                <iframe src="{{ t.embedSrc }}" loading="lazy" style="width:100%;height:100%;border:0;display:block;" allow="encrypted-media; picture-in-picture" allowFullScreen="{{ true }}"></iframe>
               </div>
             </sc-if>
             <sc-if value="{{ t.playing }}" hint-placeholder-val="{{ false }}">
@@ -634,6 +634,9 @@ class Component extends DCLogic {
     const testimoniosAll = titulares.map((resultado, i) => {
       const playingUrl = this.state.playing[i];
       const hidden = i >= resVisible;
+      // los testimonios plegados quedan en display:none, pero el iframe igual cargaría:
+      // no lo montamos hasta que la lista se expande
+      const oculto = hidden && !this.state.resExpanded;
       const embed = embeds[i];
       return {
         avatarId: "avatar-" + (i + 1), thumbId: "thumb-" + (i + 1),
@@ -642,7 +645,7 @@ class Component extends DCLogic {
         resultado: (embed && embed.resultado) || resultado,
         cita: (embed && embed.cita) || "“Cita corta de ejemplo, una o dos líneas del testimonio.”",
         videoUrl: "",
-        hasEmbed: !!embed, embedSrc: embed ? embed.src : "", embedRatio: embed ? embed.ratio : "16/9",
+        hasEmbed: !!embed && !oculto, embedSrc: embed ? embed.src : "", embedRatio: embed ? embed.ratio : "16/9",
         embedMaxWidth: embed && embed.ratio === "9/16" ? "300px" : "100%",
         playing: !embed && !!playingUrl, notPlaying: !embed && !playingUrl, iframeSrc: playingUrl || "",
         display: hidden && !this.state.resExpanded ? "none" : "block",
@@ -704,10 +707,10 @@ class Component extends DCLogic {
         precio ? "Hola Gino, quiero entrar al plan " + nombre + " de " + precio
                : "Hola Gino, quiero info del plan " + nombre);
     const planes = [
-      { nombre: "Comunidad", precio: "USD 97", bajada: "Todo el sistema, a tu ritmo.", badge: "", destacada: false,
+      { nombre: "Comunidad", precio: "USD 197", bajada: "Todo el sistema, a tu ritmo.", badge: "", destacada: false,
         cta: "Quiero entrar",
         items: ["10 módulos · +100 clases", "Mentorías en vivo todas las semanas", "Kit comercial completo", "Bolsa de trabajo", "Comunidad privada + feedback"] },
-      { nombre: "Acompañamiento 1 mes", precio: "USD 397", bajada: "Todo lo anterior + trabajo conmigo, uno a uno.", badge: "Más elegido", destacada: true,
+      { nombre: "Acompañamiento 1 mes", precio: "", bajada: "Todo lo anterior + trabajo conmigo, uno a uno.", badge: "Más elegido", destacada: true,
         cta: "Quiero el acompañamiento",
         items: ["Todo lo de Comunidad", "4 llamadas 1:1 conmigo", "Revisión directa de tu web, tu propuesta y tu precio", "Seguimiento por WhatsApp durante el mes"] },
       { nombre: "Acompañamiento 3 meses", precio: "", bajada: "Para el que va en serio a los $1.000/mes.", badge: "3 cupos por mes", destacada: false,
@@ -716,7 +719,7 @@ class Component extends DCLogic {
     ].map(p => ({
       ...p,
       precioDisplay: p.precio || "Hablemos",
-      etiqueta: p.precio ? "Pago único" : "Cupos por aplicación",
+      etiqueta: p.precio ? "Pago único" : "Escribime por WhatsApp",
       waHref: waPlan(p.nombre, p.precio),
       cardClass: p.destacada ? "plan-card plan-destacada" : "plan-card",
       ctaClass: p.destacada ? "plan-cta plan-cta-solid" : "plan-cta plan-cta-ghost",
