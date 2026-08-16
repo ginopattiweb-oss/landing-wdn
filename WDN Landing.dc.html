@@ -13,6 +13,8 @@
 <title>Web Design Network — Conseguí tu primer cliente de diseño web</title>
 <link rel="icon" type="image/png" href="./uploads/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<!-- los videos ya no cargan solos: el handshake con Loom se adelanta para que el play no espere -->
+<link rel="dns-prefetch" href="https://www.loom.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,500;1,9..40,600;1,9..40,700&amp;display=swap" rel="stylesheet">
 <script src="./image-slot.js"></script>
 <script src="./hero-shader.js"></script>
@@ -180,7 +182,18 @@
     </div>
     <sc-if value="{{ showHeroVideo }}" hint-placeholder-val="{{ true }}">
       <div style="width:100%;max-width:760px;margin-top:24px;background:#101014;border:1px solid #1E1E26;border-radius:14px;overflow:hidden;position:relative;aspect-ratio:16/9;">
-        <iframe src="https://www.loom.com/embed/9eb44c0c8bb448238f2618fb9cf9d698" frameborder="0" webkitallowfullscreen="{{ true }}" mozallowfullscreen="{{ true }}" allowFullScreen="{{ true }}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;display:block;"></iframe>
+        <sc-if value="{{ heroPlaying }}" hint-placeholder-val="{{ false }}">
+          <iframe src="{{ heroSrc }}" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" webkitallowfullscreen="{{ true }}" mozallowfullscreen="{{ true }}" allowFullScreen="{{ true }}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;display:block;"></iframe>
+        </sc-if>
+        <sc-if value="{{ heroIdle }}" hint-placeholder-val="{{ true }}">
+          <div onClick="{{ heroPlay }}" style="position:absolute;inset:0;cursor:pointer;">
+            <img src="./uploads/loom-thumbs/hero.jpg" alt="Tour de Web Design Network" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:contain;display:block;background:#0A0A0D;">
+            <div style="position:absolute;inset:0;background:rgba(0,0,0,0.32);transition:background 0.3s ease;pointer-events:none;" style-hover="background:rgba(0,0,0,0.14);"></div>
+            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:68px;border-radius:50%;background:#4F7CFF;display:flex;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 8px 28px rgba(79,124,255,0.4);">
+              <div style="width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:19px solid #FFFFFF;margin-left:5px;"></div>
+            </div>
+          </div>
+        </sc-if>
       </div>
     </sc-if>
   </div>
@@ -260,8 +273,19 @@
             </div>
             <p style="margin:0;font-weight:700;font-size:17px;letter-spacing:-0.01em;line-height:1.3;min-height:2.6em;">{{ t.resultado }}</p>
             <sc-if value="{{ t.hasEmbed }}" hint-placeholder-val="{{ false }}">
-              <div style="width:100%;max-width:{{ t.embedMaxWidth }};margin:0 auto;aspect-ratio:{{ t.embedRatio }};border-radius:10px;overflow:hidden;background:#0A0A0D;border:1px solid #1E1E26;">
-                <iframe src="{{ t.embedSrc }}" loading="lazy" style="width:100%;height:100%;border:0;display:block;" allow="encrypted-media; picture-in-picture" allowFullScreen="{{ true }}"></iframe>
+              <div style="position:relative;width:100%;max-width:{{ t.embedMaxWidth }};margin:0 auto;aspect-ratio:{{ t.embedRatio }};border-radius:10px;overflow:hidden;background:#0A0A0D;border:1px solid #1E1E26;">
+                <sc-if value="{{ t.embedPlaying }}" hint-placeholder-val="{{ false }}">
+                  <iframe src="{{ t.embedPlaySrc }}" style="width:100%;height:100%;border:0;display:block;" allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen="{{ true }}"></iframe>
+                </sc-if>
+                <sc-if value="{{ t.embedIdle }}" hint-placeholder-val="{{ true }}">
+                  <div onClick="{{ t.playClick }}" data-video-url="{{ t.embedSrc }}" style="position:absolute;inset:0;cursor:pointer;">
+                    <img src="{{ t.posterSrc }}" alt="Testimonio de {{ t.nombre }}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:contain;display:block;background:#0A0A0D;">
+                    <div style="position:absolute;inset:0;background:rgba(0,0,0,0.32);transition:background 0.3s ease;pointer-events:none;" style-hover="background:rgba(0,0,0,0.14);"></div>
+                    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:#4F7CFF;display:flex;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 6px 20px rgba(79,124,255,0.38);">
+                      <div style="width:0;height:0;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:15px solid #FFFFFF;margin-left:4px;"></div>
+                    </div>
+                  </div>
+                </sc-if>
               </div>
             </sc-if>
             <sc-if value="{{ t.playing }}" hint-placeholder-val="{{ false }}">
@@ -396,7 +420,7 @@
   &quot;testimonialCount&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;2&quot;, &quot;3&quot;], &quot;default&quot;: &quot;3&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Resultados&quot;}
 }">
 class Component extends DCLogic {
-  state = { open: -1, resExpanded: false, resShown: false, playing: {}, capRatios: {} };
+  state = { open: -1, resExpanded: false, resShown: false, playing: {}, capRatios: {}, heroPlaying: false };
   componentDidMount() {
     // mide el ratio natural de cada captura cargada para que el alto de la card salga de la imagen
     const watch = () => {
@@ -477,6 +501,11 @@ class Component extends DCLogic {
       { valor: "5.0 ⭐", label: "en Google Reviews" },
     ];
     const showHeroVideo = this.props.showHeroVideo ?? true;
+    // el hero arranca con una miniatura estática: el iframe de Loom (player + bundle)
+    // recién se monta cuando alguien hace click en play
+    const heroPlaying = this.state.heroPlaying;
+    const heroSrc = "https://www.loom.com/embed/9eb44c0c8bb448238f2618fb9cf9d698?autoplay=1";
+    const heroPlay = () => this.setState({ heroPlaying: true });
     const count = parseInt(this.props.testimonialCount ?? "3", 10);
     // cada dolor se parte en pre/hl/post: hl es la parte resaltada en azul
     const dolores = [
@@ -493,43 +522,43 @@ class Component extends DCLogic {
     // testimonios con video ya cargado: se embeben directo (sin miniatura). ratio "9/16" = vertical
     const embeds = {
       0: {
-        src: "https://www.loom.com/embed/082b1db400a04356ba7b9a8ec9e0d29c", ratio: "9/16",
+        src: "https://www.loom.com/embed/082b1db400a04356ba7b9a8ec9e0d29c", poster: "./uploads/loom-thumbs/joel.jpg", ratio: "9/16",
         nombre: "Joel Soria", avatar: "./uploads/joel.jpg",
         resultado: "Consiguió su primer cliente en menos de dos semanas",
         cita: "“Había mandado más de 2000 mensajes en frío antes de entrar en la comunidad.”",
       },
       1: {
-        src: "https://www.loom.com/embed/4cfbc98beb8049868fe1bd28ff62e237", ratio: "9/16",
+        src: "https://www.loom.com/embed/4cfbc98beb8049868fe1bd28ff62e237", poster: "./uploads/loom-thumbs/tomas.jpg", ratio: "9/16",
         nombre: "Tomás Espinosa", avatar: "./uploads/tomas-espinosa.jpeg",
         resultado: "Cerró su primer cliente en menos de 21 días",
         cita: "“Era un estudiante de programación frustrado.”",
       },
       2: {
-        src: "https://www.loom.com/embed/a6dc1746e5a54f359814dd58e0d96ddd", ratio: "9/16",
+        src: "https://www.loom.com/embed/a6dc1746e5a54f359814dd58e0d96ddd", poster: "./uploads/loom-thumbs/mateo.jpg", ratio: "9/16",
         nombre: "Mateo Narducci", avatar: "./uploads/mateo.jpg",
         resultado: "10/10 la comunidad, estaba un poco perdido antes de entrar",
         cita: "“Entré en la comunidad hace poco y me ordenó muchísimo. Me gustó que la gente está toda en la misma.”",
       },
       3: {
-        src: "https://www.loom.com/embed/9a4682e75e354d8298f2e5594d867069", ratio: "16/9",
+        src: "https://www.loom.com/embed/9a4682e75e354d8298f2e5594d867069", poster: "./uploads/loom-thumbs/lorena.jpg", ratio: "16/9",
         nombre: "Lorena Castro", avatar: "./uploads/lorena-castro.jpg",
         resultado: "Cerró su primer cliente en Framer gracias a la comunidad",
         cita: "“La comunidad me ayudó mucho a poder organizar mis ideas.”",
       },
       4: {
-        src: "https://www.loom.com/embed/dd68f0cfa64a4e519f8397ed00472b40", ratio: "16/9",
+        src: "https://www.loom.com/embed/dd68f0cfa64a4e519f8397ed00472b40", poster: "./uploads/loom-thumbs/carol.jpg", ratio: "16/9",
         nombre: "Carol", avatar: "./uploads/carol.jpg",
         resultado: "Diseñadora UX/UI",
         cita: "“Era lo que necesitaba.”",
       },
       5: {
-        src: "https://www.loom.com/embed/c13c82b228ef4cacb0915d9f84f1eca2", ratio: "16/9",
+        src: "https://www.loom.com/embed/c13c82b228ef4cacb0915d9f84f1eca2", poster: "./uploads/loom-thumbs/franco.jpg", ratio: "16/9",
         nombre: "Franco Fucinelli", avatar: "./uploads/franco.jpg",
         resultado: "La comunidad está genial, no sabía que había ese intercambio",
         cita: "“Me terminó convenciendo que hay un mix de clases grabadas y llamadas en vivo.”",
       },
       6: {
-        src: "https://www.loom.com/embed/5ab9846079cd4193b8ce0413c6ea8fca", ratio: "16/9",
+        src: "https://www.loom.com/embed/5ab9846079cd4193b8ce0413c6ea8fca", poster: "./uploads/loom-thumbs/hernan.jpg", ratio: "16/9",
         nombre: "Hernán Bugner", avatar: "./uploads/hernan.jpg",
         resultado: "Consiguió su primer cliente: una nutricionista italiana",
         cita: "“Valoro mucho que la formación no se queda solo en diseño web, también te prepara para la vida real.”",
@@ -551,6 +580,9 @@ class Component extends DCLogic {
         videoUrl: "",
         hasEmbed: !!embed && !oculto, embedSrc: embed ? embed.src : "", embedRatio: embed ? embed.ratio : "16/9",
         embedMaxWidth: embed && embed.ratio === "9/16" ? "300px" : "100%",
+        // mismo trato que el hero: miniatura hasta el click, después el iframe
+        posterSrc: (embed && embed.poster) || "",
+        embedPlaying: !!embed && !!playingUrl, embedIdle: !!embed && !playingUrl, embedPlaySrc: playingUrl || "",
         playing: !embed && !!playingUrl, notPlaying: !embed && !playingUrl, iframeSrc: playingUrl || "",
         display: hidden && !this.state.resExpanded ? "none" : "block",
         opacity: hidden && !this.state.resShown ? 0 : 1,
@@ -616,7 +648,8 @@ class Component extends DCLogic {
       toggle: () => this.setState(s => ({ open: s.open === i ? -1 : i })),
     }));
     return {
-      showHeroVideo, dolores, testimonios: testimoniosAll, entregables, checks, faqs,
+      showHeroVideo, heroPlaying, heroIdle: !heroPlaying, heroSrc, heroPlay,
+      dolores, testimonios: testimoniosAll, entregables, checks, faqs,
       sobreMiIzq, sobreMiDer,
       toggleResultados: this.toggleResultados,
       verMasTestimoniosDisplay: hiddenCount === 0 ? "none" : "flex",
