@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tabulador de cobro para diseñadores y desarrolladores web — Web Design Network</title>
+<meta name="description" content="Poné cuánto querés ganar por hora y descubrí qué precio debería tener cada proyecto web: landing, institucional o tienda online. Gratis y sin vueltas.">
+<link rel="canonical" href="https://webdesignnetwork.com/recursos/tabulador">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tabulador de cobro para diseñadores y desarrolladores web">
+<meta property="og:description" content="Poné cuánto querés ganar por hora y descubrí qué precio debería tener cada proyecto.">
+<meta property="og:url" content="https://webdesignnetwork.com/recursos/tabulador">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tabulador de cobro para diseñadores y desarrolladores web">
+<meta name="twitter:description" content="Poné cuánto querés ganar por hora y descubrí qué precio debería tener cada proyecto.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+<style>
+/* ==========================================================================
+   Tabulador de cobro — Web Design Network
+   Archivo autocontenido: todo el CSS y el JS viven acá.
+   Los tokens son los mismos que /recursos/styles.css para que las dos
+   mitades del sitio se lean como una sola pieza.
+   ========================================================================== */
+
+:root{
+  /* --- color --- */
+  --wdn-bg:#0A0A0D;
+  --wdn-bg-rgb:10,10,13;
+  --wdn-surface:#101016;
+  --wdn-surface-2:#0E0E13;
+  --wdn-surface-3:#16161C;
+  --wdn-border:#1E1E26;
+  --wdn-border-soft:#16161C;
+  --wdn-text:#F2F2F4;
+  --wdn-muted:#A0A0AB;
+  --wdn-muted-2:#8B8B96;
+  --wdn-accent:#4F7CFF;
+  --wdn-accent-2:#8FA9FF;
+  --wdn-accent-rgb:79,124,255;
+  --wdn-success:#3DD68C;
+  --wdn-success-rgb:61,214,140;
+  --wdn-danger:#FF6B6B;
+  --wdn-on-accent:#0A0A0D;
+  --wdn-shadow-rgb:0,0,0;
+
+  /* --- forma --- */
+  --wdn-radius:16px;
+  --wdn-radius-sm:12px;
+  --wdn-radius-xs:8px;
+  --wdn-radius-pill:999px;
+
+  /* --- profundidad --- */
+  --wdn-shadow:0 8px 32px rgba(var(--wdn-shadow-rgb),.35);
+  --wdn-shadow-sm:0 2px 12px rgba(var(--wdn-shadow-rgb),.25);
+  --wdn-ring:0 0 0 3px rgba(var(--wdn-accent-rgb),.35);
+
+  /* --- movimiento --- */
+  --wdn-ease:cubic-bezier(.4,0,.2,1);
+  --wdn-fast:150ms;
+  --wdn-slow:250ms;
+
+  /* --- tipografía --- */
+  --wdn-font-display:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --wdn-font-text:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+
+  /* --- espaciado (escala de 4px) --- */
+  --wdn-s1:4px; --wdn-s2:8px; --wdn-s3:12px; --wdn-s4:16px;
+  --wdn-s5:20px; --wdn-s6:24px; --wdn-s8:32px; --wdn-s10:40px;
+  --wdn-s12:48px; --wdn-s16:64px; --wdn-s20:80px;
+
+  --wdn-maxw:1120px;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--wdn-bg);
+  color:var(--wdn-text);
+  font-family:var(--wdn-font-text);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block;}
+button,input,select{font:inherit;color:inherit;}
+button{cursor:pointer;background:none;border:0;}
+svg{display:block;}
+
+/* Foco visible en todo lo interactivo, sin excepciones. */
+:focus-visible{outline:2px solid var(--wdn-accent-2);outline-offset:2px;border-radius:var(--wdn-radius-xs);}
+
+/* Solo para lectores de pantalla. */
+.sr{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{
+    animation-duration:.01ms !important;animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+}
+
+/* --- layout ------------------------------------------------------------- */
+.wrap{max-width:var(--wdn-maxw);margin:0 auto;padding:0 var(--wdn-s6);}
+@media(max-width:480px){ .wrap{padding:0 var(--wdn-s5);} }
+
+/* --- header ------------------------------------------------------------- */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(var(--wdn-bg-rgb),.82);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--wdn-border-soft);
+}
+.site-header__inner{
+  max-width:var(--wdn-maxw);margin:0 auto;
+  padding:14px var(--wdn-s6);
+  display:flex;align-items:center;justify-content:space-between;gap:var(--wdn-s5);
+}
+.brand{display:flex;align-items:center;gap:10px;color:var(--wdn-text);text-decoration:none;}
+.brand svg{width:22px;height:22px;color:var(--wdn-accent);}
+.brand span{font-family:var(--wdn-font-display);font-weight:700;font-size:15px;letter-spacing:-.02em;}
+.site-nav{display:flex;align-items:center;gap:22px;}
+.site-nav a{font-size:14px;color:var(--wdn-muted);text-decoration:none;transition:color var(--wdn-slow) var(--wdn-ease);}
+.site-nav a:hover{color:var(--wdn-text);}
+.site-nav .nav-cta{
+  padding:9px 18px;border-radius:var(--wdn-radius-pill);
+  background:var(--wdn-text);color:var(--wdn-on-accent);
+  font-weight:600;font-size:13.5px;
+  transition:opacity var(--wdn-slow) var(--wdn-ease);
+}
+.site-nav .nav-cta:hover{color:var(--wdn-on-accent);opacity:.86;}
+@media(max-width:560px){
+  .site-nav{gap:14px;}
+  .site-nav .nav-link{display:none;}
+  .brand span{display:none;}
+}
+
+/* --- glow del fondo ----------------------------------------------------- */
+.glow{position:relative;isolation:isolate;}
+.glow::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(ellipse 90% 55% at 50% -10%,
+    rgba(var(--wdn-accent-rgb),.16), rgba(var(--wdn-accent-rgb),0) 70%);
+}
+
+/* --- tipografía --------------------------------------------------------- */
+.eyebrow{
+  margin:0;font-size:12.5px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--wdn-accent);
+}
+.title{
+  margin:14px 0 0;font-family:var(--wdn-font-display);
+  font-size:clamp(30px,5.2vw,54px);font-weight:700;
+  letter-spacing:-.03em;line-height:1.08;text-wrap:balance;
+}
+.lead{margin:var(--wdn-s5) 0 0;font-size:clamp(16.5px,2.1vw,18px);color:var(--wdn-text);max-width:60ch;text-wrap:pretty;}
+.section-title{
+  margin:0;font-family:var(--wdn-font-display);
+  font-size:clamp(24px,3.4vw,34px);font-weight:600;
+  letter-spacing:-.02em;line-height:1.2;text-wrap:pretty;
+}
+.fine{margin:0;font-size:13.5px;color:var(--wdn-muted-2);line-height:1.55;}
+
+/* --- hero --------------------------------------------------------------- */
+.hero{padding:clamp(48px,7vw,80px) 0 0;}
+
+/* --- input de tarifa ---------------------------------------------------- */
+.rate{
+  margin-top:var(--wdn-s10);
+  display:flex;flex-wrap:wrap;align-items:flex-end;gap:var(--wdn-s5);
+}
+.rate__field{flex:0 1 440px;min-width:0;}
+.rate__label{display:block;margin-bottom:10px;font-size:14px;font-weight:500;color:var(--wdn-muted);}
+.rate__box{
+  display:flex;align-items:stretch;
+  background:var(--wdn-surface);
+  border:1px solid var(--wdn-border);
+  border-radius:var(--wdn-radius);
+  box-shadow:var(--wdn-shadow-sm);
+  overflow:hidden;
+  transition:border-color var(--wdn-slow) var(--wdn-ease),box-shadow var(--wdn-slow) var(--wdn-ease);
+}
+.rate__box:focus-within{border-color:var(--wdn-accent);box-shadow:var(--wdn-ring);}
+.rate__box input{
+  flex:1 1 auto;min-width:0;
+  padding:18px var(--wdn-s5);
+  background:transparent;border:0;
+  font-family:var(--wdn-font-display);
+  font-size:clamp(28px,4.4vw,40px);font-weight:700;letter-spacing:-.02em;
+}
+.rate__box input:focus{outline:none;}
+.rate__box input::-webkit-outer-spin-button,
+.rate__box input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.rate__box input[type=number]{-moz-appearance:textfield;}
+.rate__sep{width:1px;background:var(--wdn-border);flex:0 0 auto;}
+.rate__box select{
+  flex:0 0 auto;
+  padding:0 var(--wdn-s5);
+  background:var(--wdn-surface-3);border:0;
+  font-weight:600;font-size:15px;letter-spacing:.02em;
+  cursor:pointer;
+}
+.rate__box select:focus{outline:none;}
+.rate__suffix{
+  display:flex;align-items:center;padding-right:var(--wdn-s5);
+  color:var(--wdn-muted);font-size:15px;font-weight:500;
+}
+.linkish{
+  background:none;border:0;padding:0;
+  color:var(--wdn-accent-2);font-size:14.5px;font-weight:500;
+  text-decoration:underline;text-underline-offset:3px;
+  text-decoration-color:rgba(var(--wdn-accent-rgb),.5);
+  transition:color var(--wdn-fast) var(--wdn-ease);
+}
+.linkish:hover{color:var(--wdn-text);}
+.rate__help{flex:0 0 auto;padding-bottom:var(--wdn-s4);}
+@media(max-width:640px){ .rate__help{padding-bottom:0;} }
+
+/* --- tabs --------------------------------------------------------------- */
+.tabs{margin-top:clamp(40px,6vw,64px);}
+.tabs__list{
+  position:relative;display:flex;gap:var(--wdn-s1);
+  padding:var(--wdn-s1);
+  background:var(--wdn-surface-2);
+  border:1px solid var(--wdn-border);
+  border-radius:var(--wdn-radius-pill);
+  width:max-content;max-width:100%;
+  overflow-x:auto;scrollbar-width:none;
+}
+.tabs__list::-webkit-scrollbar{display:none;}
+.tabs__ind{
+  position:absolute;top:var(--wdn-s1);left:0;height:calc(100% - var(--wdn-s1) * 2);
+  background:rgba(var(--wdn-accent-rgb),.16);
+  border:1px solid rgba(var(--wdn-accent-rgb),.45);
+  border-radius:var(--wdn-radius-pill);
+  transition:transform var(--wdn-slow) var(--wdn-ease),width var(--wdn-slow) var(--wdn-ease);
+  pointer-events:none;
+}
+.tabs__btn{
+  position:relative;z-index:1;flex:0 0 auto;
+  padding:11px var(--wdn-s5);
+  border-radius:var(--wdn-radius-pill);
+  font-size:14.5px;font-weight:600;color:var(--wdn-muted);white-space:nowrap;
+  transition:color var(--wdn-slow) var(--wdn-ease);
+}
+.tabs__btn:hover{color:var(--wdn-text);}
+.tabs__btn[aria-selected="true"]{color:var(--wdn-accent-2);}
+
+/* --- tabla -------------------------------------------------------------- */
+.panel[hidden]{display:none;}
+.tablecard{
+  margin-top:var(--wdn-s6);
+  background:var(--wdn-surface);
+  border:1px solid var(--wdn-border);
+  border-radius:var(--wdn-radius);
+  box-shadow:var(--wdn-shadow);
+  overflow:hidden;
+}
+table{width:100%;border-collapse:collapse;font-size:15px;}
+thead th{
+  padding:var(--wdn-s4) var(--wdn-s5);
+  text-align:left;font-size:12px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--wdn-muted-2);
+  border-bottom:1px solid var(--wdn-border);
+  background:var(--wdn-surface-2);
+  white-space:nowrap;
+}
+tbody td{
+  padding:var(--wdn-s4) var(--wdn-s5);
+  border-bottom:1px solid var(--wdn-border-soft);
+  vertical-align:middle;
+}
+tbody tr:last-child td{border-bottom:0;}
+tbody tr{transition:background var(--wdn-fast) var(--wdn-ease);}
+tbody tr:hover{background:var(--wdn-surface-3);}
+.cell-tipo{font-weight:600;white-space:nowrap;}
+.cell-alcance,.cell-plazo{color:var(--wdn-muted);}
+.cell-horas{font-variant-numeric:tabular-nums;white-space:nowrap;}
+.cell-precio{
+  font-family:var(--wdn-font-display);
+  font-weight:700;font-size:16px;letter-spacing:-.01em;
+  color:var(--wdn-accent-2);white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+}
+.tablenote{margin:var(--wdn-s4) 0 0;padding:0 var(--wdn-s1);}
+
+/* En mobile la tabla se vuelve tarjetas apiladas. */
+@media(max-width:760px){
+  .tablecard{background:transparent;border:0;box-shadow:none;overflow:visible;}
+  table,thead,tbody,tr,td{display:block;width:100%;}
+  thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);}
+  tbody tr{
+    background:var(--wdn-surface);
+    border:1px solid var(--wdn-border);
+    border-radius:var(--wdn-radius);
+    box-shadow:var(--wdn-shadow-sm);
+    padding:var(--wdn-s2) var(--wdn-s5);
+    margin-bottom:var(--wdn-s3);
+  }
+  tbody tr:hover{background:var(--wdn-surface);}
+  tbody td{
+    display:flex;align-items:baseline;justify-content:space-between;gap:var(--wdn-s4);
+    padding:10px 0;border-bottom:1px solid var(--wdn-border-soft);
+  }
+  tbody td::before{
+    content:attr(data-label);
+    flex:0 0 auto;
+    font-size:12px;font-weight:700;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--wdn-muted-2);
+  }
+  .cell-tipo,.cell-alcance,.cell-horas,.cell-plazo,.cell-precio{text-align:right;white-space:normal;}
+}
+
+/* --- CTA hacia el wizard ------------------------------------------------ */
+.ctacard{
+  margin:clamp(40px,6vw,64px) 0 0;
+  padding:clamp(24px,4vw,36px);
+  background:
+    radial-gradient(ellipse 70% 140% at 12% 0%, rgba(var(--wdn-accent-rgb),.14), rgba(var(--wdn-accent-rgb),0) 70%),
+    var(--wdn-surface);
+  border:1px solid var(--wdn-border);
+  border-radius:var(--wdn-radius);
+  box-shadow:var(--wdn-shadow);
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:var(--wdn-s6);
+}
+.ctacard p{margin:8px 0 0;color:var(--wdn-muted);font-size:15px;max-width:52ch;}
+.ctacard h2{margin:0;font-family:var(--wdn-font-display);font-size:clamp(20px,3vw,26px);font-weight:700;letter-spacing:-.02em;line-height:1.2;}
+
+/* --- botones ------------------------------------------------------------ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:13px 24px;border-radius:var(--wdn-radius-pill);
+  font-size:15px;font-weight:600;text-decoration:none;white-space:nowrap;
+  border:1px solid transparent;
+  transition:opacity var(--wdn-slow) var(--wdn-ease),
+             background var(--wdn-slow) var(--wdn-ease),
+             border-color var(--wdn-slow) var(--wdn-ease),
+             transform var(--wdn-fast) var(--wdn-ease);
+}
+.btn:active{transform:translateY(1px);}
+.btn--primary{background:var(--wdn-accent);color:var(--wdn-text);}
+.btn--primary:hover{opacity:.88;}
+.btn--light{background:var(--wdn-text);color:var(--wdn-on-accent);}
+.btn--light:hover{opacity:.88;}
+.btn--ghost{background:var(--wdn-surface-3);color:var(--wdn-text);border-color:var(--wdn-border);}
+.btn--ghost:hover{background:var(--wdn-border);}
+.btn[disabled]{opacity:.45;cursor:not-allowed;}
+.btn svg{width:18px;height:18px;}
+
+/* --- modal -------------------------------------------------------------- */
+.modal{
+  position:fixed;inset:0;z-index:100;
+  display:grid;place-items:center;
+  padding:var(--wdn-s5);
+  background:rgba(var(--wdn-shadow-rgb),.72);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  opacity:0;visibility:hidden;
+  transition:opacity var(--wdn-slow) var(--wdn-ease),visibility var(--wdn-slow) var(--wdn-ease);
+}
+.modal[data-open="true"]{opacity:1;visibility:visible;}
+.modal__box{
+  width:min(520px,100%);max-height:90vh;overflow-y:auto;
+  padding:clamp(24px,4vw,32px);
+  background:var(--wdn-surface);
+  border:1px solid var(--wdn-border);
+  border-radius:var(--wdn-radius);
+  box-shadow:var(--wdn-shadow);
+  transform:translateY(12px) scale(.98);
+  transition:transform var(--wdn-slow) var(--wdn-ease);
+}
+.modal[data-open="true"] .modal__box{transform:none;}
+.modal__head{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--wdn-s4);}
+.modal__title{margin:0;font-family:var(--wdn-font-display);font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.25;}
+.modal__close{
+  flex:0 0 auto;width:34px;height:34px;
+  display:grid;place-items:center;border-radius:var(--wdn-radius-pill);
+  color:var(--wdn-muted);
+  transition:background var(--wdn-fast) var(--wdn-ease),color var(--wdn-fast) var(--wdn-ease);
+}
+.modal__close:hover{background:var(--wdn-surface-3);color:var(--wdn-text);}
+.modal__close svg{width:18px;height:18px;}
+
+.field{margin-top:var(--wdn-s5);}
+.field > label{display:block;margin-bottom:8px;font-size:14.5px;font-weight:500;}
+.field__note{margin:6px 0 0;font-size:12.5px;color:var(--wdn-muted-2);line-height:1.5;}
+.input{
+  width:100%;padding:12px var(--wdn-s4);
+  background:var(--wdn-surface-2);
+  border:1px solid var(--wdn-border);
+  border-radius:var(--wdn-radius-sm);
+  font-size:16px;
+  transition:border-color var(--wdn-fast) var(--wdn-ease),box-shadow var(--wdn-fast) var(--wdn-ease);
+}
+.input:focus{outline:none;border-color:var(--wdn-accent);box-shadow:var(--wdn-ring);}
+.input[aria-invalid="true"]{border-color:var(--wdn-danger);}
+
+.modal__result{
+  margin-top:var(--wdn-s6);padding:var(--wdn-s5);
+  background:var(--wdn-surface-2);
+  border:1px solid var(--wdn-border);
+  border-radius:var(--wdn-radius-sm);
+  text-align:center;
+}
+.modal__result small{display:block;font-size:13px;color:var(--wdn-muted);}
+.modal__result strong{
+  display:block;margin-top:6px;
+  font-family:var(--wdn-font-display);
+  font-size:clamp(32px,7vw,42px);font-weight:700;letter-spacing:-.03em;
+  color:var(--wdn-accent-2);font-variant-numeric:tabular-nums;
+}
+.modal__actions{margin-top:var(--wdn-s6);display:flex;gap:var(--wdn-s3);flex-wrap:wrap;}
+.modal__actions .btn{flex:1 1 auto;}
+
+/* --- wizard ------------------------------------------------------------- */
+.wizard{padding:clamp(64px,9vw,110px) 0 clamp(64px,9vw,110px);}
+.wizard__head{max-width:60ch;}
+.wizcard{
+  margin-top:var(--wdn-s8);
+  background:var(--wdn-surface);
+  border:1px solid var(--wdn-border);
+  border-radius:var(--wdn-radius);
+  box-shadow:var(--wdn-shadow);
+  overflow:hidden;
+}
+.wizcard__top{
+  padding:var(--wdn-s5) clamp(20px,4vw,32px);
+  border-bottom:1px solid var(--wdn-border-soft);
+  background:var(--wdn-surface-2);
+}
+.progress{display:flex;gap:6px;}
+.progress__seg{
+  flex:1 1 0;height:4px;border-radius:var(--wdn-radius-pill);
+  background:var(--wdn-border);
+  transition:background var(--wdn-slow) var(--wdn-ease);
+}
+.progress__seg[data-on="true"]{background:var(--wdn-accent);}
+.progress__label{margin:10px 0 0;font-size:13px;color:var(--wdn-muted);}
+
+.wizcard__body{padding:clamp(24px,4vw,36px) clamp(20px,4vw,32px);}
+.viewport{position:relative;transition:height var(--wdn-slow) var(--wdn-ease);}
+.step{
+  position:absolute;top:0;left:0;width:100%;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transform:translateY(8px);
+  transition:opacity var(--wdn-slow) var(--wdn-ease),transform var(--wdn-slow) var(--wdn-ease),visibility var(--wdn-slow);
+}
+.step.is-on{opacity:1;visibility:visible;pointer-events:auto;transform:none;position:relative;}
+.step__title{margin:0;font-family:var(--wdn-font-display);font-size:clamp(21px,3.2vw,27px);font-weight:700;letter-spacing:-.02em;line-height:1.25;}
+.step__sub{margin:10px 0 0;font-size:15px;color:var(--wdn-muted);max-width:56ch;}
+.step__group{margin-top:var(--wdn-s6);}
+.step__group + .step__group{margin-top:var(--wdn-s8);}
+.step__legend{
+  margin:0 0 var(--wdn-s3);padding:0;
+  font-size:12px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--wdn-muted-2);
+}
+fieldset{margin:0;padding:0;border:0;min-width:0;}
+
+/* Opciones: tarjetas seleccionables (radio y checkbox comparten estilo). */
+.opts{display:grid;gap:var(--wdn-s3);}
+.opts--3{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));}
+.opts--2{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}
+.opt{
+  position:relative;display:flex;align-items:flex-start;gap:var(--wdn-s3);
+  padding:var(--wdn-s4);
+  background:var(--wdn-surface-2);
+  border:1px solid var(--wdn-border);
+  border-radius:var(--wdn-radius-sm);
+  cursor:pointer;
+  transition:border-color var(--wdn-fast) var(--wdn-ease),background var(--wdn-fast) var(--wdn-ease);
+}
+.opt:hover{border-color:var(--wdn-muted-2);}
+.opt input{position:absolute;opacity:0;width:1px;height:1px;}
+.opt__mark{
+  flex:0 0 auto;width:20px;height:20px;margin-top:2px;
+  border:1.5px solid var(--wdn-border);border-radius:var(--wdn-radius-pill);
+  display:grid;place-items:center;
+  transition:border-color var(--wdn-fast) var(--wdn-ease),background var(--wdn-fast) var(--wdn-ease);
+}
+.opt--check .opt__mark{border-radius:6px;}
+.opt__mark::after{
+  content:"";width:8px;height:8px;border-radius:var(--wdn-radius-pill);
+  background:var(--wdn-on-accent);transform:scale(0);
+  transition:transform var(--wdn-fast) var(--wdn-ease);
+}
+.opt--check .opt__mark::after{border-radius:2px;}
+.opt__ico{flex:0 0 auto;width:26px;height:26px;color:var(--wdn-muted);transition:color var(--wdn-fast) var(--wdn-ease);}
+.opt__txt{min-width:0;}
+.opt__name{display:block;font-weight:600;font-size:15px;line-height:1.35;}
+.opt__desc{display:block;margin-top:4px;font-size:13.5px;color:var(--wdn-muted);line-height:1.45;}
+.opt input:checked ~ .opt__txt .opt__name{color:var(--wdn-text);}
+.opt:has(input:checked){border-color:var(--wdn-accent);background:rgba(var(--wdn-accent-rgb),.08);}
+.opt:has(input:checked) .opt__mark{border-color:var(--wdn-accent);background:var(--wdn-accent);}
+.opt:has(input:checked) .opt__mark::after{transform:scale(1);}
+.opt:has(input:checked) .opt__ico{color:var(--wdn-accent-2);}
+.opt:has(input:focus-visible){outline:2px solid var(--wdn-accent-2);outline-offset:2px;}
+.opt--big{flex-direction:column;padding:var(--wdn-s5);}
+.opt--big .opt__mark{position:absolute;top:var(--wdn-s4);right:var(--wdn-s4);margin:0;}
+.opt--big .opt__ico{width:30px;height:30px;}
+
+.err{
+  margin:var(--wdn-s4) 0 0;font-size:14px;color:var(--wdn-danger);
+  display:none;
+}
+.err[data-show="true"]{display:block;}
+
+.wizcard__foot{
+  padding:var(--wdn-s5) clamp(20px,4vw,32px);
+  border-top:1px solid var(--wdn-border-soft);
+  background:var(--wdn-surface-2);
+  display:flex;align-items:center;justify-content:space-between;gap:var(--wdn-s4);
+}
+.wizcard__foot .fine{max-width:34ch;}
+
+/* --- resultado ---------------------------------------------------------- */
+.result__eyebrow{margin:0;font-size:15px;color:var(--wdn-muted);}
+.result__price{
+  margin:var(--wdn-s3) 0 0;
+  font-family:var(--wdn-font-display);
+  font-size:clamp(34px,7.4vw,60px);font-weight:700;
+  letter-spacing:-.035em;line-height:1.05;
+  color:var(--wdn-accent-2);font-variant-numeric:tabular-nums;
+  text-wrap:balance;
+}
+.metrics{
+  margin-top:var(--wdn-s8);
+  display:grid;gap:var(--wdn-s3);
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+}
+.metric{
+  padding:var(--wdn-s4) var(--wdn-s5);
+  background:var(--wdn-surface-2);
+  border:1px solid var(--wdn-border);
+  border-radius:var(--wdn-radius-sm);
+}
+.metric dt{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--wdn-muted-2);}
+.metric dd{
+  margin:6px 0 0;font-family:var(--wdn-font-display);
+  font-size:22px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;
+}
+.block{margin-top:var(--wdn-s10);}
+.block__title{
+  margin:0 0 var(--wdn-s4);font-size:12px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--wdn-muted-2);
+}
+.bar{
+  display:flex;height:14px;width:100%;
+  border-radius:var(--wdn-radius-pill);overflow:hidden;
+  background:var(--wdn-surface-3);
+}
+.bar__seg{height:100%;transition:width var(--wdn-slow) var(--wdn-ease);}
+.legend{margin:var(--wdn-s4) 0 0;padding:0;list-style:none;display:grid;gap:10px;}
+@media(min-width:640px){ .legend{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--wdn-s6);} }
+.legend li{display:flex;align-items:center;gap:10px;font-size:14.5px;}
+.legend__dot{flex:0 0 auto;width:10px;height:10px;border-radius:var(--wdn-radius-pill);}
+.legend__name{flex:1 1 auto;min-width:0;}
+.legend__val{flex:0 0 auto;color:var(--wdn-muted);font-variant-numeric:tabular-nums;}
+
+.list{margin:0;padding:0;list-style:none;display:grid;gap:10px;}
+.list li{display:flex;align-items:flex-start;gap:10px;font-size:15px;}
+.list svg{flex:0 0 auto;width:18px;height:18px;margin-top:3px;color:var(--wdn-success);}
+
+.pay{display:grid;gap:var(--wdn-s3);grid-template-columns:repeat(auto-fit,minmax(180px,1fr));}
+.pay__item{
+  padding:var(--wdn-s4);
+  background:var(--wdn-surface-2);
+  border:1px solid var(--wdn-border);
+  border-radius:var(--wdn-radius-sm);
+}
+.pay__when{font-size:13.5px;color:var(--wdn-muted);}
+.pay__amount{
+  margin-top:4px;font-family:var(--wdn-font-display);
+  font-size:19px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;
+}
+.notice{
+  margin-top:var(--wdn-s10);padding:var(--wdn-s5);
+  background:var(--wdn-surface-2);
+  border:1px solid var(--wdn-border);
+  border-left:3px solid var(--wdn-accent);
+  border-radius:var(--wdn-radius-sm);
+}
+.notice p{margin:0;font-size:14.5px;color:var(--wdn-muted);line-height:1.6;}
+.notice strong{color:var(--wdn-text);font-weight:600;}
+.result__actions{margin-top:var(--wdn-s10);display:flex;flex-wrap:wrap;gap:var(--wdn-s3);}
+
+/* --- footer ------------------------------------------------------------- */
+.site-footer{border-top:1px solid var(--wdn-border-soft);background:var(--wdn-surface-2);}
+.site-footer__inner{
+  max-width:var(--wdn-maxw);margin:0 auto;padding:var(--wdn-s8) var(--wdn-s6);
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:var(--wdn-s4);font-size:14px;color:var(--wdn-muted);
+}
+.site-footer a{color:var(--wdn-muted);text-decoration:none;transition:color var(--wdn-fast) var(--wdn-ease);}
+.site-footer a:hover{color:var(--wdn-text);}
+.site-footer__links{display:flex;gap:var(--wdn-s5);}
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="/" aria-label="Web Design Network — inicio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M3 6.5 8 18l4-8 4 8 5-11.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Web Design Network</span>
+    </a>
+    <nav class="site-nav">
+      <a class="nav-link" href="/">Inicio</a>
+      <a class="nav-link" href="/recursos">Recursos</a>
+      <a class="nav-cta" href="https://chat.whatsapp.com/HKfcNbTwEGUHTFibcTQouX" target="_blank" rel="noopener">Sumate a WDN</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ====================================================================
+       MÓDULO A — Tabla de referencia rápida
+       ==================================================================== -->
+  <section class="hero glow">
+    <div class="wrap">
+      <p class="eyebrow">Recurso gratis</p>
+      <h1 class="title">Tabulador de cobro para diseñadores y desarrolladores web</h1>
+      <p class="lead">Poné cuánto querés ganar por hora y descubrí qué precio debería tener cada proyecto.</p>
+
+      <div class="rate">
+        <div class="rate__field">
+          <label class="rate__label" for="tarifa">Tu tarifa por hora</label>
+          <div class="rate__box">
+            <input id="tarifa" type="number" min="1" max="1000000" step="1" value="25"
+                   inputmode="decimal" autocomplete="off" aria-describedby="tarifa-ayuda">
+            <span class="rate__suffix" aria-hidden="true">/ h</span>
+            <span class="rate__sep"></span>
+            <label class="sr" for="moneda">Moneda</label>
+            <select id="moneda">
+              <option value="USD" selected>USD</option>
+              <option value="ARS">ARS</option>
+              <option value="EUR">EUR</option>
+              <option value="MXN">MXN</option>
+              <option value="COP">COP</option>
+              <option value="CLP">CLP</option>
+            </select>
+          </div>
+        </div>
+        <div class="rate__help">
+          <button type="button" class="linkish" data-abrir-modal id="tarifa-ayuda">¿No sabés cuánto vale tu hora?</button>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <div class="tabs__list" role="tablist" aria-label="Tipo de proyecto">
+          <span class="tabs__ind" aria-hidden="true"></span>
+          <button class="tabs__btn" role="tab" id="tab-landing" aria-controls="panel-landing" aria-selected="true" data-tipo="landing">Landing page</button>
+          <button class="tabs__btn" role="tab" id="tab-institucional" aria-controls="panel-institucional" aria-selected="false" tabindex="-1" data-tipo="institucional">Web institucional</button>
+          <button class="tabs__btn" role="tab" id="tab-tienda" aria-controls="panel-tienda" aria-selected="false" tabindex="-1" data-tipo="tienda">Tienda online</button>
+        </div>
+
+        <!-- Los tbody se llenan desde JS a partir de CONFIG. -->
+        <div class="panel" role="tabpanel" id="panel-landing" aria-labelledby="tab-landing" tabindex="0">
+          <div class="tablecard">
+            <table>
+              <caption class="sr">Precios sugeridos para landing pages</caption>
+              <thead><tr><th scope="col">Tipo</th><th scope="col">Alcance</th><th scope="col">Horas estimadas</th><th scope="col">Plazo</th><th scope="col">Precio sugerido</th></tr></thead>
+              <tbody data-tabla="landing" aria-live="polite"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="panel" role="tabpanel" id="panel-institucional" aria-labelledby="tab-institucional" tabindex="0" hidden>
+          <div class="tablecard">
+            <table>
+              <caption class="sr">Precios sugeridos para webs institucionales</caption>
+              <thead><tr><th scope="col">Tipo</th><th scope="col">Alcance</th><th scope="col">Horas estimadas</th><th scope="col">Plazo</th><th scope="col">Precio sugerido</th></tr></thead>
+              <tbody data-tabla="institucional" aria-live="polite"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="panel" role="tabpanel" id="panel-tienda" aria-labelledby="tab-tienda" tabindex="0" hidden>
+          <div class="tablecard">
+            <table>
+              <caption class="sr">Precios sugeridos para tiendas online</caption>
+              <thead><tr><th scope="col">Tipo</th><th scope="col">Alcance</th><th scope="col">Horas estimadas</th><th scope="col">Plazo</th><th scope="col">Precio sugerido</th></tr></thead>
+              <tbody data-tabla="tienda" aria-live="polite"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <p class="fine tablenote">Precios estimados para un proyecto completo: estrategia, copy, diseño, desarrollo y control de calidad.</p>
+      </div>
+
+      <div class="ctacard">
+        <div>
+          <h2>¿Querés un número para TU proyecto puntual?</h2>
+          <p>Siete preguntas y te devuelvo un rango con el desglose por etapa y un plan de pago sugerido.</p>
+        </div>
+        <button type="button" class="btn btn--light" data-ir-wizard>
+          Calcular mi presupuesto
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M12 5v14m0 0 6-6m-6 6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       MÓDULO B — Wizard de presupuesto
+       ==================================================================== -->
+  <section class="wizard" id="wizard">
+    <div class="wrap">
+      <div class="wizard__head">
+        <p class="eyebrow">Tu proyecto</p>
+        <h2 class="section-title">Calculá tu presupuesto en siete pasos</h2>
+        <p class="lead">Contame qué tenés que hacer y te doy un rango con el desglose. Podés moverte con las flechas del teclado.</p>
+      </div>
+
+      <div class="wizcard">
+        <div class="wizcard__top" id="wiz-top">
+          <div class="progress" aria-hidden="true">
+            <span class="progress__seg" data-seg="1"></span><span class="progress__seg" data-seg="2"></span>
+            <span class="progress__seg" data-seg="3"></span><span class="progress__seg" data-seg="4"></span>
+            <span class="progress__seg" data-seg="5"></span><span class="progress__seg" data-seg="6"></span>
+            <span class="progress__seg" data-seg="7"></span>
+          </div>
+          <p class="progress__label" id="wiz-label" aria-live="polite">Paso 1 de 7</p>
+        </div>
+
+        <div class="wizcard__body">
+          <div class="viewport" id="viewport">
+
+            <!-- Paso 1 -->
+            <section class="step is-on" data-paso="1" aria-label="Paso 1: tipo de web">
+              <h3 class="step__title">¿Qué tipo de web es?</h3>
+              <p class="step__sub">Elegí lo que más se parezca a lo que te pidieron.</p>
+              <fieldset class="step__group">
+                <legend class="sr">Tipo de web</legend>
+                <div class="opts opts--3" id="opts-tipo"></div>
+              </fieldset>
+              <p class="err" data-err="1">Elegí un tipo de web para seguir.</p>
+            </section>
+
+            <!-- Paso 2 -->
+            <section class="step" data-paso="2" aria-label="Paso 2: tamaño">
+              <h3 class="step__title">¿Qué tamaño tiene?</h3>
+              <p class="step__sub">Contá las secciones o páginas que vas a tener que armar de verdad.</p>
+              <fieldset class="step__group">
+                <legend class="sr">Tamaño del proyecto</legend>
+                <div class="opts opts--2" id="opts-tamano"></div>
+              </fieldset>
+              <p class="err" data-err="2">Elegí un tamaño para seguir.</p>
+            </section>
+
+            <!-- Paso 3 -->
+            <section class="step" data-paso="3" aria-label="Paso 3: qué incluye">
+              <h3 class="step__title">¿Qué incluye?</h3>
+              <p class="step__sub">Marcá todo lo que entra en el trabajo. Si no estás seguro, dejalo sin marcar y sumalo después.</p>
+              <fieldset class="step__group">
+                <legend class="sr">Extras incluidos</legend>
+                <div class="opts opts--2" id="opts-addons"></div>
+              </fieldset>
+            </section>
+
+            <!-- Paso 4 -->
+            <section class="step" data-paso="4" aria-label="Paso 4: idioma, textos y movimiento">
+              <h3 class="step__title">Idioma, textos y movimiento</h3>
+              <p class="step__sub">Tres cosas que mueven el número más de lo que parece.</p>
+
+              <fieldset class="step__group">
+                <legend class="step__legend">Los textos</legend>
+                <div class="opts opts--2">
+                  <label class="opt"><input type="radio" name="copy" value="nosotros" checked><span class="opt__mark"></span>
+                    <span class="opt__txt"><span class="opt__name">Los textos los escribimos nosotros</span><span class="opt__desc">Copy estratégico incluido en el precio.</span></span></label>
+                  <label class="opt"><input type="radio" name="copy" value="cliente"><span class="opt__mark"></span>
+                    <span class="opt__txt"><span class="opt__name">El cliente entrega los textos</span><span class="opt__desc">Menos horas, pero después no te quejes del contenido.</span></span></label>
+                </div>
+              </fieldset>
+
+              <fieldset class="step__group">
+                <legend class="step__legend">Cantidad de idiomas</legend>
+                <div class="opts opts--3">
+                  <label class="opt"><input type="radio" name="idiomas" value="1" checked><span class="opt__mark"></span>
+                    <span class="opt__txt"><span class="opt__name">1 idioma</span></span></label>
+                  <label class="opt"><input type="radio" name="idiomas" value="2"><span class="opt__mark"></span>
+                    <span class="opt__txt"><span class="opt__name">2 idiomas</span></span></label>
+                  <label class="opt"><input type="radio" name="idiomas" value="3"><span class="opt__mark"></span>
+                    <span class="opt__txt"><span class="opt__name">3 o más</span></span></label>
+                </div>
+              </fieldset>
+
+              <fieldset class="step__group">
+                <legend class="step__legend">Movimiento</legend>
+                <div class="opts opts--2">
+                  <label class="opt"><input type="radio" name="animaciones" value="no" checked><span class="opt__mark"></span>
+                    <span class="opt__txt"><span class="opt__name">Transiciones simples</span><span class="opt__desc">Lo justo para que no se sienta estático.</span></span></label>
+                  <label class="opt"><input type="radio" name="animaciones" value="si"><span class="opt__mark"></span>
+                    <span class="opt__txt"><span class="opt__name">Animaciones e interacciones avanzadas</span><span class="opt__desc">Scroll, parallax, microinteracciones a medida.</span></span></label>
+                </div>
+              </fieldset>
+            </section>
+
+            <!-- Paso 5 -->
+            <section class="step" data-paso="5" aria-label="Paso 5: cliente, plazo y revisiones">
+              <h3 class="step__title">Cliente, plazo y revisiones</h3>
+              <p class="step__sub">Acá es donde se esconden las horas que nadie presupuesta.</p>
+
+              <fieldset class="step__group">
+                <legend class="step__legend">Tipo de cliente</legend>
+                <div class="opts opts--3">
+                  <label class="opt"><input type="radio" name="cliente" value="pyme" checked><span class="opt__mark"></span>
+                    <span class="opt__txt"><span class="opt__name">PyME o emprendedor</span><span class="opt__desc">Decide una persona y decide rápido.</span></span></label>
+                  <label class="opt"><input type="radio" name="cliente" value="startup"><span class="opt__mark"></span>
+                    <span class="opt__txt"><span class="opt__name">Startup con muchos cambios</span><span class="opt__desc">El alcance se mueve mientras trabajás.</span></span></label>
+                  <label class="opt"><input type="radio" name="cliente" value="corporativo"><span class="opt__mark"></span>
+                    <span class="opt__txt"><span class="opt__name">Corporativo con comité</span><span class="opt__desc">Cada aprobación pasa por tres personas.</span></span></label>
+                </div>
+              </fieldset>
+
+              <fieldset class="step__group">
+                <legend class="step__legend">Plazo</legend>
+                <div class="opts opts--3">
+                  <label class="opt"><input type="radio" name="plazo" value="normal" checked><span class="opt__mark"></span>
+                    <span class="opt__txt"><span class="opt__name">Normal</span><span class="opt__desc">El tiempo que el proyecto necesita.</span></span></label>
+                  <label class="opt"><input type="radio" name="plazo" value="express"><span class="opt__mark"></span>
+                    <span class="opt__txt"><span class="opt__name">Express</span><span class="opt__desc">La mitad del tiempo habitual.</span></span></label>
+                  <label class="opt"><input type="radio" name="plazo" value="urgente"><span class="opt__mark"></span>
+                    <span class="opt__txt"><span class="opt__name">Urgente</span><span class="opt__desc">Para ayer. Se cobra.</span></span></label>
+                </div>
+              </fieldset>
+
+              <fieldset class="step__group">
+                <legend class="step__legend">Rondas de revisión</legend>
+                <div class="opts opts--3">
+                  <label class="opt"><input type="radio" name="revisiones" value="r2" checked><span class="opt__mark"></span>
+                    <span class="opt__txt"><span class="opt__name">2 rondas</span><span class="opt__desc">Lo estándar y lo recomendable.</span></span></label>
+                  <label class="opt"><input type="radio" name="revisiones" value="r3"><span class="opt__mark"></span>
+                    <span class="opt__txt"><span class="opt__name">3 rondas</span></span></label>
+                  <label class="opt"><input type="radio" name="revisiones" value="r5"><span class="opt__mark"></span>
+                    <span class="opt__txt"><span class="opt__name">Hasta 5 rondas</span></span></label>
+                </div>
+              </fieldset>
+            </section>
+
+            <!-- Paso 6 -->
+            <section class="step" data-paso="6" aria-label="Paso 6: tu tarifa por hora">
+              <h3 class="step__title">Tu tarifa por hora</h3>
+              <p class="step__sub">Es el mismo valor que pusiste arriba. Cambialo acá y se actualiza en los dos lados.</p>
+              <div class="step__group">
+                <div class="rate__box" style="max-width:420px">
+                  <label class="sr" for="tarifa-wiz">Tu tarifa por hora</label>
+                  <input id="tarifa-wiz" type="number" min="1" max="1000000" step="1" value="25" inputmode="decimal" autocomplete="off">
+                  <span class="rate__suffix" aria-hidden="true">/ h</span>
+                  <span class="rate__sep"></span>
+                  <label class="sr" for="moneda-wiz">Moneda</label>
+                  <select id="moneda-wiz">
+                    <option value="USD" selected>USD</option><option value="ARS">ARS</option>
+                    <option value="EUR">EUR</option><option value="MXN">MXN</option>
+                    <option value="COP">COP</option><option value="CLP">CLP</option>
+                  </select>
+                </div>
+                <p class="field__note" style="margin-top:14px">
+                  <button type="button" class="linkish" data-abrir-modal>¿No sabés cuánto vale tu hora?</button>
+                </p>
+              </div>
+              <p class="err" data-err="6">Poné una tarifa mayor a cero.</p>
+            </section>
+
+            <!-- Paso 7 -->
+            <section class="step" data-paso="7" aria-label="Paso 7: tus datos">
+              <h3 class="step__title">¿A dónde te mando el presupuesto?</h3>
+              <p class="step__sub">Lo vas a ver en pantalla igual. Esto es para que te quede guardado.</p>
+              <div class="step__group">
+                <div class="field" style="margin-top:0">
+                  <label for="lead-nombre">Tu nombre</label>
+                  <input class="input" id="lead-nombre" name="nombre" type="text" autocomplete="name" required>
+                </div>
+                <div class="field">
+                  <label for="lead-email">Tu email</label>
+                  <input class="input" id="lead-email" name="email" type="email" autocomplete="email" required>
+                </div>
+                <div class="field">
+                  <label class="opt opt--check" style="align-items:center">
+                    <input type="checkbox" id="lead-consent" checked><span class="opt__mark"></span>
+                    <span class="opt__txt"><span class="opt__name">Quiero recibir recursos de Web Design Network por email.</span></span>
+                  </label>
+                </div>
+                <p class="fine" style="margin-top:16px">No compartimos tu email con nadie. Podés darte de baja cuando quieras.</p>
+              </div>
+              <p class="err" data-err="7"></p>
+            </section>
+
+            <!-- Resultado -->
+            <section class="step" data-paso="8" aria-label="Tu presupuesto">
+              <p class="result__eyebrow">Tu proyecto vale entre</p>
+              <p class="result__price" id="res-precio" aria-live="polite">—</p>
+
+              <dl class="metrics">
+                <div class="metric"><dt>Horas totales</dt><dd id="res-horas">—</dd></div>
+                <div class="metric"><dt>Plazo estimado</dt><dd id="res-semanas">—</dd></div>
+                <div class="metric"><dt>Tarifa aplicada</dt><dd id="res-tarifa">—</dd></div>
+              </dl>
+
+              <div class="block">
+                <h4 class="block__title">Cómo se reparten las horas</h4>
+                <div class="bar" id="res-bar" role="img" aria-label="Desglose de horas por etapa"></div>
+                <ul class="legend" id="res-legend"></ul>
+              </div>
+
+              <div class="block">
+                <h4 class="block__title">Lo que incluye</h4>
+                <ul class="list" id="res-incluye"></ul>
+              </div>
+
+              <div class="block">
+                <h4 class="block__title">Plan de pago sugerido</h4>
+                <div class="pay" id="res-pago"></div>
+              </div>
+
+              <div class="notice">
+                <p><strong>Esto es un estimado, no un presupuesto cerrado.</strong> Ajustalo según tu experiencia, tu mercado y lo que ese cliente puntual pueda pagar. Un número más alto con un buen argumento suele cerrarse igual.</p>
+              </div>
+
+              <div class="result__actions">
+                <button type="button" class="btn btn--primary" id="btn-png">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                    <path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke-linecap="round"/>
+                  </svg>
+                  Descargar como imagen
+                </button>
+                <button type="button" class="btn btn--ghost" id="btn-reset">Empezar de nuevo</button>
+                <a class="btn btn--ghost" href="https://chat.whatsapp.com/HKfcNbTwEGUHTFibcTQouX" target="_blank" rel="noopener">Sumate a la comunidad de WDN</a>
+              </div>
+            </section>
+
+          </div>
+        </div>
+
+        <div class="wizcard__foot" id="wiz-foot">
+          <button type="button" class="btn btn--ghost" id="btn-atras">Atrás</button>
+          <button type="button" class="btn btn--primary" id="btn-siguiente">Siguiente</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <strong>Web Design Network</strong>
+    <span>© 2026 Web Design Network</span>
+    <div class="site-footer__links">
+      <a href="/recursos">Recursos</a>
+      <a href="/">Inicio</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ======================================================================
+     MODAL — ¿Cuánto vale tu hora?
+     ====================================================================== -->
+<div class="modal" id="modal-tarifa" role="dialog" aria-modal="true" aria-labelledby="modal-titulo" data-open="false">
+  <div class="modal__box">
+    <div class="modal__head">
+      <h2 class="modal__title" id="modal-titulo">¿Cuánto vale tu hora?</h2>
+      <button type="button" class="modal__close" data-cerrar-modal aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M6 6l12 12M18 6 6 18" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="field">
+      <label for="m-ingreso">¿Cuánto querés ganar por mes, limpio?</label>
+      <input class="input" id="m-ingreso" type="number" min="0" step="1" value="2000" inputmode="decimal">
+    </div>
+    <div class="field">
+      <label for="m-gastos">¿Cuánto gastás por mes en herramientas, servicios y estructura?</label>
+      <input class="input" id="m-gastos" type="number" min="0" step="1" value="300" inputmode="decimal">
+    </div>
+    <div class="field">
+      <label for="m-impuestos">¿Qué porcentaje se te va en impuestos y comisiones?</label>
+      <input class="input" id="m-impuestos" type="number" min="0" max="95" step="1" value="25" inputmode="decimal">
+    </div>
+    <div class="field">
+      <label for="m-horas">¿Cuántas horas por semana podés facturar de verdad?</label>
+      <input class="input" id="m-horas" type="number" min="1" max="80" step="1" value="20" inputmode="decimal">
+      <p class="field__note">No son 40. Entre propuestas, mails, reuniones y administración, la mitad de tu semana no se factura.</p>
+    </div>
+
+    <div class="modal__result">
+      <small>Tu hora debería valer</small>
+      <strong id="m-resultado" aria-live="polite">—</strong>
+    </div>
+
+    <div class="modal__actions">
+      <button type="button" class="btn btn--primary" id="m-usar">Usar esta tarifa</button>
+      <button type="button" class="btn btn--ghost" data-cerrar-modal>Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ======================================================================
+     CONFIG — toda la lógica de precios vive acá.
+     Para cambiar horas o multiplicadores, tocá solo este objeto.
+     ====================================================================== */
+  const CONFIG = {
+    // Gestión de proyecto: siempre se aplica, no es opcional.
+    gestion: 1.15,
+    // Horas realmente facturables por semana (para estimar el plazo).
+    horasPorSemana: 20,
+    // El precio se muestra como rango: -8% / +12% sobre el valor calculado.
+    rango: { min: 0.92, max: 1.12 },
+
+    tipos: {
+      landing: {
+        nombre: "Landing page",
+        desc: "Una sola página para vender algo puntual.",
+        tamanos: [
+          { clave: "l1", nombre: "Muy corta",  alcance: "1 sección",        horas: 8  },
+          { clave: "l2", nombre: "Corta",      alcance: "2 – 3 secciones",  horas: 14 },
+          { clave: "l3", nombre: "Mediana",    alcance: "4 – 6 secciones",  horas: 24 },
+          { clave: "l4", nombre: "Larga",      alcance: "7 – 10 secciones", horas: 36 },
+          { clave: "l5", nombre: "Muy larga",  alcance: "11 – 15 secciones",horas: 52 }
+        ]
+      },
+      institucional: {
+        nombre: "Web institucional",
+        desc: "Varias páginas: la casa de la marca en internet.",
+        tamanos: [
+          { clave: "i1", nombre: "Básica",      alcance: "1 – 3 páginas",   horas: 28 },
+          { clave: "i2", nombre: "Estándar",    alcance: "4 – 6 páginas",   horas: 45 },
+          { clave: "i3", nombre: "Completa",    alcance: "7 – 10 páginas",  horas: 68 },
+          { clave: "i4", nombre: "Corporativa", alcance: "11 – 15 páginas", horas: 95 }
+        ]
+      },
+      tienda: {
+        nombre: "Tienda online",
+        desc: "Catálogo, carrito y pagos funcionando.",
+        tamanos: [
+          { clave: "t1", nombre: "Micro",   alcance: "hasta 20 productos",  horas: 55  },
+          { clave: "t2", nombre: "Chica",   alcance: "21 – 60 productos",   horas: 78  },
+          { clave: "t3", nombre: "Mediana", alcance: "61 – 150 productos",  horas: 105 },
+          { clave: "t4", nombre: "Grande",  alcance: "más de 150 productos",horas: 140 }
+        ]
+      }
+    },
+
+    // Los add-ons se SUMAN en horas antes de aplicar los multiplicadores.
+    addons: [
+      { clave:"identidad",  nombre:"Identidad visual / mini branding",        horas:16, desc:"Logo, paleta y tipografías para arrancar de cero.",           aplica:["landing","institucional","tienda"] },
+      { clave:"sistema",    nombre:"Sistema de diseño y guía de estilo",      horas:10, desc:"Componentes documentados para que la web crezca sin romperse.", aplica:["landing","institucional","tienda"] },
+      { clave:"blog",       nombre:"Blog con estructura de artículos",        horas:8,  desc:"Listado, artículo y categorías, listos para cargar.",           aplica:["institucional","tienda"] },
+      { clave:"reservas",   nombre:"Reservas o turnos online",                horas:14, desc:"Calendario con disponibilidad, sin ir y venir por WhatsApp.",   aplica:["landing","institucional","tienda"] },
+      { clave:"miembros",   nombre:"Área de miembros / login",                horas:26, desc:"Registro, contenido privado y gestión de usuarios.",            aplica:["institucional","tienda"] },
+      { clave:"crm",        nombre:"Integración con CRM o automatizaciones",  horas:10, desc:"Los leads entran solos a donde el cliente los trabaja.",        aplica:["landing","institucional","tienda"] },
+      { clave:"seo",        nombre:"SEO on-page y optimización de performance",horas:9, desc:"Estructura, metadatos y velocidad para no arrancar invisible.", aplica:["landing","institucional","tienda"] },
+      { clave:"migracion",  nombre:"Migración de contenido existente",        horas:7,  desc:"Pasar lo que ya está publicado a la web nueva.",                aplica:["institucional","tienda"] },
+      { clave:"imagenes",   nombre:"Producción de imágenes (banco o IA)",     horas:6,  desc:"Conseguir, generar y editar las imágenes que faltan.",          aplica:["landing","institucional","tienda"] },
+      { clave:"formularios",nombre:"Formularios avanzados / multi-paso",      horas:5,  desc:"Varios pasos, lógica condicional y validación real.",           aplica:["landing","institucional","tienda"] },
+      { clave:"pagos",      nombre:"Pasarela de pago adicional o suscripciones",horas:12,desc:"Otro medio de cobro o pagos recurrentes.",                     aplica:["tienda"] },
+      { clave:"envios",     nombre:"Configuración de envíos y logística",     horas:8,  desc:"Zonas, costos y reglas de entrega cargadas y probadas.",        aplica:["tienda"] }
+    ],
+
+    // Multiplicadores porcentuales.
+    factores: {
+      copy:        { nosotros: 1.00, cliente: 0.82 },
+      idiomaExtra: 1.22,   // se aplica por cada idioma adicional al primero
+      animaciones: 1.15,
+      cliente:     { pyme: 1.00, startup: 1.10, corporativo: 1.20 },
+      plazo:       { normal: 1.00, express: 1.35, urgente: 1.60 },
+      revisiones:  { r2: 1.00, r3: 1.08, r5: 1.20 }
+    },
+
+    // Reparto de las horas por etapa (tiene que sumar 1).
+    etapas: [
+      { clave:"estrategia", nombre:"Estrategia y arquitectura",   pct:0.10, color:"--wdn-accent"    },
+      { clave:"copy",       nombre:"Copywriting",                 pct:0.18, color:"--wdn-accent-2"  },
+      { clave:"diseno",     nombre:"Diseño UI",                   pct:0.32, color:"--wdn-success"   },
+      { clave:"desarrollo", nombre:"Desarrollo",                  pct:0.30, color:"--wdn-muted"     },
+      { clave:"qa",         nombre:"QA, ajustes y publicación",   pct:0.10, color:"--wdn-muted-2"   }
+    ],
+
+    // Locale de formateo por moneda. Los separadores salen de acá.
+    monedas: {
+      USD:{ locale:"es-AR" }, ARS:{ locale:"es-AR" }, EUR:{ locale:"es-ES" },
+      MXN:{ locale:"es-MX" }, COP:{ locale:"es-CO" }, CLP:{ locale:"es-CL" }
+    },
+
+    // Umbral de horas para pasar de 50/50 a 40/30/30.
+    umbralPagoEnTres: 60
+  };
+
+  /* ======================================================================
+     ENDPOINT DE LEADS — pegá acá la URL "/exec" del Apps Script.
+     Si queda vacío, el resultado se muestra igual y el lead no se envía.
+     ====================================================================== */
+  const SHEET_ENDPOINT = '';
+
+  /* --- estado en memoria (nada de localStorage) -------------------------- */
+  const estado = {
+    moneda: "USD",
+    tarifa: 25,
+    tab: "landing",
+    wizard: {
+      paso: 1,
+      tipo: null,
+      tamano: null,
+      addons: [],
+      copy: "nosotros",
+      idiomas: 1,
+      animaciones: false,
+      cliente: "pyme",
+      plazo: "normal",
+      revisiones: "r2",
+      nombre: "",
+      email: "",
+      consentimiento: true
+    },
+    ultimo: null   // último cálculo del wizard, para el PNG
+  };
+
+  const $  = (sel, ctx) => (ctx || document).querySelector(sel);
+  const $$ = (sel, ctx) => Array.prototype.slice.call((ctx || document).querySelectorAll(sel));
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ======================================================================
+     CÁLCULO
+     ====================================================================== */
+
+  // Devuelve el objeto de tamaño a partir del tipo y la clave.
+  function buscarTamano(tipo, clave){
+    const lista = CONFIG.tipos[tipo].tamanos;
+    for (let i = 0; i < lista.length; i++) if (lista[i].clave === clave) return lista[i];
+    return null;
+  }
+
+  function buscarAddon(clave){
+    for (let i = 0; i < CONFIG.addons.length; i++) if (CONFIG.addons[i].clave === clave) return CONFIG.addons[i];
+    return null;
+  }
+
+  // Opciones neutras: las que usa la tabla del Módulo A.
+  function opcionesBase(){
+    return { addons:[], copy:"nosotros", idiomas:1, animaciones:false, cliente:"pyme", plazo:"normal", revisiones:"r2" };
+  }
+
+  // horasTotales = (base + add-ons) × todos los factores × gestión de proyecto
+  function calcularHoras(tipo, claveTamano, o){
+    const tam = buscarTamano(tipo, claveTamano);
+    if (!tam) return 0;
+
+    let horas = tam.horas;
+    for (let i = 0; i < o.addons.length; i++){
+      const a = buscarAddon(o.addons[i]);
+      if (a) horas += a.horas;
+    }
+
+    horas *= CONFIG.factores.copy[o.copy];
+    horas *= Math.pow(CONFIG.factores.idiomaExtra, Math.max(0, o.idiomas - 1));
+    horas *= o.animaciones ? CONFIG.factores.animaciones : 1;
+    horas *= CONFIG.factores.cliente[o.cliente];
+    horas *= CONFIG.factores.plazo[o.plazo];
+    horas *= CONFIG.factores.revisiones[o.revisiones];
+    horas *= CONFIG.gestion;
+
+    return horas;
+  }
+
+  // Redondeo de precios: siempre a la decena más cercana.
+  // (La tabla de verificación usa decena también arriba de 1.000 — ej. 950 / 1.160.)
+  function redondearPrecio(v){ return Math.round(v / 10) * 10; }
+
+  // Cálculo completo listo para pintar.
+  function calcular(tipo, claveTamano, opciones, tarifa){
+    const o = opciones || opcionesBase();
+    const horas = calcularHoras(tipo, claveTamano, o);
+    const precio = horas * tarifa;
+
+    return {
+      horas: horas,
+      horasRedondeadas: Math.round(horas),
+      precio: precio,
+      min: redondearPrecio(precio * CONFIG.rango.min),
+      max: redondearPrecio(precio * CONFIG.rango.max),
+      semanas: Math.max(1, Math.round(horas / CONFIG.horasPorSemana)),
+      etapas: repartirEtapas(horas, o.copy === "cliente")
+    };
+  }
+
+  // Reparte las horas por etapa. Si el cliente trae los textos, la etapa de
+  // copy desaparece y su 18% se redistribuye proporcionalmente entre el resto.
+  function repartirEtapas(horas, sinCopy){
+    const usadas = CONFIG.etapas.filter(e => !(sinCopy && e.clave === "copy"));
+    let suma = 0;
+    usadas.forEach(e => { suma += e.pct; });
+    return usadas.map(e => {
+      const pct = e.pct / suma;
+      return { clave:e.clave, nombre:e.nombre, color:e.color, pct:pct, horas:horas * pct };
+    });
+  }
+
+  /* ======================================================================
+     FORMATEO
+     ====================================================================== */
+  const cacheNf = {};
+  function nf(moneda){
+    if (!cacheNf[moneda]){
+      const loc = (CONFIG.monedas[moneda] || CONFIG.monedas.USD).locale;
+      cacheNf[moneda] = new Intl.NumberFormat(loc, { maximumFractionDigits: 0 });
+    }
+    return cacheNf[moneda];
+  }
+  function fmtNum(v, moneda){ return nf(moneda || estado.moneda).format(Math.round(v)); }
+  function fmtPrecio(v, moneda){ const m = moneda || estado.moneda; return m + " " + fmtNum(v, m); }
+  function fmtRango(min, max, moneda){ const m = moneda || estado.moneda; return m + " " + fmtNum(min,m) + " – " + fmtNum(max,m); }
+  function fmtSemanas(n){ return n + (n === 1 ? " semana" : " semanas"); }
+  function fmtHoras(n){ return n + " h"; }
+
+  /* ======================================================================
+     ANIMACIÓN DE CONTEO — un solo rAF para todos los números a la vez.
+     ====================================================================== */
+  let animId = null;
+  function animarValores(items, dur){
+    if (animId) { cancelAnimationFrame(animId); animId = null; }
+
+    if (reduceMotion){
+      items.forEach(it => { it.el.textContent = it.render(it.hasta); });
+      return;
+    }
+
+    const t0 = performance.now();
+    const total = dur || 200;
+
+    function paso(t){
+      const p = Math.min(1, (t - t0) / total);
+      // easeOutCubic: arranca rápido y frena, se lee mejor que lineal.
+      const e = 1 - Math.pow(1 - p, 3);
+      for (let i = 0; i < items.length; i++){
+        const it = items[i];
+        it.el.textContent = it.render(it.desde + (it.hasta - it.desde) * e);
+      }
+      if (p < 1) animId = requestAnimationFrame(paso);
+      else { animId = null; items.forEach(it => { it.el.textContent = it.render(it.hasta); }); }
+    }
+    animId = requestAnimationFrame(paso);
+  }
+
+  /* ======================================================================
+     MÓDULO A — tablas
+     ====================================================================== */
+
+  // Construye las filas una sola vez; después solo se actualizan los números.
+  function construirTablas(){
+    Object.keys(CONFIG.tipos).forEach(function(tipo){
+      const tbody = $('[data-tabla="' + tipo + '"]');
+      const html = CONFIG.tipos[tipo].tamanos.map(function(t){
+        return '<tr data-clave="' + t.clave + '">' +
+          '<td class="cell-tipo" data-label="Tipo">' + CONFIG.tipos[tipo].nombre + ' ' + t.nombre.toLowerCase() + '</td>' +
+          '<td class="cell-alcance" data-label="Alcance">' + t.alcance + '</td>' +
+          '<td class="cell-horas" data-label="Horas" data-campo="horas">—</td>' +
+          '<td class="cell-plazo" data-label="Plazo" data-campo="plazo">—</td>' +
+          '<td class="cell-precio" data-label="Precio" data-campo="precio">—</td>' +
+        '</tr>';
+      }).join('');
+      tbody.innerHTML = html;
+    });
+  }
+
+  // Recalcula las tres tablas con la tarifa actual y anima los números.
+  function pintarTablas(animar){
+    const items = [];
+    const tarifa = estado.tarifa;
+    const moneda = estado.moneda;
+
+    Object.keys(CONFIG.tipos).forEach(function(tipo){
+      const tbody = $('[data-tabla="' + tipo + '"]');
+      $$('tr', tbody).forEach(function(tr){
+        const r = calcular(tipo, tr.getAttribute("data-clave"), opcionesBase(), tarifa);
+
+        const celdaHoras  = $('[data-campo="horas"]', tr);
+        const celdaPlazo  = $('[data-campo="plazo"]', tr);
+        const celdaPrecio = $('[data-campo="precio"]', tr);
+
+        // Horas y plazo no dependen de la tarifa: se escriben directo.
+        celdaHoras.textContent = fmtHoras(r.horasRedondeadas);
+        celdaPlazo.textContent = fmtSemanas(r.semanas);
+
+        // El precio sí: se anima desde el valor anterior.
+        const desde = parseFloat(celdaPrecio.getAttribute("data-min")) || 0;
+        const desdeMax = parseFloat(celdaPrecio.getAttribute("data-max")) || 0;
+        celdaPrecio.setAttribute("data-min", r.min);
+        celdaPrecio.setAttribute("data-max", r.max);
+
+        if (!animar){
+          celdaPrecio.textContent = fmtRango(r.min, r.max, moneda);
+        } else {
+          items.push({
+            el: celdaPrecio,
+            desde: desde, hasta: r.min,
+            // El render arma el rango completo interpolando los dos extremos.
+            render: (function(dMin, dMax, hMin, hMax, m){
+              return function(v){
+                const p = (hMin - dMin) === 0 ? 1 : (v - dMin) / (hMin - dMin);
+                const maxAhora = dMax + (hMax - dMax) * p;
+                return fmtRango(v, maxAhora, m);
+              };
+            })(desde, desdeMax, r.min, r.max, moneda)
+          });
+        }
+      });
+    });
+
+    if (animar && items.length) animarValores(items, 200);
+  }
+
+  /* --- tabs --------------------------------------------------------------- */
+  function moverIndicador(){
+    const activo = $('.tabs__btn[aria-selected="true"]');
+    const ind = $('.tabs__ind');
+    if (!activo || !ind) return;
+    ind.style.width = activo.offsetWidth + "px";
+    ind.style.transform = "translateX(" + activo.offsetLeft + "px)";
+  }
+
+  function activarTab(tipo, foco){
+    estado.tab = tipo;
+    $$('.tabs__btn').forEach(function(b){
+      const on = b.getAttribute("data-tipo") === tipo;
+      b.setAttribute("aria-selected", on ? "true" : "false");
+      b.tabIndex = on ? 0 : -1;
+      if (on && foco) b.focus();
+    });
+    $$('.panel').forEach(function(p){ p.hidden = p.id !== ("panel-" + tipo); });
+    moverIndicador();
+  }
+
+  function initTabs(){
+    const lista = $$('.tabs__btn');
+    lista.forEach(function(btn){
+      btn.addEventListener("click", function(){ activarTab(btn.getAttribute("data-tipo")); });
+      btn.addEventListener("keydown", function(ev){
+        let i = lista.indexOf(btn);
+        if (ev.key === "ArrowRight") i = (i + 1) % lista.length;
+        else if (ev.key === "ArrowLeft") i = (i - 1 + lista.length) % lista.length;
+        else if (ev.key === "Home") i = 0;
+        else if (ev.key === "End") i = lista.length - 1;
+        else return;
+        ev.preventDefault();
+        activarTab(lista[i].getAttribute("data-tipo"), true);
+      });
+    });
+    window.addEventListener("resize", moverIndicador);
+    // Cuando termina de cargar DM Sans cambia el ancho de los tabs.
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(moverIndicador);
+  }
+
+  /* --- inputs de tarifa (Módulo A y paso 6 comparten estado) -------------- */
+  function setTarifa(valor, origen){
+    const n = Math.max(0, parseFloat(valor) || 0);
+    estado.tarifa = n;
+    if (origen !== "a")   $("#tarifa").value = n;
+    if (origen !== "wiz") $("#tarifa-wiz").value = n;
+    pintarTablas(true);
+  }
+
+  function setMoneda(valor, origen){
+    estado.moneda = valor;
+    if (origen !== "a")   $("#moneda").value = valor;
+    if (origen !== "wiz") $("#moneda-wiz").value = valor;
+    pintarTablas(false);
+  }
+
+  function initTarifa(){
+    $("#tarifa").addEventListener("input", function(){ setTarifa(this.value, "a"); });
+    $("#tarifa-wiz").addEventListener("input", function(){ setTarifa(this.value, "wiz"); });
+    $("#moneda").addEventListener("change", function(){ setMoneda(this.value, "a"); });
+    $("#moneda-wiz").addEventListener("change", function(){ setMoneda(this.value, "wiz"); });
+  }
+
+  /* ======================================================================
+     MODAL — ¿cuánto vale tu hora?
+     ====================================================================== */
+  const modal = $("#modal-tarifa");
+  let focoPrevio = null;
+
+  function calcularTarifaHora(){
+    const ingreso   = parseFloat($("#m-ingreso").value) || 0;
+    const gastos    = parseFloat($("#m-gastos").value) || 0;
+    const impuestos = Math.min(95, Math.max(0, parseFloat($("#m-impuestos").value) || 0));
+    const horasSem  = Math.max(1, parseFloat($("#m-horas").value) || 1);
+    const horasMes  = horasSem * 4.33;
+    return ((ingreso + gastos) / (1 - impuestos / 100)) / horasMes;
+  }
+
+  function pintarModal(){
+    const v = calcularTarifaHora();
+    $("#m-resultado").textContent = fmtPrecio(v) + " / h";
+    modal.setAttribute("data-valor", String(v));
+  }
+
+  function abrirModal(){
+    focoPrevio = document.activeElement;
+    modal.setAttribute("data-open", "true");
+    document.body.style.overflow = "hidden";
+    pintarModal();
+    $("#m-ingreso").focus();
+    $("#m-ingreso").select();
+  }
+
+  function cerrarModal(){
+    modal.setAttribute("data-open", "false");
+    document.body.style.overflow = "";
+    if (focoPrevio && focoPrevio.focus) focoPrevio.focus();
+  }
+
+  function initModal(){
+    $$("[data-abrir-modal]").forEach(function(b){ b.addEventListener("click", abrirModal); });
+    $$("[data-cerrar-modal]").forEach(function(b){ b.addEventListener("click", cerrarModal); });
+    modal.addEventListener("click", function(ev){ if (ev.target === modal) cerrarModal(); });
+
+    ["m-ingreso","m-gastos","m-impuestos","m-horas"].forEach(function(id){
+      $("#" + id).addEventListener("input", pintarModal);
+    });
+
+    $("#m-usar").addEventListener("click", function(){
+      const v = Math.round(calcularTarifaHora());
+      cerrarModal();
+      setTarifa(v);
+    });
+
+    // Esc cierra y Tab queda atrapado dentro del modal.
+    modal.addEventListener("keydown", function(ev){
+      if (ev.key === "Escape"){ ev.preventDefault(); cerrarModal(); return; }
+      if (ev.key !== "Tab") return;
+      const foco = $$('button, input, select, a[href]', modal).filter(function(el){ return !el.disabled && el.offsetParent !== null; });
+      if (!foco.length) return;
+      const primero = foco[0], ultimo = foco[foco.length - 1];
+      if (ev.shiftKey && document.activeElement === primero){ ev.preventDefault(); ultimo.focus(); }
+      else if (!ev.shiftKey && document.activeElement === ultimo){ ev.preventDefault(); primero.focus(); }
+    });
+  }
+
+  /* ======================================================================
+     ÍCONOS (SVG de trazo, dibujados acá)
+     ====================================================================== */
+  const ICONOS = {
+    landing: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h5" stroke-linecap="round"/><rect x="8" y="16" width="7" height="2.5" rx="1.25"/></svg>',
+    institucional: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11" stroke-linecap="round"/></svg>',
+    tienda: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z" stroke-linejoin="round"/><path d="M9 8V6a3 3 0 0 1 6 0v2" stroke-linecap="round"/></svg>',
+    check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+  };
+
+  /* ======================================================================
+     WIZARD
+     ====================================================================== */
+  const viewport   = $("#viewport");
+  const btnAtras   = $("#btn-atras");
+  const btnSig     = $("#btn-siguiente");
+  const PASO_FINAL = 7;   // el 8 es la pantalla de resultado
+
+  function pasoActual(){ return $('.step[data-paso="' + estado.wizard.paso + '"]'); }
+
+  function ajustarAltura(){
+    const activo = pasoActual();
+    if (activo) viewport.style.height = activo.offsetHeight + "px";
+  }
+
+  function mostrarPaso(n, foco){
+    estado.wizard.paso = n;
+
+    $$('.step').forEach(function(s){
+      s.classList.toggle("is-on", parseInt(s.getAttribute("data-paso"), 10) === n);
+    });
+
+    // Progreso y botonera: en el resultado desaparecen.
+    const enResultado = n > PASO_FINAL;
+    $("#wiz-top").style.display = enResultado ? "none" : "";
+    $("#wiz-foot").style.display = enResultado ? "none" : "";
+
+    if (!enResultado){
+      $$('.progress__seg').forEach(function(seg){
+        seg.setAttribute("data-on", parseInt(seg.getAttribute("data-seg"), 10) <= n ? "true" : "false");
+      });
+      $("#wiz-label").textContent = "Paso " + n + " de " + PASO_FINAL;
+      btnAtras.disabled = n === 1;
+      btnSig.textContent = n === PASO_FINAL ? "Ver mi presupuesto" : "Siguiente";
+    }
+
+    ajustarAltura();
+    if (foco !== false){
+      const activo = pasoActual();
+      const titulo = $('.step__title', activo) || $('.result__eyebrow', activo);
+      if (titulo){ titulo.setAttribute("tabindex", "-1"); titulo.focus({ preventScroll: true }); }
+    }
+  }
+
+  function limpiarError(n){
+    const el = $('[data-err="' + n + '"]');
+    if (el) el.setAttribute("data-show", "false");
+  }
+
+  function mostrarError(n, msg){
+    const el = $('[data-err="' + n + '"]');
+    if (!el) return;
+    if (msg) el.textContent = msg;
+    el.setAttribute("data-show", "true");
+    ajustarAltura();
+  }
+
+  // Paso 1: tarjetas de tipo.
+  function pintarTipos(){
+    $("#opts-tipo").innerHTML = Object.keys(CONFIG.tipos).map(function(clave){
+      const t = CONFIG.tipos[clave];
+      return '<label class="opt opt--big"><input type="radio" name="tipo" value="' + clave + '">' +
+        '<span class="opt__mark"></span>' +
+        '<span class="opt__ico">' + ICONOS[clave] + '</span>' +
+        '<span class="opt__txt"><span class="opt__name">' + t.nombre + '</span>' +
+        '<span class="opt__desc">' + t.desc + '</span></span></label>';
+    }).join('');
+
+    $$('#opts-tipo input').forEach(function(inp){
+      inp.addEventListener("change", function(){
+        // Cambiar de tipo invalida el tamaño y los add-ons que ya no aplican.
+        if (estado.wizard.tipo !== inp.value){
+          estado.wizard.tipo = inp.value;
+          estado.wizard.tamano = null;
+          estado.wizard.addons = estado.wizard.addons.filter(function(c){
+            const a = buscarAddon(c);
+            return a && a.aplica.indexOf(inp.value) !== -1;
+          });
+          pintarTamanos();
+          pintarAddons();
+        }
+        limpiarError(1);
+      });
+    });
+  }
+
+  // Paso 2: tamaños del tipo elegido.
+  function pintarTamanos(){
+    const tipo = estado.wizard.tipo;
+    if (!tipo){ $("#opts-tamano").innerHTML = ""; return; }
+
+    $("#opts-tamano").innerHTML = CONFIG.tipos[tipo].tamanos.map(function(t){
+      const chk = estado.wizard.tamano === t.clave ? " checked" : "";
+      return '<label class="opt"><input type="radio" name="tamano" value="' + t.clave + '"' + chk + '>' +
+        '<span class="opt__mark"></span>' +
+        '<span class="opt__txt"><span class="opt__name">' + t.nombre + '</span>' +
+        '<span class="opt__desc">' + t.alcance + '</span></span></label>';
+    }).join('');
+
+    $$('#opts-tamano input').forEach(function(inp){
+      inp.addEventListener("change", function(){ estado.wizard.tamano = inp.value; limpiarError(2); });
+    });
+  }
+
+  // Paso 3: add-ons filtrados por tipo. Sin horas ni precios a la vista.
+  function pintarAddons(){
+    const tipo = estado.wizard.tipo;
+    if (!tipo){ $("#opts-addons").innerHTML = ""; return; }
+
+    $("#opts-addons").innerHTML = CONFIG.addons
+      .filter(function(a){ return a.aplica.indexOf(tipo) !== -1; })
+      .map(function(a){
+        const chk = estado.wizard.addons.indexOf(a.clave) !== -1 ? " checked" : "";
+        return '<label class="opt opt--check"><input type="checkbox" value="' + a.clave + '"' + chk + '>' +
+          '<span class="opt__mark"></span>' +
+          '<span class="opt__txt"><span class="opt__name">' + a.nombre + '</span>' +
+          '<span class="opt__desc">' + a.desc + '</span></span></label>';
+      }).join('');
+
+    $$('#opts-addons input').forEach(function(inp){
+      inp.addEventListener("change", function(){
+        const i = estado.wizard.addons.indexOf(inp.value);
+        if (inp.checked && i === -1) estado.wizard.addons.push(inp.value);
+        if (!inp.checked && i !== -1) estado.wizard.addons.splice(i, 1);
+      });
+    });
+  }
+
+  // Pasos 4 y 5: radios estáticos.
+  function initRadiosFijos(){
+    function bind(name, fn){
+      $$('input[name="' + name + '"]').forEach(function(inp){
+        inp.addEventListener("change", function(){ if (inp.checked) fn(inp.value); });
+      });
+    }
+    bind("copy",        function(v){ estado.wizard.copy = v; });
+    bind("idiomas",     function(v){ estado.wizard.idiomas = parseInt(v, 10); });
+    bind("animaciones", function(v){ estado.wizard.animaciones = (v === "si"); });
+    bind("cliente",     function(v){ estado.wizard.cliente = v; });
+    bind("plazo",       function(v){ estado.wizard.plazo = v; });
+    bind("revisiones",  function(v){ estado.wizard.revisiones = v; });
+  }
+
+  // Paso 7: validación.
+  const RE_EMAIL = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
+
+  function validarPaso(n){
+    if (n === 1 && !estado.wizard.tipo){ mostrarError(1); return false; }
+    if (n === 2 && !estado.wizard.tamano){ mostrarError(2); return false; }
+    if (n === 6 && !(estado.tarifa > 0)){ mostrarError(6); return false; }
+    if (n === 7){
+      const nombre = $("#lead-nombre").value.trim();
+      const email  = $("#lead-email").value.trim();
+      $("#lead-nombre").setAttribute("aria-invalid", "false");
+      $("#lead-email").setAttribute("aria-invalid", "false");
+
+      if (!nombre){
+        $("#lead-nombre").setAttribute("aria-invalid", "true");
+        mostrarError(7, "Poné tu nombre para seguir.");
+        $("#lead-nombre").focus();
+        return false;
+      }
+      if (!RE_EMAIL.test(email)){
+        $("#lead-email").setAttribute("aria-invalid", "true");
+        mostrarError(7, "Ese email no parece válido. Revisalo, tiene que ser tipo nombre@dominio.com.");
+        $("#lead-email").focus();
+        return false;
+      }
+      estado.wizard.nombre = nombre;
+      estado.wizard.email = email;
+      estado.wizard.consentimiento = $("#lead-consent").checked;
+    }
+    limpiarError(n);
+    return true;
+  }
+
+  function siguiente(){
+    const n = estado.wizard.paso;
+    if (n > PASO_FINAL) return;
+    if (!validarPaso(n)) return;
+
+    if (n === PASO_FINAL){ finalizar(); return; }
+    mostrarPaso(n + 1);
+  }
+
+  function atras(){
+    if (estado.wizard.paso <= 1) return;
+    mostrarPaso(estado.wizard.paso - 1);
+  }
+
+  /* --- resultado ---------------------------------------------------------- */
+  function finalizar(){
+    const w = estado.wizard;
+    const r = calcular(w.tipo, w.tamano, {
+      addons: w.addons, copy: w.copy, idiomas: w.idiomas, animaciones: w.animaciones,
+      cliente: w.cliente, plazo: w.plazo, revisiones: w.revisiones
+    }, estado.tarifa);
+
+    estado.ultimo = r;
+    pintarResultado(r);
+    mostrarPaso(PASO_FINAL + 1);
+
+    // El envío nunca bloquea la pantalla: se dispara y seguimos.
+    enviarLead(armarPayload(r));
+  }
+
+  function pintarResultado(r){
+    const tam = buscarTamano(estado.wizard.tipo, estado.wizard.tamano);
+    const moneda = estado.moneda;
+
+    // Rango grande con conteo.
+    // Se escribe primero el valor final: si el rAF no llega a correr
+    // (pestaña en segundo plano, navegador raro), el número igual queda bien.
+    const elPrecio = $("#res-precio");
+    elPrecio.textContent = fmtRango(r.min, r.max, moneda);
+    animarValores([{
+      el: elPrecio, desde: 0, hasta: r.min,
+      render: function(v){
+        const p = r.min === 0 ? 1 : v / r.min;
+        return fmtRango(v, r.max * p, moneda);
+      }
+    }], 700);
+
+    $("#res-horas").textContent   = fmtHoras(r.horasRedondeadas);
+    $("#res-semanas").textContent = fmtSemanas(r.semanas);
+    $("#res-tarifa").textContent  = fmtPrecio(estado.tarifa, moneda) + " / h";
+
+    // Barra apilada + leyenda.
+    $("#res-bar").innerHTML = r.etapas.map(function(e){
+      return '<span class="bar__seg" style="width:' + (e.pct * 100) + '%;background:var(' + e.color + ')"></span>';
+    }).join('');
+    $("#res-legend").innerHTML = r.etapas.map(function(e){
+      return '<li><span class="legend__dot" style="background:var(' + e.color + ')"></span>' +
+        '<span class="legend__name">' + e.nombre + '</span>' +
+        '<span class="legend__val">' + Math.round(e.pct * 100) + '% · ' + Math.round(e.horas) + ' h</span></li>';
+    }).join('');
+
+    // Lo que incluye.
+    const incluye = [CONFIG.tipos[estado.wizard.tipo].nombre + " " + tam.nombre.toLowerCase() + " (" + tam.alcance + ")"];
+    if (estado.wizard.copy === "nosotros") incluye.push("Copy estratégico escrito por vos");
+    if (estado.wizard.idiomas > 1) incluye.push(estado.wizard.idiomas === 3 ? "3 o más idiomas" : estado.wizard.idiomas + " idiomas");
+    if (estado.wizard.animaciones) incluye.push("Animaciones e interacciones avanzadas");
+    estado.wizard.addons.forEach(function(c){
+      const a = buscarAddon(c);
+      if (a) incluye.push(a.nombre);
+    });
+    incluye.push("Gestión del proyecto de punta a punta");
+    $("#res-incluye").innerHTML = incluye.map(function(t){
+      return '<li>' + ICONOS.check + '<span>' + t + '</span></li>';
+    }).join('');
+
+    // Plan de pago sobre el precio central del rango.
+    const base = redondearPrecio(r.precio);
+    const plan = r.horas <= CONFIG.umbralPagoEnTres
+      ? [{ t:"50 % de anticipo", v: base * 0.5 }, { t:"50 % contra entrega", v: base * 0.5 }]
+      : [{ t:"40 % de anticipo", v: base * 0.4 }, { t:"30 % al aprobar diseño", v: base * 0.3 }, { t:"30 % contra entrega", v: base * 0.3 }];
+    $("#res-pago").innerHTML = plan.map(function(p){
+      return '<div class="pay__item"><div class="pay__when">' + p.t + '</div>' +
+        '<div class="pay__amount">' + fmtPrecio(p.v, moneda) + '</div></div>';
+    }).join('');
+  }
+
+  /* --- teclado ------------------------------------------------------------ */
+  function initTeclado(){
+    btnSig.addEventListener("click", siguiente);
+    btnAtras.addEventListener("click", atras);
+
+    document.addEventListener("keydown", function(ev){
+      // El modal maneja su propio teclado.
+      if (modal.getAttribute("data-open") === "true") return;
+      // Solo cuando el foco está dentro del wizard.
+      const dentro = ev.target.closest && ev.target.closest(".wizcard");
+      if (!dentro) return;
+      if (estado.wizard.paso > PASO_FINAL) return;
+
+      const tag = (ev.target.tagName || "").toLowerCase();
+      const editando = tag === "input" || tag === "select" || tag === "textarea";
+
+      if (ev.key === "Enter"){
+        // En un botón, dejamos que el click natural haga lo suyo.
+        if (tag === "button") return;
+        ev.preventDefault();
+        siguiente();
+        return;
+      }
+      // Las flechas se reservan para navegar salvo que estés editando o
+      // moviéndote entre radios (que ya usan flechas por accesibilidad).
+      if (editando || ev.target.type === "radio" || ev.target.type === "checkbox") return;
+      if (ev.key === "ArrowRight"){ ev.preventDefault(); siguiente(); }
+      if (ev.key === "ArrowLeft"){ ev.preventDefault(); atras(); }
+    });
+  }
+
+  /* ======================================================================
+     ENVÍO DEL LEAD
+     ====================================================================== */
+  function armarPayload(r){
+    const w = estado.wizard;
+    const tam = buscarTamano(w.tipo, w.tamano);
+    return {
+      fecha: new Date().toISOString(),
+      nombre: w.nombre,
+      email: w.email,
+      consentimiento: w.consentimiento ? "si" : "no",
+      tipoWeb: CONFIG.tipos[w.tipo].nombre,
+      tamano: tam ? tam.nombre + " (" + tam.alcance + ")" : "",
+      addons: w.addons.map(function(c){ const a = buscarAddon(c); return a ? a.nombre : c; }).join(", "),
+      copyIncluido: w.copy === "nosotros" ? "si" : "no",
+      idiomas: w.idiomas,
+      animaciones: w.animaciones ? "si" : "no",
+      tipoCliente: w.cliente,
+      plazo: w.plazo,
+      revisiones: w.revisiones,
+      moneda: estado.moneda,
+      tarifaHora: estado.tarifa,
+      horasTotales: r.horasRedondeadas,
+      precioMin: r.min,
+      precioMax: r.max,
+      semanas: r.semanas
+    };
+  }
+
+  async function enviarLead(payload){
+    if (!SHEET_ENDPOINT){
+      console.warn("Lead no enviado: falta SHEET_ENDPOINT.");
+      return;
+    }
+    try {
+      await fetch(SHEET_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+    } catch (e) {
+      console.warn('Lead no enviado:', e);
+    }
+  }
+
+  /* ======================================================================
+     DESCARGA COMO IMAGEN — canvas nativo, sin librerías.
+     ====================================================================== */
+  function descargarPNG(){
+    const r = estado.ultimo;
+    if (!r) return;
+
+    const W = 1200, H = 675, dpr = 2;
+    const canvas = document.createElement("canvas");
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    const ctx = canvas.getContext("2d");
+    ctx.scale(dpr, dpr);
+
+    const cs = getComputedStyle(document.documentElement);
+    const col = function(n){ return cs.getPropertyValue(n).trim(); };
+    const F = col("--wdn-font-text");
+
+    // Fondo + glow superior.
+    ctx.fillStyle = col("--wdn-bg");
+    ctx.fillRect(0, 0, W, H);
+    const g = ctx.createRadialGradient(W / 2, -60, 0, W / 2, -60, W * 0.75);
+    g.addColorStop(0, "rgba(" + col("--wdn-accent-rgb") + ",0.20)");
+    g.addColorStop(1, "rgba(" + col("--wdn-accent-rgb") + ",0)");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+
+    const M = 80;
+    let y = 96;
+
+    // Marca.
+    ctx.fillStyle = col("--wdn-accent");
+    ctx.font = "700 15px " + F;
+    ctx.fillText("WEB DESIGN NETWORK · TABULADOR DE COBRO", M, y);
+    y += 62;
+
+    // Encabezado.
+    ctx.fillStyle = col("--wdn-muted");
+    ctx.font = "500 24px " + F;
+    ctx.fillText("Tu proyecto vale entre", M, y);
+    y += 76;
+
+    // Rango grande.
+    ctx.fillStyle = col("--wdn-accent-2");
+    ctx.font = "700 68px " + F;
+    ctx.fillText(fmtRango(r.min, r.max), M, y);
+    y += 60;
+
+    // Qué es el proyecto.
+    const tam = buscarTamano(estado.wizard.tipo, estado.wizard.tamano);
+    ctx.fillStyle = col("--wdn-text");
+    ctx.font = "500 22px " + F;
+    ctx.fillText(CONFIG.tipos[estado.wizard.tipo].nombre + " · " + tam.nombre + " · " + tam.alcance, M, y);
+    y += 66;
+
+    // Tres métricas en tarjetas.
+    const datos = [
+      ["HORAS TOTALES", fmtHoras(r.horasRedondeadas)],
+      ["PLAZO ESTIMADO", fmtSemanas(r.semanas)],
+      ["TARIFA APLICADA", fmtPrecio(estado.tarifa) + " / h"]
+    ];
+    const cw = (W - M * 2 - 32) / 3;
+    datos.forEach(function(d, i){
+      const x = M + i * (cw + 16);
+      ctx.fillStyle = col("--wdn-surface");
+      ctx.strokeStyle = col("--wdn-border");
+      ctx.lineWidth = 1;
+      redondearRect(ctx, x, y, cw, 104, 14);
+      ctx.fill(); ctx.stroke();
+      ctx.fillStyle = col("--wdn-muted-2");
+      ctx.font = "700 13px " + F;
+      ctx.fillText(d[0], x + 24, y + 38);
+      ctx.fillStyle = col("--wdn-text");
+      ctx.font = "700 28px " + F;
+      ctx.fillText(d[1], x + 24, y + 78);
+    });
+    y += 152;
+
+    // Barra apilada de etapas.
+    const bw = W - M * 2, bh = 16;
+    let bx = M;
+    r.etapas.forEach(function(e){
+      ctx.fillStyle = col(e.color);
+      ctx.fillRect(bx, y, bw * e.pct, bh);
+      bx += bw * e.pct;
+    });
+    y += 52;
+    ctx.fillStyle = col("--wdn-muted");
+    ctx.font = "400 17px " + F;
+    ctx.fillText(r.etapas.map(function(e){ return e.nombre + " " + Math.round(e.pct * 100) + "%"; }).join("   ·   "), M, y);
+
+    // Pie.
+    ctx.fillStyle = col("--wdn-muted-2");
+    ctx.font = "400 16px " + F;
+    ctx.fillText("Estimado, no presupuesto cerrado · webdesignnetwork.com/recursos/tabulador", M, H - 56);
+
+    canvas.toBlob(function(blob){
+      if (!blob) return;
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "presupuesto-wdn.png";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+    }, "image/png");
+  }
+
+  // Rectángulo con esquinas redondeadas (no todos los navegadores traen roundRect).
+  function redondearRect(ctx, x, y, w, h, r){
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  /* --- reiniciar ---------------------------------------------------------- */
+  function reiniciar(){
+    estado.wizard.tipo = null;
+    estado.wizard.tamano = null;
+    estado.wizard.addons = [];
+    estado.wizard.copy = "nosotros";
+    estado.wizard.idiomas = 1;
+    estado.wizard.animaciones = false;
+    estado.wizard.cliente = "pyme";
+    estado.wizard.plazo = "normal";
+    estado.wizard.revisiones = "r2";
+    estado.ultimo = null;
+
+    $$('#opts-tipo input').forEach(function(i){ i.checked = false; });
+    ["copy","idiomas","animaciones","cliente","plazo","revisiones"].forEach(function(name){
+      const lista = $$('input[name="' + name + '"]');
+      lista.forEach(function(i, idx){ i.checked = idx === 0; });
+    });
+    pintarTamanos();
+    pintarAddons();
+    [1,2,6,7].forEach(limpiarError);
+    mostrarPaso(1);
+    $("#wizard").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  }
+
+  /* ======================================================================
+     ARRANQUE
+     ====================================================================== */
+  function init(){
+    construirTablas();
+    pintarTablas(false);
+    initTabs();
+    activarTab("landing");
+    initTarifa();
+    initModal();
+
+    pintarTipos();
+    pintarTamanos();
+    pintarAddons();
+    initRadiosFijos();
+    initTeclado();
+
+    $("#btn-png").addEventListener("click", descargarPNG);
+    $("#btn-reset").addEventListener("click", reiniciar);
+    $$("[data-ir-wizard]").forEach(function(b){
+      b.addEventListener("click", function(){
+        $("#wizard").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      });
+    });
+
+    mostrarPaso(1, false);
+    // Al cambiar el ancho cambia la altura del paso activo.
+    window.addEventListener("resize", ajustarAltura);
+    if (window.ResizeObserver){
+      const ro = new ResizeObserver(ajustarAltura);
+      $$('.step').forEach(function(s){ ro.observe(s); });
+    }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(ajustarAltura);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
+</script>
+
+<!--
+================================================================================
+  GOOGLE APPS SCRIPT — código para recibir los leads
+================================================================================
+  1. Creá una hoja de cálculo nueva en Google Sheets.
+  2. Extensiones → Apps Script.
+  3. Borrá lo que haya y pegá el código de abajo.
+  4. Implementar → Nueva implementación → Aplicación web.
+     - Ejecutar como: Yo
+     - Quién tiene acceso: Cualquier persona
+  5. Copiá la URL que termina en "/exec" y pegala arriba en SHEET_ENDPOINT.
+
+function doPost(e) {
+  const hoja = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+  const d = JSON.parse(e.postData.contents);
+  if (hoja.getLastRow() === 0) {
+    hoja.appendRow(['fecha','nombre','email','consentimiento','tipoWeb','tamano','addons',
+      'copyIncluido','idiomas','animaciones','tipoCliente','plazo','revisiones','moneda',
+      'tarifaHora','horasTotales','precioMin','precioMax','semanas']);
+  }
+  hoja.appendRow([new Date(), d.nombre, d.email, d.consentimiento, d.tipoWeb, d.tamano,
+    d.addons, d.copyIncluido, d.idiomas, d.animaciones, d.tipoCliente, d.plazo,
+    d.revisiones, d.moneda, d.tarifaHora, d.horasTotales, d.precioMin, d.precioMax, d.semanas]);
+  return ContentService.createTextOutput(JSON.stringify({ok: true}))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+================================================================================
+-->
+
+</body>
+</html>
