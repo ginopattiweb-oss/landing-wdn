@@ -14,40 +14,52 @@
 <meta property="og:image" content="https://comunidad.southprojects.dev/uploads/cta-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZWD2NJ6WZV"></script>
+<!-- Analytics (GA4 + Meta Pixel + Clarity).
+     Los stubs y la cola de eventos quedan definidos al instante, así que cualquier
+     gtag()/fbq()/clarity() posterior se encola bien. Sólo se difiere la descarga de
+     cada tag hasta después de load (o 3,5 s, lo que pase primero) para no competir
+     por ancho de banda y main thread durante el primer render. -->
 <script>
+(function () {
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  window.gtag = gtag;
   gtag('js', new Date());
-
   gtag('config', 'G-ZWD2NJ6WZV');
-</script>
 
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '2324488668354184');
-fbq('track', 'PageView');
-</script>
-<!-- End Meta Pixel Code -->
+  !function(f,n){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window);
+  fbq('init', '2324488668354184');
+  fbq('track', 'PageView');
 
-<!-- Microsoft Clarity -->
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "yc0v443i4o");
+  window.clarity = window.clarity || function(){(clarity.q=clarity.q||[]).push(arguments)};
+
+  var TAGS = [
+    'https://www.googletagmanager.com/gtag/js?id=G-ZWD2NJ6WZV',
+    'https://connect.facebook.net/en_US/fbevents.js',
+    'https://www.clarity.ms/tag/yc0v443i4o'
+  ];
+  var loaded = false;
+  function load() {
+    if (loaded) return;
+    loaded = true;
+    for (var i = 0; i < TAGS.length; i++) {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = TAGS[i];
+      document.head.appendChild(s);
+    }
+  }
+  function schedule() {
+    if (window.requestIdleCallback) requestIdleCallback(load, { timeout: 2000 });
+    else setTimeout(load, 500);
+  }
+  if (document.readyState === 'complete') schedule();
+  else { addEventListener('load', schedule); setTimeout(schedule, 3500); }
+})();
 </script>
-<!-- End Microsoft Clarity -->
+<!-- End Analytics -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="dns-prefetch" href="https://www.youtube-nocookie.com">
