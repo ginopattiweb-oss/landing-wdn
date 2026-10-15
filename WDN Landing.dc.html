@@ -93,16 +93,34 @@ window.__resources = {
     #hero h1{font-size:25px;}
     #hero h1 .l{white-space:normal;}
   }
-  /* carrusel infinito de capturas: cada card lleva su propio margin-right,
-     el track se duplica y se desplaza -50% para que el loop no salte */
-  @keyframes wdn-mq-l{from{transform:translate3d(0,0,0);}to{transform:translate3d(-50%,0,0);}}
-  @keyframes wdn-mq-r{from{transform:translate3d(-50%,0,0);}to{transform:translate3d(0,0,0);}}
-  .wdn-mq{display:flex;width:max-content;will-change:transform;}
-  .wdn-mq-wrap{position:relative;overflow:hidden;}
-  .wdn-mq-wrap:hover .wdn-mq{animation-play-state:paused;}
-  @media(prefers-reduced-motion:reduce){
-    .wdn-mq{animation:none !important;}
-    .wdn-mq-wrap{overflow-x:auto;}
+  /* capturas: grilla tipo masonry, cada una con su proporción real */
+  .cap-grid{max-width:1100px;margin:20px auto 0;padding:0 24px;box-sizing:border-box;columns:2;column-gap:20px;}
+  .cap-grid .cap-card{break-inside:avoid;margin-bottom:20px;width:100%;}
+  @media(max-width:640px){.cap-grid{columns:1;}}
+  .cap-more{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:10px;cursor:pointer;font-family:inherit;border:1px solid #2A2A34;color:#F2F2F4;font-weight:600;font-size:15px;padding:13px 26px;border-radius:10px;transition:border-color .2s ease,color .2s ease;}
+  .cap-more:hover,.cap-more:focus-visible{border-color:#4F7CFF;color:#4F7CFF;}
+  /* capturas: se abren en grande con un click */
+  .cap-card{position:relative;cursor:zoom-in;transition:border-color .2s ease,transform .2s ease;}
+  .cap-card:hover,.cap-card:focus-visible{border-color:#4F7CFF !important;outline:none;}
+  .cap-card::after{content:"";position:absolute;right:10px;bottom:10px;width:30px;height:30px;border-radius:50%;
+    background:rgba(10,10,13,0.78) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7'/%3E%3C/svg%3E") center / 15px no-repeat;
+    opacity:0;transition:opacity .2s ease;pointer-events:none;}
+  .cap-card:hover::after,.cap-card:focus-visible::after{opacity:1;}
+  .cap-lb{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;background:rgba(5,5,8,0.94);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:64px 80px;box-sizing:border-box;}
+  .cap-lb.is-open{display:flex;}
+  .cap-lb img{display:block;width:min(100%,960px);height:auto;max-height:100%;object-fit:contain;border-radius:12px;background:#fff;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+  .cap-lb button{all:unset;box-sizing:border-box;position:absolute;display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;cursor:pointer;background:#101014;border:1px solid #2A2A34;color:#F2F2F4;transition:border-color .2s ease,color .2s ease;}
+  .cap-lb button:hover,.cap-lb button:focus-visible{border-color:#4F7CFF;color:#4F7CFF;}
+  .cap-lb button svg{width:20px;height:20px;}
+  .cap-lb .cap-lb__close{top:16px;right:16px;}
+  .cap-lb .cap-lb__prev{left:18px;top:50%;transform:translateY(-50%);}
+  .cap-lb .cap-lb__next{right:18px;top:50%;transform:translateY(-50%);}
+  .cap-lb__count{position:absolute;top:28px;left:50%;transform:translateX(-50%);font-size:13px;color:#A0A0AB;letter-spacing:0.04em;}
+  @media(max-width:640px){
+    .cap-lb{padding:64px 12px 92px;}
+    .cap-lb .cap-lb__prev,.cap-lb .cap-lb__next{top:auto;bottom:24px;transform:none;}
+    .cap-lb .cap-lb__prev{left:calc(50% - 58px);}
+    .cap-lb .cap-lb__next{right:calc(50% - 58px);}
   }
 
   /* sobre mí: dos columnas de datos con la foto al medio */
@@ -262,7 +280,7 @@ window.__resources = {
         </sc-if>
         <sc-if value="{{ heroIdle }}" hint-placeholder-val="{{ true }}">
           <div onClick="{{ heroPlay }}" style="position:absolute;inset:0;cursor:pointer;">
-            <img src="./uploads/loom-thumbs/hero.jpg" alt="Tour de Web Design Network" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:contain;display:block;background:#0A0A0D;">
+            <img src="./uploads/loom-thumbs/hero-recorrido.jpg" alt="Tour de Web Design Network" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:contain;display:block;background:#0A0A0D;">
             <div style="position:absolute;inset:0;background:rgba(0,0,0,0.32);transition:background 0.3s ease;pointer-events:none;" style-hover="background:rgba(0,0,0,0.14);"></div>
             <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:68px;border-radius:50%;background:#4F7CFF;display:flex;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 8px 28px rgba(79,124,255,0.4);">
               <div style="width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:19px solid #FFFFFF;margin-left:5px;"></div>
@@ -294,27 +312,22 @@ window.__resources = {
       </div>
     </sc-for>
   </div>
-  <div style="margin-top:48px;position:relative;">
-    <div class="wdn-mq-wrap">
-      <div class="wdn-mq" style="animation:wdn-mq-l 40s linear infinite;">
-        <sc-for list="{{ filaA }}" as="c" hint-placeholder-count="14">
-          <div style="flex:none;margin-right:20px;height:clamp(190px,23vw,250px);aspect-ratio:{{ c.ratio }};border:1px solid #1E1E26;border-radius:12px;overflow:hidden;background:#101014;line-height:0;font-size:0;">
-            <div style="width:100%;height:100%;line-height:0;font-size:0;"><image-slot id="{{ c.id }}" src="{{ c.src }}" shape="rect" fit="cover" placeholder="{{ c.label }}"></image-slot></div>
-          </div>
-        </sc-for>
+  <p style="margin:44px auto 0;padding:0 24px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:13.5px;color:#8B8B96;text-align:center;">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+    Tocá una captura para verla completa
+  </p>
+  <div class="cap-grid">
+    <sc-for list="{{ capturas }}" as="c" hint-placeholder-count="15">
+      <div class="cap-card" data-cap-id="{{ c.id }}" role="button" tabindex="0" aria-label="Ver captura en grande" style="display:{{ c.display }};aspect-ratio:{{ c.ratio }};border:1px solid #1E1E26;border-radius:12px;overflow:hidden;background:#101014;line-height:0;font-size:0;">
+        <div style="width:100%;height:100%;line-height:0;font-size:0;"><image-slot id="{{ c.id }}" src="{{ c.src }}" shape="rect" fit="cover" placeholder="{{ c.label }}"></image-slot></div>
       </div>
-    </div>
-    <div class="wdn-mq-wrap" style="margin-top:20px;">
-      <div class="wdn-mq" style="animation:wdn-mq-r 55s linear infinite;">
-        <sc-for list="{{ filaB }}" as="c" hint-placeholder-count="12">
-          <div style="flex:none;margin-right:20px;height:clamp(190px,23vw,250px);aspect-ratio:{{ c.ratio }};border:1px solid #1E1E26;border-radius:12px;overflow:hidden;background:#101014;line-height:0;font-size:0;">
-            <div style="width:100%;height:100%;line-height:0;font-size:0;"><image-slot id="{{ c.id }}" src="{{ c.src }}" shape="rect" fit="cover" placeholder="{{ c.label }}"></image-slot></div>
-          </div>
-        </sc-for>
-      </div>
-    </div>
-    <div style="position:absolute;top:0;bottom:0;left:0;width:clamp(40px,8vw,120px);background:linear-gradient(90deg,#0A0A0D,rgba(10,10,13,0));pointer-events:none;"></div>
-    <div style="position:absolute;top:0;bottom:0;right:0;width:clamp(40px,8vw,120px);background:linear-gradient(270deg,#0A0A0D,rgba(10,10,13,0));pointer-events:none;"></div>
+    </sc-for>
+  </div>
+  <div style="display:{{ capMasDisplay }};justify-content:center;margin-top:12px;padding:0 24px;">
+    <button class="cap-more" onClick="{{ toggleCapturas }}">
+      <span>{{ capMasLabel }}</span>
+      <span style="display:inline-flex;transform:rotate({{ capMasRot }});transition:transform 0.4s ease;font-size:13px;color:#4F7CFF;">↓</span>
+    </button>
   </div>
 </section>
 
@@ -501,7 +514,7 @@ window.__resources = {
   &quot;showHeroVideo&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Hero&quot;}
 }">
 class Component extends DCLogic {
-  state = { open: -1, playing: {}, capRatios: {}, heroPlaying: false };
+  state = { open: -1, playing: {}, capRatios: {}, heroPlaying: false, capsExpanded: false };
   componentDidMount() {
     // mide el ratio natural de cada captura cargada para que el alto de la card salga de la imagen
     const watch = () => {
@@ -538,6 +551,86 @@ class Component extends DCLogic {
     watch();
     const t = setInterval(watch, 1000);
     setTimeout(() => clearInterval(t), 10000);
+    this.capLightbox();
+  }
+  // visor de capturas: click en una card la abre en grande; flechas / swipe para pasar, Esc para cerrar.
+  // la lista sale del DOM (las filas están duplicadas para el loop, se deduplica por id)
+  capLightbox() {
+    if (document.getElementById("cap-lb")) return;
+    const icon = (d) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + d + '"/></svg>';
+    const lb = document.createElement("div");
+    lb.id = "cap-lb";
+    lb.className = "cap-lb";
+    lb.setAttribute("role", "dialog");
+    lb.setAttribute("aria-modal", "true");
+    lb.setAttribute("aria-label", "Captura ampliada");
+    lb.innerHTML = '<span class="cap-lb__count"></span><img alt="Captura de un resultado">' +
+      '<button class="cap-lb__close" aria-label="Cerrar">' + icon("M18 6L6 18M6 6l12 12") + '</button>' +
+      '<button class="cap-lb__prev" aria-label="Captura anterior">' + icon("M15 18l-6-6 6-6") + '</button>' +
+      '<button class="cap-lb__next" aria-label="Captura siguiente">' + icon("M9 18l6-6-6-6") + '</button>';
+    document.body.appendChild(lb);
+    const img = lb.querySelector("img"), count = lb.querySelector(".cap-lb__count");
+    let items = [], idx = 0, lastFocus = null;
+    const srcOf = (card) => {
+      const slot = card.querySelector("image-slot");
+      const el = slot && slot.shadowRoot && slot.shadowRoot.querySelector(".frame img");
+      return (el && (el.currentSrc || el.src)) || (slot && slot.getAttribute("src")) || "";
+    };
+    const collect = () => {
+      const seen = new Set(), out = [];
+      document.querySelectorAll("#comunidad .cap-card").forEach((c) => {
+        const id = c.getAttribute("data-cap-id"), src = srcOf(c);
+        if (!id || seen.has(id) || !src) return;
+        seen.add(id); out.push({ id, src });
+      });
+      return out;
+    };
+    const show = (i) => {
+      idx = (i + items.length) % items.length;
+      img.src = items[idx].src;
+      count.textContent = (idx + 1) + " / " + items.length;
+    };
+    const open = (card) => {
+      items = collect();
+      const i = items.findIndex((it) => it.id === card.getAttribute("data-cap-id"));
+      if (i < 0) return;
+      lastFocus = document.activeElement;
+      show(i);
+      lb.classList.add("is-open");
+            document.documentElement.style.overflow = "hidden";
+      lb.querySelector(".cap-lb__close").focus();
+    };
+    const close = () => {
+      lb.classList.remove("is-open");
+            document.documentElement.style.overflow = "";
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    };
+    document.addEventListener("click", (e) => {
+      const card = e.target.closest && e.target.closest("#comunidad .cap-card");
+      if (card) open(card);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (lb.classList.contains("is-open")) {
+        if (e.key === "Escape") close();
+        else if (e.key === "ArrowLeft") show(idx - 1);
+        else if (e.key === "ArrowRight") show(idx + 1);
+        return;
+      }
+      const card = e.target.closest && e.target.closest("#comunidad .cap-card");
+      if (card && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); open(card); }
+    });
+    lb.addEventListener("click", (e) => { if (e.target === lb) close(); });
+    lb.querySelector(".cap-lb__close").addEventListener("click", close);
+    lb.querySelector(".cap-lb__prev").addEventListener("click", () => show(idx - 1));
+    lb.querySelector(".cap-lb__next").addEventListener("click", () => show(idx + 1));
+    let x0 = null;
+    lb.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener("touchend", (e) => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      x0 = null;
+      if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1));
+    });
   }
   // carrusel de resultados: avanza de a una card y da la vuelta en los extremos.
   // al pasar, se cortan los videos que estuvieran sonando
@@ -552,6 +645,14 @@ class Component extends DCLogic {
     if (dir < 0 && track.scrollLeft <= 4) left = track.scrollWidth;
     track.scrollTo({ left, behavior: "smooth" });
     if (Object.keys(this.state.playing).length) this.setState({ playing: {} });
+  };
+  toggleCapturas = () => {
+    const cerrar = this.state.capsExpanded;
+    this.setState({ capsExpanded: !cerrar });
+    if (cerrar) {
+      const grid = document.querySelector("#comunidad .cap-grid");
+      if (grid) window.scrollTo({ top: grid.getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" });
+    }
   };
   resPrev = () => this.resScroll(-1);
   resNext = () => this.resScroll(1);
@@ -572,9 +673,13 @@ class Component extends DCLogic {
       archivo("res-3", "resultado-2.png", "760 / 772"),
       archivo("res-4", "resultado-3.png", "764 / 734"),
     ]);
-    // cada track se duplica: la animación desplaza -50% y el loop queda continuo
-    const filaA = baseA.concat(baseA);
-    const filaB = baseB.concat(baseB);
+    // grilla de capturas: se muestran las primeras CAP_VISIBLES y el resto con "Ver las N capturas"
+    const CAP_VISIBLES = 6;
+    const todasCapturas = baseA.concat(baseB);
+    const capturas = todasCapturas.map((c, i) => ({
+      ...c, display: i < CAP_VISIBLES || this.state.capsExpanded ? "block" : "none",
+    }));
+    const capOcultas = Math.max(0, todasCapturas.length - CAP_VISIBLES);
     const stats = [
       { valor: "+300", label: "personas capacitadas" },
       { valor: "+15", label: "países" },
@@ -585,7 +690,7 @@ class Component extends DCLogic {
     // el hero arranca con una miniatura estática: el iframe de Loom (player + bundle)
     // recién se monta cuando alguien hace click en play
     const heroPlaying = this.state.heroPlaying;
-    const heroSrc = "https://www.loom.com/embed/9eb44c0c8bb448238f2618fb9cf9d698?autoplay=1";
+    const heroSrc = "https://www.loom.com/embed/99718b6ba7d249d28820495f3dc62510?autoplay=1";
     const heroPlay = () => this.setState({ heroPlaying: true });
     // cada dolor se parte en pre/hl/post: hl es la parte resaltada en azul
     const dolores = [
@@ -601,52 +706,52 @@ class Component extends DCLogic {
     // testimonios con video ya cargado: se embeben directo (sin miniatura). ratio "9/16" = vertical
     const embeds = {
       0: {
+        src: "https://www.loom.com/embed/0854d9925c244017b23d6bf40bb38e3b", poster: "./uploads/loom-thumbs/vinicius.jpg", ratio: "9/16",
+        nombre: "Vinicius", avatar: "./uploads/vinicius.jpg",
+        resultado: "Arrancó con Framer y la comunidad fue un cambio rotundo",
+        cita: "“La gente que está ahí es muy, muy amable, siempre está predispuesta a ayudarte.”",
+      },
+      1: {
         src: "https://www.loom.com/embed/082b1db400a04356ba7b9a8ec9e0d29c", poster: "./uploads/loom-thumbs/joel.jpg", ratio: "9/16",
         nombre: "Joel Soria", avatar: "./uploads/joel.jpg",
         resultado: "Consiguió su primer cliente en menos de dos semanas",
         cita: "“Había mandado más de 2000 mensajes en frío antes de entrar en la comunidad.”",
       },
-      1: {
+      2: {
         src: "https://www.loom.com/embed/4cfbc98beb8049868fe1bd28ff62e237", poster: "./uploads/loom-thumbs/tomas.jpg", ratio: "9/16",
         nombre: "Tomás Espinosa", avatar: "./uploads/tomas-espinosa.jpeg",
         resultado: "Cerró su primer cliente en menos de 21 días",
         cita: "“Era un estudiante de programación frustrado.”",
       },
-      2: {
+      3: {
         src: "https://www.loom.com/embed/a6dc1746e5a54f359814dd58e0d96ddd", poster: "./uploads/loom-thumbs/mateo.jpg", ratio: "9/16",
         nombre: "Mateo Narducci", avatar: "./uploads/mateo.jpg",
         resultado: "10/10 la comunidad, estaba un poco perdido antes de entrar",
         cita: "“Entré en la comunidad hace poco y me ordenó muchísimo. Me gustó que la gente está toda en la misma.”",
       },
-      3: {
+      4: {
         src: "https://www.loom.com/embed/9a4682e75e354d8298f2e5594d867069", poster: "./uploads/loom-thumbs/lorena.jpg", ratio: "16/9",
         nombre: "Lorena Castro", avatar: "./uploads/lorena-castro.jpg",
         resultado: "Cerró su primer cliente en Framer gracias a la comunidad",
         cita: "“La comunidad me ayudó mucho a poder organizar mis ideas.”",
       },
-      4: {
+      5: {
         src: "https://www.loom.com/embed/dd68f0cfa64a4e519f8397ed00472b40", poster: "./uploads/loom-thumbs/carol.jpg", ratio: "16/9",
         nombre: "Carol", avatar: "./uploads/carol.jpg",
         resultado: "Diseñadora UX/UI",
         cita: "“Era lo que necesitaba.”",
       },
-      5: {
+      6: {
         src: "https://www.loom.com/embed/c13c82b228ef4cacb0915d9f84f1eca2", poster: "./uploads/loom-thumbs/franco.jpg", ratio: "16/9",
         nombre: "Franco Fucinelli", avatar: "./uploads/franco.jpg",
         resultado: "La comunidad está genial, no sabía que había ese intercambio",
         cita: "“Me terminó convenciendo que hay un mix de clases grabadas y llamadas en vivo.”",
       },
-      6: {
+      7: {
         src: "https://www.loom.com/embed/5ab9846079cd4193b8ce0413c6ea8fca", poster: "./uploads/loom-thumbs/hernan.jpg", ratio: "16/9",
         nombre: "Hernán Bugner", avatar: "./uploads/hernan.jpg",
         resultado: "Consiguió su primer cliente: una nutricionista italiana",
         cita: "“Valoro mucho que la formación no se queda solo en diseño web, también te prepara para la vida real.”",
-      },
-      7: {
-        src: "https://www.loom.com/embed/0854d9925c244017b23d6bf40bb38e3b", poster: "./uploads/loom-thumbs/vinicius.jpg", ratio: "9/16",
-        nombre: "Vinicius", avatar: "./uploads/vinicius.jpg",
-        resultado: "Arrancó con Framer y la comunidad fue un cambio rotundo",
-        cita: "“La gente que está ahí es muy, muy amable, siempre está predispuesta a ayudarte.”",
       },
     };
     const testimoniosAll = titulares.map((resultado, i) => {
@@ -729,7 +834,11 @@ class Component extends DCLogic {
       dolores, testimonios: testimoniosAll, entregables, checks, faqs,
       sobreMiIzq, sobreMiDer,
       resPrev: this.resPrev, resNext: this.resNext,
-      filaA, filaB, stats,
+      capturas, stats,
+      toggleCapturas: this.toggleCapturas,
+      capMasDisplay: capOcultas === 0 ? "none" : "flex",
+      capMasLabel: this.state.capsExpanded ? "Ver menos" : ("Ver las " + todasCapturas.length + " capturas"),
+      capMasRot: this.state.capsExpanded ? "180deg" : "0deg",
     };
   }
 }
