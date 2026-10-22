@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo quitar el AI slop de tus webs con Taste Skill · Web Design Network</title>
+<meta name="description" content="Guía paso a paso para que Claude Code, Cursor o Codex dejen de armar la misma landing genérica de siempre. Instalación, prompts y el checklist anti AI slop de Taste Skill.">
+<link rel="canonical" href="https://comunidad.southprojects.dev/recursos/ai-slop-taste-skill">
+<link rel="icon" type="image/png" href="/uploads/favicon.png">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cómo quitar el AI slop de tus webs con Taste Skill">
+<meta property="og:description" content="La guía para que tu agente de IA diseñe webs con criterio en vez de la landing genérica de siempre.">
+<meta property="og:url" content="https://comunidad.southprojects.dev/recursos/ai-slop-taste-skill">
+<meta property="og:image" content="https://comunidad.southprojects.dev/uploads/taste-skill-thumb.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Analytics (GA4 + Meta Pixel + Clarity).
+     Los stubs y la cola de eventos quedan definidos al instante, así que cualquier
+     gtag()/fbq()/clarity() posterior se encola bien. Sólo se difiere la descarga de
+     cada tag hasta después de load (o 3,5 s, lo que pase primero) para no competir
+     por ancho de banda y main thread durante el primer render. -->
+<script>
+(function () {
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  window.gtag = gtag;
+  gtag('js', new Date());
+  gtag('config', 'G-ZWD2NJ6WZV');
+
+  !function(f,n){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window);
+  fbq('init', '2324488668354184');
+  fbq('track', 'PageView');
+
+  window.clarity = window.clarity || function(){(clarity.q=clarity.q||[]).push(arguments)};
+
+  var TAGS = [
+    'https://www.googletagmanager.com/gtag/js?id=G-ZWD2NJ6WZV',
+    'https://connect.facebook.net/en_US/fbevents.js',
+    'https://www.clarity.ms/tag/yc0v443i4o'
+  ];
+  var loaded = false;
+  function load() {
+    if (loaded) return;
+    loaded = true;
+    for (var i = 0; i < TAGS.length; i++) {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = TAGS[i];
+      document.head.appendChild(s);
+    }
+  }
+  function schedule() {
+    if (window.requestIdleCallback) requestIdleCallback(load, { timeout: 2000 });
+    else setTimeout(load, 500);
+  }
+  if (document.readyState === 'complete') schedule();
+  else { addEventListener('load', schedule); setTimeout(schedule, 3500); }
+})();
+</script>
+<!-- End Analytics -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/recursos/styles.css">
+<style>
+  /* --- gate de WhatsApp: tarjeta en la página, no modal -------------------- */
+  .wa-gate{
+    margin-top:clamp(32px,5vw,44px);padding:clamp(22px,4vw,32px);
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    box-shadow:0 20px 60px rgba(0,0,0,0.35);
+  }
+  .wa-gate__head{display:flex;align-items:flex-start;gap:14px;}
+  .wa-gate__icon{flex:none;width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(37,211,102,0.12);}
+  .wa-gate__icon svg{width:22px;height:22px;fill:#25D366;}
+  .wa-gate h2{margin:0;font-size:clamp(19px,2.4vw,22px);font-weight:600;letter-spacing:-0.02em;}
+  .wa-gate__intro{margin:6px 0 0;font-size:15px;color:var(--muted);text-wrap:pretty;}
+  .wa-gate form{margin-top:22px;display:grid;grid-template-columns:1fr 1.3fr;gap:12px;}
+  .wa-gate label{display:flex;flex-direction:column;gap:7px;font-size:13px;color:var(--muted-2);}
+  .wa-gate input{
+    width:100%;padding:13px 14px;border-radius:10px;border:1px solid var(--border);
+    background:var(--bg);color:var(--text);font:inherit;font-size:15.5px;
+  }
+  .wa-gate input:focus{outline:none;border-color:var(--accent);}
+  .wa-gate input::placeholder{color:#5A5A66;}
+  .wa-gate__hint{font-size:12px;color:var(--muted-2);}
+  .wa-gate .btn-primary{grid-column:1 / -1;margin-top:4px;padding:15px;width:100%;}
+  .wa-gate .btn-primary[disabled]{opacity:.6;cursor:wait;}
+  .wa-gate__error{grid-column:1 / -1;margin:0;font-size:13.5px;color:#FF6B6B;display:none;}
+  .wa-gate__error[data-show="true"]{display:block;}
+  .wa-gate__fine{margin:14px 0 0;font-size:12.5px;color:var(--muted-2);text-align:center;text-wrap:pretty;}
+  .wa-gate__done{display:none;}
+  @media(max-width:600px){.wa-gate form{grid-template-columns:1fr;}}
+
+  body.is-unlocked .wa-gate form,
+  body.is-unlocked .wa-gate__fine,
+  body.is-unlocked .wa-gate__intro{display:none;}
+  body.is-unlocked .wa-gate__done{display:block;margin:6px 0 0;font-size:15px;color:var(--muted);text-wrap:pretty;}
+
+  /* --- contenido bloqueado: se ve el arranque, el resto queda tapado -------- */
+  .guide{position:relative;margin-top:clamp(48px,7vw,72px);}
+  body:not(.is-unlocked) .guide{max-height:520px;overflow:hidden;user-select:none;}
+  body:not(.is-unlocked) .guide::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(rgba(10,10,13,0) 0%, rgba(10,10,13,0.85) 45%, var(--bg) 80%);
+  }
+  .guide__locked{display:none;margin-top:-80px;position:relative;z-index:1;text-align:center;}
+  body:not(.is-unlocked) .guide__locked{display:flex;flex-direction:column;align-items:center;gap:12px;}
+  .guide__locked p{margin:0;font-size:14.5px;color:var(--muted);}
+  .btn-ghost{
+    display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;
+    border:1px solid var(--border);background:var(--surface-2);color:var(--text);font-size:14.5px;font-weight:600;cursor:pointer;
+    transition:border-color .2s ease,transform .2s ease;
+  }
+  .btn-ghost:hover{border-color:rgba(79,124,255,0.45);transform:translateY(-2px);}
+
+  /* --- cuerpo de la guía ---------------------------------------------------- */
+  .step{padding-top:clamp(40px,6vw,56px);}
+  .step:first-child{padding-top:0;}
+  .step__num{font-size:12.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);}
+  .step h2{margin:10px 0 0;font-size:clamp(23px,3.2vw,30px);font-weight:600;letter-spacing:-0.02em;line-height:1.2;text-wrap:balance;}
+  .step p,.step li{font-size:16px;color:var(--muted);text-wrap:pretty;}
+  .step p{margin:14px 0 0;}
+  .step strong{color:var(--text);font-weight:600;}
+  .step ul,.step ol{margin:14px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:8px;}
+  .step a.inline{color:var(--accent-soft);text-decoration:underline;text-underline-offset:3px;}
+
+  .code{
+    position:relative;margin-top:16px;border:1px solid var(--border);border-radius:12px;background:#08080B;
+  }
+  .code__label{display:block;padding:10px 14px 0;font-size:12px;color:var(--muted-2);}
+  .code pre{margin:0;padding:10px 64px 14px 14px;overflow-x:auto;}
+  .code code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;line-height:1.6;color:#E6E6EA;white-space:pre;}
+  .code--prompt code{white-space:pre-wrap;font-family:'DM Sans',sans-serif;font-size:15px;}
+  .copy{
+    position:absolute;top:10px;right:10px;padding:6px 10px;border-radius:8px;cursor:pointer;
+    border:1px solid var(--border);background:var(--surface);color:var(--muted);font:inherit;font-size:12px;font-weight:600;
+  }
+  .copy:hover{color:var(--text);border-color:var(--muted-2);}
+
+  .split{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media(max-width:640px){.split{grid-template-columns:1fr;}}
+  .card{padding:20px;border:1px solid var(--border);border-radius:14px;background:var(--surface-2);}
+  .card h3{margin:0;font-size:15.5px;font-weight:600;}
+  .card ul{margin:12px 0 0;padding-left:18px;gap:6px;}
+  .card li{font-size:14.5px;}
+  .card--bad h3{color:#FF8A8A;}
+  .card--good h3{color:#7EE2A8;}
+
+  .bans{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(max-width:640px){.bans{grid-template-columns:1fr;}}
+  .ban{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border:1px solid var(--border);border-radius:12px;background:var(--surface-2);}
+  .ban__x{flex:none;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,107,107,0.12);color:#FF8A8A;font-size:12px;font-weight:700;line-height:1;}
+  .ban p{margin:0;font-size:14.5px;color:var(--muted);}
+  .ban strong{display:block;color:var(--text);font-size:15px;margin-bottom:2px;}
+
+  .note{margin-top:18px;padding:16px 18px;border-left:3px solid var(--accent);background:rgba(79,124,255,0.06);border-radius:0 12px 12px 0;}
+  .note p{margin:0;font-size:15px;}
+
+  /* --- CTA a la comunidad -------------------------------------------------- */
+  .community{
+    margin-top:clamp(48px,7vw,72px);padding:clamp(24px,4vw,36px);border-radius:var(--radius);
+    border:1px solid rgba(79,124,255,0.3);
+    background:radial-gradient(ellipse 80% 120% at 100% 0%, rgba(79,124,255,0.16), rgba(79,124,255,0) 60%), var(--surface);
+    display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  }
+  .community h2{margin:0;font-size:clamp(20px,2.8vw,26px);font-weight:600;letter-spacing:-0.02em;text-wrap:balance;}
+  .community p{margin:8px 0 0;font-size:15px;color:var(--muted);max-width:46ch;text-wrap:pretty;}
+  .btn-wa{
+    display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:999px;
+    background:#fff;color:#0A0A0D;font-size:15.5px;font-weight:600;white-space:nowrap;
+    transition:transform .2s ease,box-shadow .2s ease;
+  }
+  .btn-wa:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(255,255,255,.14);color:#0A0A0D;}
+  .btn-wa svg{width:18px;height:18px;fill:#25D366;}
+  @media(max-width:600px){.community .btn-wa{width:100%;justify-content:center;}}
+</style>
+</head>
+
+<!-- data-recurso viaja con el lead para saber de qué página vino -->
+<body data-recurso="ai-slop-taste-skill">
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2324488668354184&ev=PageView&noscript=1"
+/></noscript>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-header__logo" href="/" aria-label="Web Design Network">
+      <img src="/uploads/logo-blanco.png" alt="Web Design Network" width="1150" height="486">
+    </a>
+    <nav class="site-nav">
+      <a class="nav-link" href="/">Inicio</a>
+      <a class="nav-link" href="/recursos" aria-current="page">Recursos</a>
+      <a class="nav-cta" href="https://wa.me/5492922453154?text=Hola%20Gino%2C%20quiero%20entrar%20a%20la%20comunidad" target="_blank" rel="noopener">Sumate a WDN</a>
+    </nav>
+  </div>
+</header>
+
+<main class="glow">
+  <article class="wrap" style="padding-top:clamp(48px,7vw,84px);">
+
+    <p class="eyebrow">Recurso gratis</p>
+    <h1 class="title">Cómo quitar el AI slop de tus webs con Taste Skill</h1>
+    <p class="lead">Si le pedís una web a Claude Code, Cursor o Codex, casi siempre te devuelve la misma landing: gradiente violeta, tres cards iguales y un “Scroll to explore”. Esta guía te muestra cómo cambiar eso con una skill gratuita.</p>
+    <p class="sub">Instalación, los prompts que uso y el checklist completo de lo que Taste Skill no deja pasar. Sirve para webs nuevas y para limpiar las que ya hiciste.</p>
+
+    <!-- Gate: pide nombre + WhatsApp antes de mostrar la guía completa -->
+    <section class="wa-gate" id="acceso" aria-labelledby="gate-title">
+      <div class="wa-gate__head">
+        <span class="wa-gate__icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.04 21.5h-.01a9.45 9.45 0 0 1-4.82-1.32l-.35-.21-3.58.94.96-3.49-.23-.36a9.43 9.43 0 0 1-1.45-5.03c0-5.22 4.25-9.47 9.48-9.47 2.53 0 4.91.99 6.7 2.78a9.4 9.4 0 0 1 2.77 6.7c0 5.22-4.25 9.46-9.47 9.46zm8.06-17.53A11.33 11.33 0 0 0 12.04.63C5.76.63.65 5.74.65 12.02c0 2 .52 3.96 1.52 5.69L.55 23.6l6.04-1.58a11.37 11.37 0 0 0 5.44 1.39h.01c6.28 0 11.39-5.11 11.39-11.39 0-3.04-1.18-5.9-3.33-8.05z"/></svg></span>
+        <div>
+          <h2 id="gate-title">Te mando la guía por WhatsApp</h2>
+          <p class="wa-gate__intro">Dejame tu nombre y tu número: te envío el recurso por WhatsApp para que lo tengas a mano, y además se desbloquea la guía completa acá abajo.</p>
+          <p class="wa-gate__done">Listo. Te llega por WhatsApp en breve y ya podés leer la guía completa acá abajo.</p>
+        </div>
+      </div>
+      <form novalidate>
+        <label>Nombre
+          <input type="text" name="nombre" autocomplete="given-name" placeholder="Tu nombre" required>
+        </label>
+        <label>WhatsApp
+          <input type="tel" name="telefono" autocomplete="tel" inputmode="tel" placeholder="+54 9 11 1234 5678" required>
+          <span class="wa-gate__hint">Con código de país, así te llega el mensaje.</span>
+        </label>
+        <p class="wa-gate__error" data-show="false" role="alert"></p>
+        <button class="btn-primary" type="submit">Quiero la guía</button>
+      </form>
+      <p class="wa-gate__fine">Usamos tu número sólo para mandarte este recurso y otros de desarrollo web por WhatsApp. Si no querés recibir más, respondé “baja”.</p>
+    </section>
+
+    <div class="guide" id="guia">
+
+      <section class="step">
+        <span class="step__num">01 · El problema</span>
+        <h2>Qué es el AI slop y por qué todas las webs hechas con IA se parecen</h2>
+        <p>AI slop es el diseño “promedio” que sale cuando le pedís una web a un agente sin darle criterio. El modelo arma lo más probable, y lo más probable es lo que ya viste mil veces. El cliente no sabe nombrarlo, pero lo siente: la web se ve barata y genérica.</p>
+        <div class="split">
+          <div class="card card--bad">
+            <h3>Lo que te devuelve la IA sola</h3>
+            <ul>
+              <li>Gradientes violetas y manchas de color de fondo</li>
+              <li>Tres cards iguales para “features”</li>
+              <li>Dashboards y terminales falsos armados con divs</li>
+              <li>Etiquetas tipo “BETA”, “V0.6” o “00 / INDEX”</li>
+              <li>“Scroll to explore” y flechitas hacia abajo</li>
+            </ul>
+          </div>
+          <div class="card card--good">
+            <h3>Lo que buscás</h3>
+            <ul>
+              <li>Una dirección de arte que salga del cliente</li>
+              <li>Fotos reales en vez de ilustraciones genéricas</li>
+              <li>Jerarquía clara: título que se entiende en la primera pantalla</li>
+              <li>Márgenes parejos, sin huecos al azar</li>
+              <li>Que se vea bien en celular, no sólo en desktop</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="step">
+        <span class="step__num">02 · La herramienta</span>
+        <h2>Qué es Taste Skill</h2>
+        <p><strong>Taste Skill</strong> es una skill gratuita y open source (licencia MIT), creada por Leon Lin, que hace que los agentes de código <strong>diseñen</strong> webs en vez de ensamblar la landing promedio. Le da al agente una dirección de arte, fotos reales y una forma de revisar su propio trabajo en un navegador de verdad.</p>
+        <p>Está armada a partir del estudio de 247 sitios curados. Cuando construye una página sigue seis pasos:</p>
+        <ol>
+          <li>Lee el brief y anota lo que <strong>sólo</strong> tiene ese cliente.</li>
+          <li>Reparte tres de 20 direcciones de diseño investigadas y el agente elige una.</li>
+          <li>Encuentra la idea: una frase que une el material del cliente con esa dirección.</li>
+          <li>Construye con fotos y videos reales de colecciones abiertas, con sus créditos.</li>
+          <li>Revisa la página en un navegador real en tres anchos de pantalla y la reprueba si tiene slop.</li>
+          <li>Mira sus propias capturas y corrige los tres problemas principales, hasta tres rondas.</li>
+        </ol>
+        <p>Funciona con Claude Code, Codex, Cursor y cualquier herramienta que lea archivos <code>SKILL.md</code>. Sirve con React, Vue, Svelte o HTML puro, porque las reglas son de diseño, no de framework.</p>
+      </section>
+
+      <section class="step">
+        <span class="step__num">03 · Antes de empezar</span>
+        <h2>Qué necesitás</h2>
+        <ul>
+          <li><strong>Node 22 o más nuevo.</strong> Lo chequeás con <code>node -v</code> en la terminal.</li>
+          <li><strong>Chrome, Edge o Chromium</strong> instalado: la skill lo usa para revisar la página.</li>
+          <li><strong>Internet</strong>, sólo para buscar las fotos.</li>
+        </ul>
+        <p>No necesita API keys ni instala nada extra en tu proyecto.</p>
+      </section>
+
+      <section class="step">
+        <span class="step__num">04 · Instalación</span>
+        <h2>Cómo instalarla</h2>
+        <p><strong>Opción A, cualquier agente.</strong> Desde la carpeta de tu proyecto, en la terminal:</p>
+        <div class="code">
+          <button class="copy" type="button" data-copy>Copiar</button>
+          <pre><code>npx skills add https://github.com/Leonxlnx/taste-skill --skill "design-taste-frontend"</code></pre>
+        </div>
+        <p><strong>Opción B, plugin de Claude Code.</strong> Escribí esto dentro de Claude Code, un comando por vez:</p>
+        <div class="code">
+          <button class="copy" type="button" data-copy>Copiar</button>
+          <pre><code>/plugin marketplace add Leonxlnx/taste-skill
+/plugin install taste-skill@taste-skill</code></pre>
+        </div>
+        <p>Para actualizarla más adelante usás <code>/plugin update</code>. Si trabajás con Codex, el equivalente es <code>codex plugin marketplace add Leonxlnx/taste-skill</code> y después <code>codex plugin add taste-skill@taste-skill</code>, y abrís una sesión nueva.</p>
+      </section>
+
+      <section class="step">
+        <span class="step__num">05 · Web nueva</span>
+        <h2>Cómo usarla en una web desde cero</h2>
+        <p>La clave es el brief. Cuanto más te cuente del cliente, más se aleja de lo genérico, porque la skill arranca buscando lo que es único de ese negocio. Este es el formato que uso (completalo con tu cliente):</p>
+        <div class="code code--prompt">
+          <span class="code__label">Prompt de ejemplo</span>
+          <button class="copy" type="button" data-copy>Copiar</button>
+          <pre><code>Usá la skill design-taste-frontend para diseñar y construir la web de este cliente.
+
+Cliente: [nombre y rubro, ej. cafetería de especialidad en Palermo]
+Qué lo hace único: [historia, producto estrella, barrio, materiales, lo que nadie más tiene]
+A quién le habla: [cliente ideal]
+Objetivo de la web: [reservas, consultas por WhatsApp, ventas]
+Secciones: [inicio, servicios, sobre nosotros, contacto]
+Material que tengo: [logo, fotos propias, textos, colores de marca]
+Lo que NO quiere: [ej. nada que parezca una startup tech]</code></pre>
+        </div>
+        <div class="note">
+          <p><strong>Tené paciencia:</strong> una construcción completa tarda entre 30 y 45 minutos y consume unos cientos de miles de tokens, porque la skill se revisa y corrige sola varias veces.</p>
+        </div>
+      </section>
+
+      <section class="step">
+        <span class="step__num">06 · Web que ya tenés</span>
+        <h2>Cómo limpiar una web que ya hiciste</h2>
+        <p>Si la web ya existe, la skill primero la audita en un navegador real y después cambia. Así no te rompe lo que funciona:</p>
+        <div class="code code--prompt">
+          <span class="code__label">Prompt de ejemplo</span>
+          <button class="copy" type="button" data-copy>Copiar</button>
+          <pre><code>Usá la skill design-taste-frontend para auditar esta web en el navegador y sacarle el AI slop.
+Primero listame los problemas que encontrás, ordenados por impacto.
+Mantené el contenido, la estructura de páginas y los colores de marca. Cambiá la parte visual.</code></pre>
+        </div>
+        <p>También sirve para dashboards y paneles: desde la versión 2.1 detecta si es una página o una app y aplica reglas propias (paneles tranquilos, números alineados, color sólo para los datos).</p>
+      </section>
+
+      <section class="step">
+        <span class="step__num">07 · El checklist</span>
+        <h2>Lo que Taste Skill no deja pasar</h2>
+        <p>Estas son algunas de las prohibiciones de la skill. Aunque no la uses, sirven como checklist para revisar cualquier web antes de entregarla:</p>
+        <div class="bans">
+          <div class="ban"><span class="ban__x" aria-hidden="true">✕</span><p><strong>Gradiente violeta de IA</strong>Ni manchas de color tipo “mesh”, salvo que la marca sea violeta de verdad.</p></div>
+          <div class="ban"><span class="ban__x" aria-hidden="true">✕</span><p><strong>Tres cards iguales</strong>La fila de tres features idénticas como solución por defecto.</p></div>
+          <div class="ban"><span class="ban__x" aria-hidden="true">✕</span><p><strong>UI falsa con divs</strong>Dashboards o terminales de mentira para “mostrar el producto”.</p></div>
+          <div class="ban"><span class="ban__x" aria-hidden="true">✕</span><p><strong>Etiquetas de versión</strong>“V0.6”, “BETA” o “INVITE-ONLY” en el hero, salvo que sea un lanzamiento.</p></div>
+          <div class="ban"><span class="ban__x" aria-hidden="true">✕</span><p><strong>Numeración decorativa</strong>Títulos tipo “00 / INDEX” encima de cada sección.</p></div>
+          <div class="ban"><span class="ban__x" aria-hidden="true">✕</span><p><strong>“Scroll to explore”</strong>Ni flechitas que te piden bajar.</p></div>
+          <div class="ban"><span class="ban__x" aria-hidden="true">✕</span><p><strong>Píldoras sobre las fotos</strong>El texto va debajo de la imagen, no encima.</p></div>
+          <div class="ban"><span class="ban__x" aria-hidden="true">✕</span><p><strong>Puntitos de “estado” de adorno</strong>Sólo si muestran un estado real, y como mucho uno por sección.</p></div>
+          <div class="ban"><span class="ban__x" aria-hidden="true">✕</span><p><strong>Tiras de ciudad, hora o clima</strong>Datos de relleno que no le importan a nadie.</p></div>
+          <div class="ban"><span class="ban__x" aria-hidden="true">✕</span><p><strong>Ilustraciones SVG genéricas</strong>Dibujos hechos a mano por la IA como decoración por defecto.</p></div>
+          <div class="ban"><span class="ban__x" aria-hidden="true">✕</span><p><strong>Rayas largas de IA en el texto</strong>Las rayas (—) que delatan copy generado. Se usa guion o se reescribe la frase.</p></div>
+          <div class="ban"><span class="ban__x" aria-hidden="true">✕</span><p><strong>Bordes arriba y abajo en cada fila</strong>Listas y tablas largas llenas de líneas.</p></div>
+        </div>
+        <p>Además pone límites al hero: el título en dos líneas como máximo en desktop, el subtítulo en hasta veinte palabras y el menú en una sola línea.</p>
+      </section>
+
+      <section class="step">
+        <span class="step__num">08 · Para cerrar</span>
+        <h2>Tres consejos para que el resultado sea tuyo</h2>
+        <ul>
+          <li><strong>Cambiá las fotos.</strong> La skill usa imágenes de colecciones abiertas (Wikimedia Commons, Openverse, el Met) con sus créditos. Son un gran punto de partida, pero cuando tengas las fotos reales del cliente, reemplazalas.</li>
+          <li><strong>El brief manda.</strong> Si el resultado se ve genérico, casi siempre es porque el brief lo era. Sumá detalles concretos del negocio y volvé a correrla.</li>
+          <li><strong>Revisá en celular.</strong> La skill ya chequea tres anchos de pantalla, pero dale una pasada vos desde tu teléfono antes de mostrársela al cliente.</li>
+        </ul>
+        <p>Toda la documentación oficial está en <a class="inline" href="https://www.tasteskill.dev/" target="_blank" rel="noopener">tasteskill.dev</a> y el código en <a class="inline" href="https://github.com/Leonxlnx/taste-skill" target="_blank" rel="noopener">GitHub</a>.</p>
+      </section>
+
+    </div>
+
+    <div class="guide__locked">
+      <p>La guía sigue con la instalación, los prompts y el checklist completo.</p>
+      <a class="btn-ghost" href="#acceso">Desbloquear la guía gratis</a>
+    </div>
+
+    <section class="community" aria-labelledby="cta-1">
+      <div>
+        <h2 id="cta-1">¿Querés que revisemos tu web juntos?</h2>
+        <p>En la comunidad subís tu web o tu propuesta y te doy feedback concreto, además de las clases y las llamadas en vivo cada semana.</p>
+      </div>
+      <a class="btn-wa" href="https://wa.me/5492922453154?text=Hola%20Gino%2C%20quiero%20entrar%20a%20la%20comunidad" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.04 21.5h-.01a9.45 9.45 0 0 1-4.82-1.32l-.35-.21-3.58.94.96-3.49-.23-.36a9.43 9.43 0 0 1-1.45-5.03c0-5.22 4.25-9.47 9.48-9.47 2.53 0 4.91.99 6.7 2.78a9.4 9.4 0 0 1 2.77 6.7c0 5.22-4.25 9.46-9.47 9.46zm8.06-17.53A11.33 11.33 0 0 0 12.04.63C5.76.63.65 5.74.65 12.02c0 2 .52 3.96 1.52 5.69L.55 23.6l6.04-1.58a11.37 11.37 0 0 0 5.44 1.39h.01c6.28 0 11.39-5.11 11.39-11.39 0-3.04-1.18-5.9-3.33-8.05z"/></svg>Quiero entrar a la comunidad</a>
+    </section>
+
+    <section class="promo">
+      <div>
+        <p class="promo__eyebrow">Web Design Network</p>
+        <h2>Esto es una sola herramienta. Adentro está el sistema completo.</h2>
+        <p>La comunidad para conseguir tu primer cliente de desarrollo web y escalar a $1.000/mes: módulos, mentorías en vivo, kit comercial y una bolsa de trabajo.</p>
+        <a class="btn-wa" style="margin-top:22px;" href="https://wa.me/5492922453154?text=Hola%20Gino%2C%20quiero%20entrar%20a%20la%20comunidad" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.04 21.5h-.01a9.45 9.45 0 0 1-4.82-1.32l-.35-.21-3.58.94.96-3.49-.23-.36a9.43 9.43 0 0 1-1.45-5.03c0-5.22 4.25-9.47 9.48-9.47 2.53 0 4.91.99 6.7 2.78a9.4 9.4 0 0 1 2.77 6.7c0 5.22-4.25 9.46-9.47 9.46zm8.06-17.53A11.33 11.33 0 0 0 12.04.63C5.76.63.65 5.74.65 12.02c0 2 .52 3.96 1.52 5.69L.55 23.6l6.04-1.58a11.37 11.37 0 0 0 5.44 1.39h.01c6.28 0 11.39-5.11 11.39-11.39 0-3.04-1.18-5.9-3.33-8.05z"/></svg>Quiero entrar a la comunidad</a>
+      </div>
+      <div class="promo__media">
+        <img src="/uploads/cta-image.jpg" alt="Web Design Network" width="1200" height="750" loading="lazy">
+      </div>
+    </section>
+
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <strong>Web Design Network</strong>
+    <span>© 2026 Web Design Network</span>
+    <div class="site-footer__links">
+      <a href="/recursos">Recursos</a>
+      <a href="/">Inicio</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* --- CONFIG -------------------------------------------------------------
+     SHEET_ENDPOINT: URL "/exec" del Apps Script que guarda los leads
+     (el código está al final de este archivo). Sin URL, la guía se
+     desbloquea igual pero el número no queda guardado en ningún lado. */
+  var SHEET_ENDPOINT = "";
+  var STORAGE_KEY = "wdn_taste_skill_lead";
+
+  function getLead() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "null"); } catch (e) { return null; }
+  }
+  function saveLead(lead) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(lead)); } catch (e) {}
+  }
+  function unlock() { document.body.classList.add("is-unlocked"); }
+
+  function sendLead(lead) {
+    if (!SHEET_ENDPOINT) {
+      console.warn("[WDN] Falta SHEET_ENDPOINT: el lead no se guardó.");
+      return Promise.resolve();
+    }
+    // text/plain + no-cors: Apps Script no acepta el preflight de CORS
+    return fetch(SHEET_ENDPOINT, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(lead)
+    });
+  }
+
+  var form = document.querySelector(".wa-gate form");
+  var error = document.querySelector(".wa-gate__error");
+  var submit = form.querySelector('button[type="submit"]');
+
+  function showError(msg) {
+    error.textContent = msg;
+    error.setAttribute("data-show", "true");
+  }
+
+  form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    error.setAttribute("data-show", "false");
+    var data = new FormData(form);
+    var nombre = (data.get("nombre") || "").toString().trim();
+    var telefono = (data.get("telefono") || "").toString().trim();
+    var digitos = telefono.replace(/\D/g, "");
+
+    if (!nombre) return showError("Decime tu nombre.");
+    if (digitos.length < 10 || digitos.length > 15) {
+      return showError("Revisá el número: tiene que llevar el código de país, por ejemplo +54 9 11 1234 5678.");
+    }
+
+    var lead = {
+      fecha: new Date().toISOString(),
+      nombre: nombre,
+      telefono: "+" + digitos,
+      recurso: document.body.getAttribute("data-recurso") || "",
+      origen: location.pathname
+    };
+
+    submit.disabled = true;
+    submit.textContent = "Enviando…";
+    sendLead(lead)
+      .catch(function () { /* no-cors: si falla la red, igual desbloqueamos */ })
+      .then(function () {
+        saveLead(lead);
+        unlock();
+        try { if (window.fbq) fbq("track", "Lead", { content_name: lead.recurso }); } catch (e) {}
+        try { if (window.gtag) gtag("event", "generate_lead", { recurso: lead.recurso }); } catch (e) {}
+        var guia = document.getElementById("guia");
+        if (guia) guia.scrollIntoView({ behavior: "smooth", block: "start" });
+      })
+      .then(function () {
+        submit.disabled = false;
+        submit.textContent = "Quiero la guía";
+      });
+  });
+
+  // botones "Copiar" de los bloques de código
+  document.addEventListener("click", function (ev) {
+    var btn = ev.target.closest("[data-copy]");
+    if (!btn) return;
+    var code = btn.parentElement.querySelector("code");
+    if (!code || !navigator.clipboard) return;
+    navigator.clipboard.writeText(code.textContent).then(function () {
+      btn.textContent = "Copiado";
+      setTimeout(function () { btn.textContent = "Copiar"; }, 1600);
+    });
+  });
+
+  if (getLead()) unlock();
+})();
+</script>
+
+<!--
+================================================================================
+  GOOGLE APPS SCRIPT: código para recibir los leads de esta página
+================================================================================
+  1. Creá una hoja de cálculo nueva en Google Sheets.
+  2. Extensiones → Apps Script.
+  3. Borrá lo que haya y pegá el código de abajo.
+  4. Implementar → Nueva implementación → Aplicación web.
+     - Ejecutar como: Yo
+     - Quién tiene acceso: Cualquier persona
+  5. Copiá la URL que termina en "/exec" y pegala arriba en SHEET_ENDPOINT.
+
+function doPost(e) {
+  const hoja = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+  const d = JSON.parse(e.postData.contents);
+  if (hoja.getLastRow() === 0) {
+    hoja.appendRow(['fecha', 'nombre', 'telefono', 'recurso', 'origen']);
+  }
+  hoja.appendRow([new Date(), d.nombre, "'" + d.telefono, d.recurso, d.origen]);
+  return ContentService.createTextOutput(JSON.stringify({ ok: true }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+================================================================================
+-->
+
+</body>
+</html>
