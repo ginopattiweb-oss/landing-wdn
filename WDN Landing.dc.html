@@ -404,6 +404,16 @@ window.__resources = {
   .wa-cta:hover,.wa-cta:focus-visible{border-color:var(--drill-accent);background:rgba(37,211,102,0.08);color:var(--drill-text);}
   .wa-cta svg{width:18px;height:18px;flex:none;fill:var(--drill-accent);}
   .wa-hint{font-size:13px;color:var(--drill-muted);}
+  .floating-cta{
+    position:fixed;z-index:20;
+    left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));
+    translate:-50% 0;
+    max-width:calc(100% - 32px);
+    animation:floating-cta-enter .22s ease-out both;
+  }
+  @keyframes floating-cta-enter{
+    from{opacity:0;translate:-50% 8px;}
+  }
   .res-carousel{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:16px;}
   .results-inner{display:flex;flex-direction:column;gap:40px;}
   .results-inner > :is(h2,.res-carousel){
@@ -917,11 +927,32 @@ window.__resources = {
   </div>
 </footer>
 
+<sc-if value="{{ showFloatingCta }}">
+  <a class="btn-primary floating-cta drill-action--compact drill-action" href="https://wa.me/5492922453154?text=Hola%20Gino%2C%20quiero%20entrar%20en%20la%20formacion" target="_blank" rel="noopener">Quiero entrar a DRILL Academy<span class="drill-action__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></a>
+</sc-if>
+
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { open: -1, playing: {} };
+  state = { open: -1, playing: {}, showFloatingCta: false };
+  componentDidMount() {
+    const hero = document.getElementById("hero");
+    const finalCta = document.getElementById("cta-final");
+    if (!hero || !finalCta) return;
+    this.floatingCtaObserver = new IntersectionObserver(() => {
+      const showFloatingCta = hero.getBoundingClientRect().bottom <= 0 &&
+        finalCta.getBoundingClientRect().top >= window.innerHeight;
+      if (showFloatingCta !== this.state.showFloatingCta) {
+        this.setState({ showFloatingCta });
+      }
+    });
+    this.floatingCtaObserver.observe(hero);
+    this.floatingCtaObserver.observe(finalCta);
+  }
+  componentWillUnmount() {
+    this.floatingCtaObserver?.disconnect();
+  }
   // carrusel de resultados: avanza de a una card y da la vuelta en los extremos.
   // al pasar, se cortan los videos que estuvieran sonando
   resScroll = (dir) => {
@@ -1094,6 +1125,7 @@ class Component extends DCLogic {
       toggle: () => this.setState(s => ({ open: s.open === i ? -1 : i })),
     }));
     return {
+      showFloatingCta: this.state.showFloatingCta,
       memberWinLayouts, testimonios: testimoniosAll, checks, faqs,
       sobreMiIzq, sobreMiDer,
       resPrev: this.resPrev, resNext: this.resNext,
