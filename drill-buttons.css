@@ -1,0 +1,81 @@
+html .drill-action.drill-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 58px;
+  max-width: 100%;
+  padding: 5px 5px 5px 22px;
+  box-sizing: border-box;
+  border: 1px solid var(--drill-ice);
+  border-radius: var(--drill-radius-pill);
+  background: var(--drill-accent);
+  color: var(--drill-on-accent);
+  box-shadow: var(--drill-glow);
+  font-weight: 500;
+  line-height: 1.2;
+  text-align: left;
+  white-space: normal;
+  transition: background-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.drill-action__icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--drill-on-accent);
+  color: var(--drill-ice);
+  transition: transform .2s ease;
+}
+
+html .drill-action.drill-action:not(:disabled):is(:hover, :focus-visible) {
+  background: var(--drill-ice);
+  color: var(--drill-on-accent);
+  box-shadow:
+    0 0 0 5px color-mix(in srgb, var(--drill-accent) 25%, transparent),
+    0 12px 44px color-mix(in srgb, var(--drill-accent) 40%, transparent);
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.drill-action:not(:disabled):is(:hover, :focus-visible) .drill-action__icon {
+  transform: translateX(2px);
+}
+
+html .drill-action.drill-action:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+html .drill-action.drill-action--compact {
+  gap: 8px;
+  min-height: 44px;
+  padding: 4px 4px 4px 12px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.drill-action--compact .drill-action__icon {
+  width: 34px;
+  height: 34px;
+}
+
+.drill-action .drill-action__icon svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.drill-action--compact .drill-action__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html .drill-action.drill-action:not(:disabled):is(:hover, :focus-visible, :active),
+  .drill-action:not(:disabled):is(:hover, :focus-visible) .drill-action__icon {
+    transform: none;
+  }
+}

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html data-brand="academy" lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="./uploads/favicon.png">
+<link rel="icon" type="image/svg+xml" href="/uploads/drill-brand-kit/assets/logos/drill-isotipo-flat.svg">
 <!-- React se sirve desde /vendor en vez de unpkg.com: mismo origen, sin DNS+TLS
      a un tercer host. support.js consulta window.__resources antes de ir al CDN
      (ver cdnScriptFor), así que esto tiene que quedar definido antes de cargarlo.
@@ -69,60 +69,264 @@ window.__resources = {
 <x-dc>
 <helmet>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Web Design Network · La comunidad para crear webs y sistemas con IA</title>
-<link rel="icon" type="image/png" href="./uploads/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>Drill Academy · La comunidad para crear webs y sistemas con IA</title>
+<link rel="stylesheet" href="/uploads/drill-brand-kit/tokens.css">
+<link rel="stylesheet" href="/drill-buttons.css">
+<link rel="icon" type="image/svg+xml" href="/uploads/drill-brand-kit/assets/logos/drill-isotipo-flat.svg">
 <!-- los videos ya no cargan solos: el handshake con Loom se adelanta para que el play no espere -->
 <link rel="dns-prefetch" href="https://www.loom.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,500;1,9..40,600;1,9..40,700&amp;display=swap" rel="stylesheet">
 <script src="./image-slot.js"></script>
-<script src="./hero-shader.js"></script>
 <style>
   html{scroll-behavior:smooth;}
-  html,body{margin:0;padding:0;background:#0A0A0D;}
-  body{font-family:'DM Sans',sans-serif;color:#F2F2F4;-webkit-font-smoothing:antialiased;}
-  a{color:#F2F2F4;text-decoration:none;}
-  a:hover{color:#4F7CFF;}
+  html,body{margin:0;padding:0;background-color:var(--drill-black);}
+  body{font-family:var(--drill-font);color:var(--drill-text);-webkit-font-smoothing:antialiased;}
+  a{color:var(--drill-text);text-decoration:none;}
+  a:hover{color:var(--drill-accent);}
+  #hero{padding:0 24px;display:flex;flex-direction:column;min-height:clamp(680px,86svh,860px);}
+  .hero-nav{
+    position:relative;z-index:2;max-width:var(--drill-container);margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:12px 0;width:100%;box-sizing:border-box;
+  }
+  .hero-nav-brand{display:block;flex:none;}
+  .hero-nav-brand img{display:block;width:auto;height:clamp(28px,2.4vw,32px);}
+  .hero-nav-links{
+    display:flex;align-items:center;gap:clamp(16px,2.5vw,32px);
+    margin:0 0 0 auto;padding:0;list-style:none;
+    font-size:15px;font-weight:500;
+  }
+  .hero-nav-links a{display:block;padding:12px 0;color:var(--drill-text-2);}
+  .hero-nav-links a:hover{color:var(--drill-text);}
+  .hero-nav-cta{
+    display:inline-flex;align-items:center;justify-content:center;min-height:44px;
+    padding:0 18px;box-sizing:border-box;border-radius:var(--drill-radius-pill);
+    border:1px solid var(--drill-accent);background:var(--drill-accent);
+    color:var(--drill-on-accent);font-size:14px;font-weight:500;white-space:nowrap;
+  }
+  .hero-nav-cta:hover,.hero-nav-cta:focus-visible{color:var(--drill-on-accent);background:var(--drill-ice);}
+  .hero-nav a:focus-visible{outline:2px solid var(--drill-ice);outline-offset:4px;}
+  @media(max-width:760px){
+    #hero{padding-inline:16px;}
+    .hero-nav-links{display:none;}
+  }
+  #hero .hero-background{opacity:.38;}
+  #hero .hero-content{overflow-wrap:anywhere;}
+  section:not(.client-logos) h2{font-size:var(--drill-fs-h2) !important;font-weight:500 !important;line-height:1.05;}
+  .academy-comparison{
+    padding:clamp(72px,10vw,144px) 24px;
+    border-top:1px solid var(--drill-line);
+  }
+  .academy-comparison-inner{max-width:var(--drill-container);margin:0 auto;}
+  .academy-comparison h2{
+    max-width:22ch;margin:0 0 clamp(32px,5vw,64px);
+    letter-spacing:-.045em;text-wrap:balance;
+  }
+  .academy-comparison h2 em{color:var(--drill-accent);font-style:normal;}
+  .academy-comparison-table{
+    --comparison-inset:clamp(20px,3vw,40px);
+    width:100%;table-layout:fixed;border-spacing:20px 0;
+    font-size:var(--drill-fs-body);line-height:1.4;
+  }
+  .academy-comparison-table :is(th,td){
+    --panel-border:var(--drill-line);
+    position:relative;padding:16px var(--comparison-inset);
+    background:var(--drill-slate);border-inline:1px solid var(--panel-border);
+    text-align:left;vertical-align:middle;
+  }
+  .academy-comparison-table th{
+    padding-top:28px;padding-bottom:20px;
+    border-top:1px solid var(--panel-border);
+    border-radius:var(--drill-radius-card) var(--drill-radius-card) 0 0;
+    color:var(--drill-text-2);font-size:15px;font-weight:700;
+  }
+  .academy-comparison-table th img{vertical-align:middle;margin-right:8px;}
+  .academy-comparison-table td::before{
+    content:"";position:absolute;inset:0 var(--comparison-inset) auto;
+    border-top:1px solid var(--panel-border);
+  }
+  .academy-comparison-table td:first-child{color:var(--drill-text-2);}
+  .academy-comparison-table :is(th,td):last-child{
+    --panel-border:color-mix(in srgb,var(--drill-accent) 24%,var(--drill-line));
+    background:color-mix(in srgb,var(--drill-forest) 28%,var(--drill-graphite));
+  }
+  .academy-comparison-table th:last-child{
+    background-image:radial-gradient(ellipse at 100% 0%,color-mix(in srgb,var(--drill-accent) 16%,transparent),transparent 78%);
+    color:var(--drill-ice);
+  }
+  .academy-comparison-table tbody tr:last-child td{
+    padding-bottom:28px;border-bottom:1px solid var(--panel-border);
+    border-radius:0 0 var(--drill-radius-card) var(--drill-radius-card);
+  }
+  .academy-comparison-item{display:flex;align-items:flex-start;gap:12px;}
+  .academy-comparison-mark{
+    display:grid;place-items:center;flex:none;width:26px;height:26px;
+    border-radius:50%;background:var(--drill-line);color:var(--drill-text-2);
+    font-size:15px;line-height:1;
+  }
+  .academy-comparison-table td:last-child .academy-comparison-mark{
+    background:var(--drill-accent);color:var(--drill-on-accent);
+  }
+  .academy-comparison-close{
+    margin:clamp(32px,5vw,56px) 0 0;
+    font-size:var(--drill-fs-h3);font-weight:500;line-height:1.15;
+    letter-spacing:-.03em;text-align:center;text-wrap:balance;
+  }
+  @media(max-width:760px){
+    .academy-comparison{padding-inline:16px;}
+    .academy-comparison-table{display:grid;grid-template-columns:minmax(0,1fr);}
+    .academy-comparison-table :is(thead,tbody,tr){display:contents;}
+    .academy-comparison-table :is(th,td):last-child{order:1;}
+    .academy-comparison-table th:last-child{margin-top:16px;}
+  }
+  .situations{
+    padding:clamp(72px,10vw,144px) 24px;
+    border-top:1px solid var(--drill-line);
+  }
+  .situations-inner{max-width:var(--drill-container);margin:0 auto;}
+  .situations-header,.situations-list,.situations-close{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    column-gap:clamp(24px,5vw,72px);
+  }
+  .situations-header{align-items:end;margin-bottom:clamp(32px,5vw,64px);}
+  .situations-header h2{margin:0;letter-spacing:-.045em;text-wrap:balance;}
+  .situations-header h2 em{color:var(--drill-accent);font-style:normal;}
+  .situations-header p,.situations-close p{
+    margin:0;
+    color:var(--drill-text-2);
+    font-size:var(--drill-fs-body);
+    line-height:1.55;
+  }
+  .situations-list{margin:0;padding:0;list-style:none;}
+  .situations-list li{
+    display:flex;
+    align-items:center;
+    padding:24px 0;
+    border-top:1px solid var(--drill-line);
+    font-size:var(--drill-fs-body);
+    line-height:1.55;
+  }
+  .situations-close{
+    grid-template-columns:minmax(0,1fr) auto;
+    align-items:center;
+    gap:24px 40px;
+    margin-top:clamp(32px,5vw,56px);
+    padding:clamp(24px,4vw,48px);
+    border:1px solid var(--drill-line);
+    border-radius:var(--drill-radius-card);
+    background:radial-gradient(ellipse at 100% 0%,color-mix(in srgb,var(--drill-forest) 32%,transparent),transparent 72%),var(--drill-graphite);
+  }
+  @media(max-width:760px){
+    .situations{padding-inline:16px;}
+    .situations-header,.situations-list,.situations-close{grid-template-columns:minmax(0,1fr);}
+    .situations-header{row-gap:16px;}
+    .situations-list li{padding:18px 0;}
+    .situations-close .drill-action{justify-self:start;}
+  }
+  .client-logos{
+    border-top:1px solid var(--drill-line);
+    background:var(--drill-black);
+    padding:clamp(32px,5vw,56px) 0;
+  }
+  .client-logos h2{
+    margin:0 24px 24px;
+    color:var(--drill-text-2);
+    font-size:var(--drill-fs-body);
+    line-height:1.4;
+    font-weight:400;
+    text-align:center;
+    text-wrap:balance;
+  }
+  .client-logos h2 strong{color:var(--drill-text);font-weight:700;}
+  .client-logos-row{
+    max-width:var(--drill-container);
+    margin:0 auto;
+    overflow:hidden;
+    mask-image:linear-gradient(to right,transparent,#000 5%,#000 95%,transparent);
+  }
+  .client-logos-row + .client-logos-row{margin-top:12px;}
+  .client-logos-track{
+    display:flex;
+    width:max-content;
+    animation:client-logos-scroll 44s linear infinite;
+  }
+  .client-logos-row--right .client-logos-track{animation-direction:reverse;}
+  .client-logos:focus-within .client-logos-track{animation-play-state:paused;}
+  .client-logos-list{
+    display:flex;
+    flex:none;
+    gap:12px;
+    margin:0;
+    padding:0 12px 0 0;
+    list-style:none;
+  }
+  @keyframes client-logos-scroll{
+    to{transform:translateX(-50%);}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .client-logos-row{overflow-x:auto;mask-image:none;}
+    .client-logos-track{animation:none;}
+    .client-logos-list[aria-hidden="true"]{display:none;}
+  }
+  .client-logos-list li{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:8px 16px 8px 8px;
+    border:1px solid var(--drill-line);
+    border-radius:var(--drill-radius-card);
+    background:var(--drill-graphite);
+    color:var(--drill-text);
+    font-size:15px;
+    font-weight:500;
+    white-space:nowrap;
+    min-width:152px;
+    box-sizing:border-box;
+  }
+  .client-logos-list img{
+    box-sizing:border-box;
+    display:block;
+    flex:none;
+    width:54px;
+    height:54px;
+    padding:6px;
+    border-radius:var(--drill-radius-icon);
+    background:var(--drill-text);
+    object-fit:contain;
+  }
   details summary::-webkit-details-marker{display:none;}
   image-slot[data-avatar]::part(empty){color:transparent;overflow:hidden;padding:0;}
-  /* el h1 siempre entra en 2 renglones: cada línea es un bloque sin cortes y
-     el cuerpo escala con el viewport hasta el tope de 46px */
-  #hero h1{font-size:min(4.4vw,46px);}
-  #hero h1 .l{display:block;white-space:nowrap;}
-  @media(max-width:560px){
-    #hero h1{font-size:25px;}
-    #hero h1 .l{white-space:normal;}
+  .hero-background{
+    position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:
+      url("./uploads/drill-brand-kit/assets/logos/drill-isotipo.svg") calc(100% + 160px) center / clamp(240px,42vw,580px) no-repeat,
+      radial-gradient(ellipse at 8% 70%,color-mix(in srgb,var(--drill-forest) 32%,transparent),transparent 48%),
+      radial-gradient(ellipse at 95% 48%,color-mix(in srgb,var(--drill-forest) 24%,transparent),transparent 48%),
+      linear-gradient(180deg,color-mix(in srgb,var(--drill-black) 44%,transparent),transparent 58%,var(--drill-black) 100%);
   }
-  /* capturas: grilla tipo masonry, cada una con su proporción real */
-  .cap-grid{max-width:1100px;margin:20px auto 0;padding:0 24px;box-sizing:border-box;columns:2;column-gap:20px;}
-  .cap-grid .cap-card{break-inside:avoid;margin-bottom:20px;width:100%;}
-  @media(max-width:640px){.cap-grid{columns:1;}}
-  .cap-more{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:10px;cursor:pointer;font-family:inherit;border:1px solid #2A2A34;color:#F2F2F4;font-weight:600;font-size:15px;padding:13px 26px;border-radius:10px;transition:border-color .2s ease,color .2s ease;}
-  .cap-more:hover,.cap-more:focus-visible{border-color:#4F7CFF;color:#4F7CFF;}
-  /* capturas: se abren en grande con un click */
-  .cap-card{position:relative;cursor:zoom-in;transition:border-color .2s ease,transform .2s ease;}
-  .cap-card:hover,.cap-card:focus-visible{border-color:#4F7CFF !important;outline:none;}
-  .cap-card::after{content:"";position:absolute;right:10px;bottom:10px;width:30px;height:30px;border-radius:50%;
-    background:rgba(10,10,13,0.78) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7'/%3E%3C/svg%3E") center / 15px no-repeat;
-    opacity:0;transition:opacity .2s ease;pointer-events:none;}
-  .cap-card:hover::after,.cap-card:focus-visible::after{opacity:1;}
-  .cap-lb{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;background:rgba(5,5,8,0.94);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:64px 80px;box-sizing:border-box;}
-  .cap-lb.is-open{display:flex;}
-  .cap-lb img{display:block;width:min(100%,960px);height:auto;max-height:100%;object-fit:contain;border-radius:12px;background:#fff;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
-  .cap-lb button{all:unset;box-sizing:border-box;position:absolute;display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;cursor:pointer;background:#101014;border:1px solid #2A2A34;color:#F2F2F4;transition:border-color .2s ease,color .2s ease;}
-  .cap-lb button:hover,.cap-lb button:focus-visible{border-color:#4F7CFF;color:#4F7CFF;}
-  .cap-lb button svg{width:20px;height:20px;}
-  .cap-lb .cap-lb__close{top:16px;right:16px;}
-  .cap-lb .cap-lb__prev{left:18px;top:50%;transform:translateY(-50%);}
-  .cap-lb .cap-lb__next{right:18px;top:50%;transform:translateY(-50%);}
-  .cap-lb__count{position:absolute;top:28px;left:50%;transform:translateX(-50%);font-size:13px;color:#A0A0AB;letter-spacing:0.04em;}
-  @media(max-width:640px){
-    .cap-lb{padding:64px 12px 92px;}
-    .cap-lb .cap-lb__prev,.cap-lb .cap-lb__next{top:auto;bottom:24px;transform:none;}
-    .cap-lb .cap-lb__prev{left:calc(50% - 58px);}
-    .cap-lb .cap-lb__next{right:calc(50% - 58px);}
+  .hero-content{
+    position:relative;z-index:2;flex:1;
+    max-width:1040px;margin:0 auto;padding:clamp(52px,9vw,124px) 0;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:24px;text-align:center;
   }
-
+  #hero h1{
+    margin:0;font-size:clamp(23px,8vw,84px);font-weight:500;
+    line-height:1;letter-spacing:var(--drill-tracking-display);text-wrap:balance;
+  }
+  #hero h1 > span{display:block;white-space:nowrap;}
+  #hero h1 em{color:var(--drill-accent);font-style:normal;}
+  .hero-description{
+    margin:0;max-width:650px;color:var(--drill-text-2);font-size:var(--drill-fs-body);
+    text-wrap:pretty;
+  }
+  .hero-proof{margin:0;color:var(--drill-text-2);font-size:14px;}
+  .hero-proof strong{color:var(--drill-text);}
+  @media(max-width:760px){
+    #hero{min-height:clamp(530px,78svh,680px);}
+    .hero-content{gap:20px;}
+  }
   /* sobre mí: dos columnas de datos con la foto al medio */
   .about-grid{display:grid;grid-template-columns:1fr minmax(260px,340px) 1fr;gap:clamp(28px,4vw,56px);align-items:center;}
   .about-col{display:flex;flex-direction:column;gap:clamp(28px,4vw,44px);}
@@ -137,121 +341,200 @@ window.__resources = {
     .about-media{max-width:240px;}
   }
 
-  /* bento grid de entregables: 6 columnas en desktop, cada card declara su span */
-  .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;}
-  .bento-card{position:relative;overflow:hidden;background:#0E0E13;border:1px solid #1E1E26;border-radius:16px;
-    display:flex;flex-direction:column;justify-content:flex-end;min-height:280px;
-    transition:border-color 0.35s ease,transform 0.35s ease;}
-  .bento-card:hover{border-color:rgba(79,124,255,0.45);transform:translateY(-3px);}
-  .bento-visual{position:absolute;inset:0;pointer-events:none;}
-  /* trama de puntos que se desvanece hacia abajo, para que el texto respire */
-  .bento-card::after{content:"";position:absolute;inset:0;pointer-events:none;
-    background-image:radial-gradient(circle at 1px 1px, rgba(255,255,255,0.07) 1px, transparent 0);
-    background-size:15px 15px;
-    mask-image:linear-gradient(#000,transparent 70%);
-    -webkit-mask-image:linear-gradient(#000,transparent 70%);}
-  .bento-body{position:relative;z-index:1;padding:26px;display:flex;flex-direction:column;gap:9px;
-    background:linear-gradient(rgba(10,10,13,0),rgba(10,10,13,0.82) 45%,#0A0A0D);}
+  .academy-includes{
+    padding:clamp(72px,10vw,144px) 24px;
+    --benefit-border:color-mix(in srgb,var(--drill-forest) 15%,white);
+    --benefit-copy:color-mix(in srgb,var(--drill-black) 72%,var(--drill-text));
+    border-top:1px solid var(--benefit-border);
+    background:color-mix(in srgb,var(--drill-slate) 6%,var(--drill-text));
+    color:var(--drill-black);
+  }
+  .academy-includes-inner{max-width:var(--drill-container);margin:0 auto;}
+  .academy-includes-header{
+    display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
+    align-items:end;gap:24px clamp(24px,6vw,88px);
+    margin:0 0 clamp(28px,4vw,44px);
+  }
+  .academy-includes-header > p{max-width:42ch;}
+  .academy-includes-header h2{margin:0;letter-spacing:-.045em;text-wrap:balance;}
+  .academy-includes-header h2 em{color:var(--drill-forest);font-style:normal;}
+  .academy-includes-header p,.academy-benefit p{
+    margin:0;color:var(--benefit-copy);font-size:var(--drill-fs-body);line-height:1.55;
+  }
+  .academy-benefits{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px;}
+  .academy-benefit{grid-column:span 4;}
+  .academy-benefit:nth-child(1),.academy-benefit:nth-child(7){grid-column:span 7;}
+  .academy-benefit:nth-child(2),.academy-benefit:nth-child(6){grid-column:span 5;}
+  .academy-benefit:nth-child(n+8){grid-column:span 6;}
+  .academy-benefit:nth-child(1),.academy-benefit:nth-child(7){
+    background:radial-gradient(ellipse at 100% 0%,color-mix(in srgb,var(--drill-mint) 13%,transparent),transparent 72%),white;
+    border-color:color-mix(in srgb,var(--drill-forest) 24%,white);
+  }
+  .academy-benefit{
+    padding:clamp(18px,2vw,26px);
+    border:1px solid var(--benefit-border);border-radius:var(--drill-radius-card);
+    background:white;
+    box-shadow:0 12px 28px color-mix(in srgb,var(--drill-black) 9%,transparent);
+  }
+  .academy-benefit-icon{
+    display:grid;place-items:center;width:38px;height:38px;
+    margin-bottom:12px;border:1px solid var(--benefit-border);
+    border-radius:var(--drill-radius-icon);background:color-mix(in srgb,var(--drill-mint) 14%,white);
+    color:var(--drill-forest);
+  }
+  .academy-benefit-icon svg{display:block;width:20px;height:20px;}
+  .academy-benefit h3{
+    margin:0 0 8px;color:var(--drill-black);font-size:clamp(18px,1.55vw,23px);
+    font-weight:500;line-height:1.15;letter-spacing:-.03em;text-wrap:balance;
+  }
+  .academy-benefit p{font-size:16px;line-height:1.45;}
   @media(max-width:980px){
-    .bento{grid-template-columns:repeat(2,1fr);}
-    .bento-card{grid-column:span 1 !important;min-height:240px;}
+    .academy-benefits{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .academy-benefits .academy-benefit:nth-child(n){grid-column:auto;}
+    .academy-benefits .academy-benefit:last-child{grid-column:1/-1;}
   }
   @media(max-width:640px){
-    .bento{grid-template-columns:1fr;}
-    .bento-card{min-height:220px;}
+    .academy-includes{padding-inline:16px;}
+    .academy-includes-header{grid-template-columns:minmax(0,1fr);gap:16px;}
+    .academy-benefits{grid-template-columns:minmax(0,1fr);}
   }
 
   /* CTA con borde cónico animado (shiny cta) */
-  @property --gradient-angle{syntax:"<angle>";initial-value:0deg;inherits:false;}
-  @property --gradient-angle-offset{syntax:"<angle>";initial-value:0deg;inherits:false;}
-  @property --gradient-percent{syntax:"<percentage>";initial-value:5%;inherits:false;}
-  @property --gradient-shine{syntax:"<color>";initial-value:#FFFFFF;inherits:false;}
-  .shiny-cta{
-    --shiny-cta-bg:#0A0A0D;
-    --shiny-cta-bg-subtle:#1A1818;
-    --shiny-cta-fg:#FFFFFF;
-    --shiny-cta-highlight:#4F7CFF;
-    --shiny-cta-highlight-subtle:#8FA9FF;
-    --animation:gradient-angle linear infinite;
-    --duration:3s;
-    --shadow-size:2px;
-    --transition:800ms cubic-bezier(0.25,1,0.5,1);
-    isolation:isolate;position:relative;overflow:hidden;cursor:pointer;outline-offset:4px;
-    display:inline-block;padding:1.15rem 2.4rem;text-align:center;text-decoration:none;
-    font-family:inherit;font-size:clamp(15px,1.6vw,17px);line-height:1.2;font-weight:600;
-    border:1px solid transparent;border-radius:360px;color:var(--shiny-cta-fg);
-    background:linear-gradient(var(--shiny-cta-bg),var(--shiny-cta-bg)) padding-box,
-      conic-gradient(from calc(var(--gradient-angle) - var(--gradient-angle-offset)),
-        transparent,
-        var(--shiny-cta-highlight) var(--gradient-percent),
-        var(--gradient-shine) calc(var(--gradient-percent) * 2),
-        var(--shiny-cta-highlight) calc(var(--gradient-percent) * 3),
-        transparent calc(var(--gradient-percent) * 4)) border-box;
-    box-shadow:inset 0 0 0 1px var(--shiny-cta-bg-subtle);
-    transition:var(--transition);
-    transition-property:--gradient-angle-offset,--gradient-percent,--gradient-shine;
-  }
-  .shiny-cta:hover,.shiny-cta:focus-visible{color:var(--shiny-cta-fg);}
-  .shiny-cta::before,.shiny-cta::after,.shiny-cta span::before{
-    content:"";pointer-events:none;position:absolute;inset-inline-start:50%;inset-block-start:50%;
-    translate:-50% -50%;z-index:-1;
-  }
-  .shiny-cta:active{translate:0 1px;}
-  /* patrón de puntos */
-  .shiny-cta::before{
-    --size:calc(100% - var(--shadow-size) * 3);--position:2px;--space:calc(var(--position) * 2);
-    width:var(--size);height:var(--size);
-    background:radial-gradient(circle at var(--position) var(--position),white calc(var(--position) / 4),transparent 0) padding-box;
-    background-size:var(--space) var(--space);background-repeat:space;
-    mask-image:conic-gradient(from calc(var(--gradient-angle) + 45deg),black,transparent 10% 90%,black);
-    -webkit-mask-image:conic-gradient(from calc(var(--gradient-angle) + 45deg),black,transparent 10% 90%,black);
-    border-radius:inherit;opacity:0.4;z-index:-1;
-  }
-  /* brillo interior */
-  .shiny-cta::after{
-    --animation:shimmer linear infinite;width:100%;aspect-ratio:1;
-    background:linear-gradient(-50deg,transparent,var(--shiny-cta-highlight),transparent);
-    mask-image:radial-gradient(circle at bottom,transparent 40%,black);
-    -webkit-mask-image:radial-gradient(circle at bottom,transparent 40%,black);
-    opacity:0.6;
-  }
-  /* sin position:relative — el glow del ::before se mide contra el botón, no contra el texto */
-  .shiny-cta span{z-index:1;}
-  .shiny-cta span::before{
-    --size:calc(100% + 1rem);width:var(--size);height:var(--size);
-    box-shadow:inset 0 -1ex 2rem 4px var(--shiny-cta-highlight);opacity:0;
-    transition:opacity var(--transition);
-    animation:calc(var(--duration) * 1.5) breathe linear infinite;
-  }
-  .shiny-cta,.shiny-cta::before,.shiny-cta::after{
-    animation:var(--animation) var(--duration),var(--animation) calc(var(--duration) / 0.4) reverse paused;
-    animation-composition:add;
-  }
-  .shiny-cta:is(:hover,:focus-visible){--gradient-percent:20%;--gradient-angle-offset:95deg;--gradient-shine:var(--shiny-cta-highlight-subtle);}
-  .shiny-cta:is(:hover,:focus-visible),
-  .shiny-cta:is(:hover,:focus-visible)::before,
-  .shiny-cta:is(:hover,:focus-visible)::after{animation-play-state:running;}
-  .shiny-cta:is(:hover,:focus-visible) span::before{opacity:1;}
-  @keyframes gradient-angle{to{--gradient-angle:360deg;}}
-  @keyframes shimmer{to{rotate:360deg;}}
-  @keyframes breathe{from,to{scale:1;}50%{scale:1.2;}}
-  @media(prefers-reduced-motion:reduce){
-    .shiny-cta,.shiny-cta::before,.shiny-cta::after,.shiny-cta span::before{animation:none !important;}
-  }
-  .wa-cta{display:inline-flex;align-items:center;gap:8px;padding:0.8rem 1.6rem;border-radius:360px;border:1px solid #2A2A33;background:rgba(255,255,255,0.03);color:#D6DAE6;font-family:inherit;font-size:15px;font-weight:600;line-height:1.2;text-decoration:none;transition:border-color .2s ease,background .2s ease,color .2s ease;}
-  .wa-cta:hover,.wa-cta:focus-visible{border-color:#25D366;background:rgba(37,211,102,0.08);color:#FFFFFF;}
-  .wa-cta svg{width:18px;height:18px;flex:none;fill:#25D366;}
-  .wa-hint{font-size:13px;color:#8B8B96;}
+  .wa-cta{display:inline-flex;align-items:center;gap:8px;padding:0.8rem 1.6rem;border-radius:360px;border:1px solid var(--drill-line);background:color-mix(in srgb,var(--drill-text) 3%,transparent);color:var(--drill-text-2);font-family:inherit;font-size:15px;font-weight:600;line-height:1.2;text-decoration:none;transition:border-color .2s ease,background .2s ease,color .2s ease;}
+  .wa-cta:hover,.wa-cta:focus-visible{border-color:var(--drill-accent);background:rgba(37,211,102,0.08);color:var(--drill-text);}
+  .wa-cta svg{width:18px;height:18px;flex:none;fill:var(--drill-accent);}
+  .wa-hint{font-size:13px;color:var(--drill-muted);}
   .res-carousel{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:16px;}
+  .results-inner{display:flex;flex-direction:column;gap:40px;}
+  .results-inner > :is(h2,.res-carousel){
+    width:calc(100% - 48px);max-width:1120px;margin-inline:auto;
+  }
+  .member-wins-mobile{display:none;}
+  .member-wins-desktop{
+    display:grid;
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    gap:12px;
+    padding-inline:12px;
+  }
+  .member-wins-lane{
+    height:clamp(480px,65vh,720px);
+    min-width:0;
+    overflow:hidden;
+    mask-image:linear-gradient(transparent,#000 8%,#000 92%,transparent);
+  }
+  .member-wins-track{
+    display:flex;flex-direction:column;
+    width:100%;height:max-content;
+    animation:member-wins-scroll 74s linear infinite;
+  }
+  .member-wins-lane:nth-child(even) .member-wins-track{animation-direction:reverse;}
+  @media(hover:hover){
+    .member-wins-lane:hover .member-wins-track{animation-play-state:paused;}
+  }
+  .member-wins-lane:focus-within{overflow:auto;mask-image:none;}
+  .member-wins-lane:focus-within .member-wins-track{animation:none;}
+  .member-wins-lane:focus-within .member-wins-group[aria-hidden="true"]{display:none;}
+  .member-wins-group{display:flex;flex:none;flex-direction:column;gap:16px;padding-bottom:16px;}
+  @keyframes member-wins-scroll{to{transform:translateY(-50%);}}
+  .member-win{
+    box-sizing:border-box;
+    margin:0;
+    padding:clamp(14px,1.35vw,22px);
+    border:1px solid var(--drill-line);
+    border-radius:var(--drill-radius-card);
+    background:radial-gradient(ellipse at top right,color-mix(in srgb,var(--drill-forest) 30%,transparent),transparent 75%),var(--drill-graphite);
+  }
+  @media(max-width:999px){
+    .member-wins-desktop{display:none;}
+    .member-wins-mobile{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;}
+    .member-wins-lane{height:auto;mask-image:linear-gradient(to right,transparent,#000 4%,#000 96%,transparent);}
+    .member-wins-track{flex-direction:row;width:max-content;animation-name:member-wins-scroll-mobile;animation-duration:105s;}
+    .member-wins-group{flex-direction:row;align-items:stretch;padding:0 16px 0 0;}
+    .member-win{width:clamp(240px,75vw,300px);}
+    @keyframes member-wins-scroll-mobile{to{transform:translateX(-50%);}}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .member-wins-lane{overflow:auto;mask-image:none;}
+    .member-wins-track{animation:none;}
+    .member-wins-group[aria-hidden="true"]{display:none;}
+  }
+  .member-win:nth-child(even){
+    background:radial-gradient(ellipse at top left,color-mix(in srgb,var(--drill-forest) 22%,transparent),transparent 75%),var(--drill-graphite);
+  }
+  .member-win-name{
+    display:flex;align-items:center;gap:10px;
+    margin:0 0 12px;font-size:14px;font-weight:700;
+  }
+  .member-win-avatar{
+    display:grid;place-items:center;flex:none;
+    width:36px;height:36px;box-sizing:border-box;
+    border:1px solid var(--drill-line);border-radius:50%;
+    background:var(--drill-slate);color:var(--drill-ice);
+    font-size:12px;object-fit:cover;
+  }
+  .member-win h3{
+    margin:0 0 10px;
+    color:var(--drill-accent);
+    font-size:clamp(22px,2.1vw,31px);
+    font-weight:700;
+    line-height:1.12;
+    letter-spacing:-.035em;
+  }
+  @supports (background-clip:text){
+    .member-win h3{
+      width:fit-content;
+      max-width:100%;
+      background:linear-gradient(105deg,var(--drill-ice),var(--drill-accent) 75%,var(--drill-mint));
+      background-clip:text;
+      color:transparent;
+    }
+  }
+  @media(forced-colors:active){
+    .member-win h3{background:none;color:CanvasText;}
+  }
+  .member-win-detail{margin:0;color:var(--drill-text-2);font-size:16px;line-height:1.5;}
+  .member-wins-title{margin:0;text-align:center;letter-spacing:-.045em;text-wrap:balance;}
+  .member-wins-title em{color:var(--drill-accent);font-style:normal;}
+  .member-win-proof{display:block;margin-top:16px;border-radius:var(--drill-radius-input);}
+  .member-win-proof img{display:block;width:100%;height:auto;max-height:180px;object-fit:contain;object-position:left center;border-radius:inherit;}
+  .member-wins-cta{align-self:center;}
+  .results-inner > .res-heading{
+    box-sizing:border-box;margin-block:16px 0;padding-inline:64px;
+    letter-spacing:-.045em;text-wrap:balance;
+  }
+  .res-heading em{color:var(--drill-accent);font-style:normal;}
+  .res-card{
+    padding:20px;border:1px solid var(--drill-line);border-radius:var(--drill-radius-card);
+    background:var(--drill-graphite);
+  }
+  .res-card h3{
+    margin:0;min-block-size:3.6em;
+    color:var(--drill-ice);font-size:clamp(18px,1.55vw,23px);
+    font-weight:700;line-height:1.2;letter-spacing:-.025em;text-wrap:pretty;
+  }
+  .res-media{
+    position:relative;width:100%;box-sizing:border-box;margin:0 auto;
+    overflow:hidden;border-radius:var(--drill-radius-input);
+    border:1px solid var(--drill-line);background:var(--drill-black);
+  }
+  .res-preview{
+    position:absolute;inset:0;display:block;width:100%;padding:0;
+    border:0;background:transparent;cursor:pointer;
+  }
+  .res-preview img{width:100%;height:100%;object-fit:cover;display:block;}
+  .res-preview:focus-visible{outline-offset:-4px;}
+  .res-preview:hover .res-preview-shade{opacity:.45;}
   .res-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding:2px;}
   .res-track::-webkit-scrollbar{display:none;}
   .res-track > article{flex:0 0 calc((100% - 40px) / 3);scroll-snap-align:start;box-sizing:border-box;}
-  .res-arrow{all:unset;box-sizing:border-box;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;background:#101014;border:1px solid #2A2A34;color:#F2F2F4;transition:border-color .2s ease,color .2s ease,background .2s ease;}
-  .res-arrow:hover,.res-arrow:focus-visible{border-color:#4F7CFF;color:#4F7CFF;background:#12131B;}
+  .res-arrow{all:unset;box-sizing:border-box;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--drill-graphite);border:1px solid var(--drill-line);color:var(--drill-text);transition:border-color .2s ease,color .2s ease,background .2s ease;}
+  .res-arrow:hover,.res-arrow:focus-visible{border-color:var(--drill-accent);color:var(--drill-accent);background:var(--drill-slate);}
   .res-arrow svg{width:20px;height:20px;}
   @media(max-width:960px){.res-track > article{flex-basis:calc((100% - 20px) / 2);}}
   @media(max-width:640px){
     .res-carousel{display:block;}
+    .results-inner > .res-heading{padding-inline:2px;}
+    .res-card{padding:16px;}
     .res-track{align-items:flex-start;}
     .res-track > article{flex-basis:86%;}
     .res-arrow{position:absolute;top:50%;z-index:2;width:40px;height:40px;transform:translateY(-50%);background:rgba(16,16,20,0.92);}
@@ -260,125 +543,234 @@ window.__resources = {
   }
 </style>
 </helmet>
-<div style="background:#0A0A0D;color:#F2F2F4;font-family:'DM Sans',sans-serif;line-height:1.5;">
+<div style="color:var(--drill-text);font-family:var(--drill-font);line-height:1.5;">
 
 <!-- HERO -->
-<header id="hero" data-screen-label="Hero" style="position:relative;isolation:isolate;overflow:hidden;background:#0A0A0D;padding:clamp(36px,5vw,64px) 24px clamp(64px,9vw,110px);">
-  <canvas id="hero-shader" style="position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;pointer-events:none;"></canvas>
-  <div style="position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 90% 60% at 50% -10%, rgba(79,124,255,0.14), rgba(79,124,255,0) 70%), linear-gradient(rgba(10,10,13,0.55), rgba(10,10,13,0.72) 60%, #0A0A0D);"></div>
-  <div style="position:relative;z-index:2;max-width:960px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px;">
-    <img src="./uploads/logo-blanco.png" alt="Web Design Network" width="1150" height="486" style="width:clamp(120px,14vw,170px);height:auto;display:block;margin-bottom:4px;">
-    <div style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:999px;background:rgba(79,124,255,0.07);border:1px solid rgba(79,124,255,0.28);font-size:12.5px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#D6DAE6;white-space:nowrap;">
-      <span style="font-size:14px;line-height:1;">💻</span>Comunidad de desarrollo web con IA
-    </div>
-    <h1 style="margin:0;font-weight:700;letter-spacing:-0.028em;line-height:1.1;"><span class="l">Aprendé a crear <em style="font-style:italic;font-weight:600;color:#4F7CFF;">webs y sistemas</em></span><span class="l">con IA y a <em style="font-style:italic;font-weight:600;color:#4F7CFF;">vivir de eso</em></span></h1>
-    <p style="margin:0;max-width:600px;font-size:clamp(16px,2.2vw,19px);color:#A0A0AB;text-wrap:pretty;">Una comunidad donde aprendés a construir con inteligencia artificial, a conseguir tus propios clientes y a crecer junto a otros que van por el mismo camino. Sin experiencia previa.</p>
-    <sc-if value="{{ showHeroVideo }}" hint-placeholder-val="{{ true }}">
-      <div style="width:100%;max-width:960px;margin-top:16px;background:#101014;border:1px solid #1E1E26;border-radius:14px;overflow:hidden;position:relative;aspect-ratio:16/9;">
-        <sc-if value="{{ heroPlaying }}" hint-placeholder-val="{{ false }}">
-          <iframe src="{{ heroSrc }}" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" webkitallowfullscreen="{{ true }}" mozallowfullscreen="{{ true }}" allowFullScreen="{{ true }}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;display:block;"></iframe>
-        </sc-if>
-        <sc-if value="{{ heroIdle }}" hint-placeholder-val="{{ true }}">
-          <div onClick="{{ heroPlay }}" style="position:absolute;inset:0;cursor:pointer;">
-            <img src="./uploads/loom-thumbs/hero-recorrido.jpg" alt="Tour de Web Design Network" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:contain;display:block;background:#0A0A0D;">
-            <div style="position:absolute;inset:0;background:rgba(0,0,0,0.32);transition:background 0.3s ease;pointer-events:none;" style-hover="background:rgba(0,0,0,0.14);"></div>
-            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:68px;border-radius:50%;background:#4F7CFF;display:flex;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 8px 28px rgba(79,124,255,0.4);">
-              <div style="width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:19px solid #FFFFFF;margin-left:5px;"></div>
-            </div>
-          </div>
-        </sc-if>
-      </div>
-    </sc-if>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:16px;">
-      <a class="shiny-cta" href="https://wa.me/5492922453154?text=Hola%20Gino%2C%20quiero%20entrar%20en%20la%20formacion" target="_blank" rel="noopener"><span>Quiero acceder a la comunidad</span></a>
-      <span class="wa-hint" style="margin-top:12px;">¿Tenés dudas?</span>
-      <a class="wa-cta" href="https://wa.me/5492922453154?text=Hola%20Gino!%20Tengo%20algunas%20dudas%20de%20la%20comunidad" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.04 21.5h-.01a9.45 9.45 0 0 1-4.82-1.32l-.35-.21-3.58.94.96-3.49-.23-.36a9.43 9.43 0 0 1-1.45-5.03c0-5.22 4.25-9.47 9.48-9.47 2.53 0 4.91.99 6.7 2.78a9.4 9.4 0 0 1 2.77 6.7c0 5.22-4.25 9.46-9.47 9.46zm8.06-17.53A11.33 11.33 0 0 0 12.04.63C5.76.63.65 5.74.65 12.02c0 2 .52 3.96 1.52 5.69L.55 23.6l6.04-1.58a11.37 11.37 0 0 0 5.44 1.39h.01c6.28 0 11.39-5.11 11.39-11.39 0-3.04-1.18-5.9-3.33-8.05z"/></svg>Hablemos por WhatsApp</a>
-    </div>
+<header id="hero" data-screen-label="Hero" style="position:relative;isolation:isolate;overflow:hidden;">
+  <div class="hero-background" aria-hidden="true"></div>
+  <nav class="hero-nav" aria-label="Navegación principal">
+    <a class="hero-nav-brand" href="#hero">
+      <img src="/uploads/drill-brand-kit/assets/logos/drill-academy-dark-bg.svg" alt="Drill Academy" width="1118" height="157">
+    </a>
+    <ul class="hero-nav-links">
+      <li><a href="#resultados">Resultados</a></li>
+      <li><a href="#recibis">Qué recibís</a></li>
+      <li><a href="#quien-soy">Sobre Gino</a></li>
+      <li><a href="#faq">Preguntas</a></li>
+    </ul>
+    <a class="hero-nav-cta drill-action drill-action--compact" href="https://wa.me/5492922453154?text=Hola%20Gino%2C%20quiero%20entrar%20en%20la%20formacion" target="_blank" rel="noopener">Quiero entrar<span class="drill-action__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></a>
+  </nav>
+  <div class="hero-content">
+    <h1><span>Creá tu agencia</span> <span>de software con IA</span> <span>y facturá <em>US$1.000 al mes</em></span></h1>
+    <p class="hero-description">Aprendé a crear y desarrollar sistemas, webs, automatizaciones y soluciones con inteligencia artificial, sin saber programar y sin experiencia previa. También vas a aprender a conseguir tus primeros clientes.</p>
+    <a class="btn-primary hero-cta drill-action" href="https://wa.me/5492922453154?text=Hola%20Gino%2C%20quiero%20entrar%20en%20la%20formacion" target="_blank" rel="noopener">Quiero acceder a la comunidad<span class="drill-action__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></a>
+    <p class="hero-proof"><strong>+160</strong> alumnos activos</p>
   </div>
 </header>
 
-<!-- PRUEBA SOCIAL -->
-<section id="comunidad" data-screen-label="Prueba social" style="padding:clamp(64px,10vw,120px) 0;border-top:1px solid #16161C;overflow:hidden;">
-  <div style="max-width:1120px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;">
-    <h2 style="margin:0;font-size:clamp(26px,3.8vw,40px);font-weight:600;letter-spacing:-0.015em;text-wrap:pretty;">Lo que se comparte en la comunidad</h2>
-    <p style="margin:0;max-width:620px;font-size:16.5px;color:#A0A0AB;text-wrap:pretty;">Proyectos, primeros clientes y avances que los miembros publican cada semana. Capturas reales, sin filtros.</p>
+<section class="client-logos" aria-labelledby="client-logos-title">
+  <h2 id="client-logos-title">Marcas con las que trabajamos en <strong>South Projects</strong></h2>
+  <div class="client-logos-row" role="group" aria-label="Marcas de South Projects, fila 1" tabindex="0">
+    <div class="client-logos-track">
+      <ul class="client-logos-list" role="list">
+        <li><img src="./uploads/south-projects/logo-gac.png" alt="" width="54" height="54" loading="lazy" decoding="async">GAC</li>
+        <li><img src="./uploads/south-projects/logo-huinca.png" alt="" width="54" height="54" loading="lazy" decoding="async">Huinca</li>
+        <li><img src="./uploads/south-projects/logo-grupo-voy.png" alt="" width="54" height="54" loading="lazy" decoding="async">Grupo Voy</li>
+        <li><img src="./uploads/south-projects/logo-sun-and-wind.png" alt="" width="54" height="54" loading="lazy" decoding="async">Sun &amp; Wind</li>
+        <li><img src="./uploads/south-projects/logo-az-media-negro.png" alt="" width="54" height="54" loading="lazy" decoding="async">AZ Media</li>
+        <li><img src="./uploads/south-projects/decomira-logo-negro.png" alt="" width="54" height="54" loading="lazy" decoding="async">Decomira</li>
+        <li><img src="./uploads/south-projects/ibsu-negro.png" alt="" width="54" height="54" loading="lazy" decoding="async">IBSU</li>
+        <li><img src="./uploads/south-projects/logo-adverpr.png" alt="" width="54" height="54" loading="lazy" decoding="async">AdverPR</li>
+        <li><img src="./uploads/south-projects/matos-homes.png" alt="" width="54" height="54" loading="lazy" decoding="async">Matos Homes</li>
+      </ul>
+      <ul class="client-logos-list" aria-hidden="true">
+        <li><img src="./uploads/south-projects/logo-gac.png" alt="" width="54" height="54" loading="lazy" decoding="async">GAC</li>
+        <li><img src="./uploads/south-projects/logo-huinca.png" alt="" width="54" height="54" loading="lazy" decoding="async">Huinca</li>
+        <li><img src="./uploads/south-projects/logo-grupo-voy.png" alt="" width="54" height="54" loading="lazy" decoding="async">Grupo Voy</li>
+        <li><img src="./uploads/south-projects/logo-sun-and-wind.png" alt="" width="54" height="54" loading="lazy" decoding="async">Sun &amp; Wind</li>
+        <li><img src="./uploads/south-projects/logo-az-media-negro.png" alt="" width="54" height="54" loading="lazy" decoding="async">AZ Media</li>
+        <li><img src="./uploads/south-projects/decomira-logo-negro.png" alt="" width="54" height="54" loading="lazy" decoding="async">Decomira</li>
+        <li><img src="./uploads/south-projects/ibsu-negro.png" alt="" width="54" height="54" loading="lazy" decoding="async">IBSU</li>
+        <li><img src="./uploads/south-projects/logo-adverpr.png" alt="" width="54" height="54" loading="lazy" decoding="async">AdverPR</li>
+        <li><img src="./uploads/south-projects/matos-homes.png" alt="" width="54" height="54" loading="lazy" decoding="async">Matos Homes</li>
+      </ul>
+    </div>
   </div>
-  <div style="max-width:1000px;margin:44px auto 0;padding:0 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;">
-    <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
-      <div style="background:#101016;border:1px solid #1E1E26;border-radius:14px;padding:22px 18px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;">
-        <span style="font-size:clamp(26px,3.4vw,34px);font-weight:700;letter-spacing:-0.02em;line-height:1;">{{ s.valor }}</span>
-        <span style="font-size:13.5px;color:#8B8B96;text-wrap:pretty;">{{ s.label }}</span>
-      </div>
-    </sc-for>
+  <div class="client-logos-row client-logos-row--right" role="group" aria-label="Marcas de South Projects, fila 2" tabindex="0">
+    <div class="client-logos-track">
+      <ul class="client-logos-list" role="list">
+        <li><img src="./uploads/south-projects/logo-baw.png" alt="" width="54" height="54" loading="lazy" decoding="async">BAW</li>
+        <li><img src="./uploads/south-projects/logo-asg.png" alt="" width="54" height="54" loading="lazy" decoding="async">ASG</li>
+        <li><img src="./uploads/south-projects/logo-triaqua.png" alt="" width="54" height="54" loading="lazy" decoding="async">Triaqua</li>
+        <li><img src="./uploads/south-projects/viedma-propiedades-logo-negro.png" alt="" width="54" height="54" loading="lazy" decoding="async">Viedma Propiedades</li>
+        <li><img src="./uploads/south-projects/logo-farmacia-mitre.png" alt="" width="54" height="54" loading="lazy" decoding="async">Farmacia Mitre</li>
+        <li><img src="./uploads/south-projects/logo-nico-sesma-negro.png" alt="" width="54" height="54" loading="lazy" decoding="async">NS Entrenamiento</li>
+        <li><img src="./uploads/south-projects/logo-agente-central.png" alt="" width="54" height="54" loading="lazy" decoding="async">Agente Central</li>
+        <li><img src="./uploads/south-projects/logo-not-dumb.png" alt="" width="54" height="54" loading="lazy" decoding="async">Not Dumb</li>
+      </ul>
+      <ul class="client-logos-list" aria-hidden="true">
+        <li><img src="./uploads/south-projects/logo-baw.png" alt="" width="54" height="54" loading="lazy" decoding="async">BAW</li>
+        <li><img src="./uploads/south-projects/logo-asg.png" alt="" width="54" height="54" loading="lazy" decoding="async">ASG</li>
+        <li><img src="./uploads/south-projects/logo-triaqua.png" alt="" width="54" height="54" loading="lazy" decoding="async">Triaqua</li>
+        <li><img src="./uploads/south-projects/viedma-propiedades-logo-negro.png" alt="" width="54" height="54" loading="lazy" decoding="async">Viedma Propiedades</li>
+        <li><img src="./uploads/south-projects/logo-farmacia-mitre.png" alt="" width="54" height="54" loading="lazy" decoding="async">Farmacia Mitre</li>
+        <li><img src="./uploads/south-projects/logo-nico-sesma-negro.png" alt="" width="54" height="54" loading="lazy" decoding="async">NS Entrenamiento</li>
+        <li><img src="./uploads/south-projects/logo-agente-central.png" alt="" width="54" height="54" loading="lazy" decoding="async">Agente Central</li>
+        <li><img src="./uploads/south-projects/logo-not-dumb.png" alt="" width="54" height="54" loading="lazy" decoding="async">Not Dumb</li>
+      </ul>
+    </div>
   </div>
-  <p style="margin:44px auto 0;padding:0 24px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:13.5px;color:#8B8B96;text-align:center;">
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-    Tocá una captura para verla completa
-  </p>
-  <div class="cap-grid">
-    <sc-for list="{{ capturas }}" as="c" hint-placeholder-count="15">
-      <div class="cap-card" data-cap-id="{{ c.id }}" role="button" tabindex="0" aria-label="Ver captura en grande" style="display:{{ c.display }};aspect-ratio:{{ c.ratio }};border:1px solid #1E1E26;border-radius:12px;overflow:hidden;background:#101014;line-height:0;font-size:0;">
-        <div style="width:100%;height:100%;line-height:0;font-size:0;"><image-slot id="{{ c.id }}" src="{{ c.src }}" shape="rect" fit="cover" placeholder="{{ c.label }}"></image-slot></div>
-      </div>
-    </sc-for>
+</section>
+
+<section id="identificacion" class="situations" data-screen-label="Identificación" aria-labelledby="situations-title">
+  <div class="situations-inner">
+    <div class="situations-header">
+      <h2 id="situations-title">¿En cuál de <em>estas</em> estás?</h2>
+      <p>Ya probaste la IA. Ahora querés usarla para crear proyectos completos y resolver problemas de negocios.</p>
+    </div>
+    <ul class="situations-list" role="list">
+      <li>Probaste crear una app con IA, pero te trabaste al conectar la base de datos, agregar el login o publicarla.</li>
+      <li>Ya hacés webs y querés ampliar tu oferta con CRMs, portales de clientes o sistemas internos.</li>
+      <li>Ves tareas repetitivas en un negocio, pero todavía no sabés cómo convertirlas en una automatización que el equipo pueda usar.</li>
+      <li>Querés implementar agentes de IA y te cuesta definir qué deberían resolver y cuándo pasarle la conversación a una persona.</li>
+      <li>Sabés construir una solución, pero te cuesta explicar su valor y ponerle precio.</li>
+      <li>Querés conseguir clientes para este tipo de proyectos y todavía estás definiendo qué ofrecer y a quién.</li>
+    </ul>
+    <div class="situations-close">
+      <p>En DRILL Academy aprendés a desarrollar software con IA, detectar problemas en negocios y resolverlos con aplicaciones, automatizaciones y agentes. También aprendés a definir tu oferta, cotizar proyectos y conseguir clientes.</p>
+      <a class="btn-primary drill-action" href="https://wa.me/5492922453154?text=Hola%20Gino%2C%20quiero%20entrar%20en%20la%20formacion" target="_blank" rel="noopener">Quiero conocer DRILL Academy<span class="drill-action__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></a>
+    </div>
   </div>
-  <div style="display:{{ capMasDisplay }};justify-content:center;margin-top:12px;padding:0 24px;">
-    <button class="cap-more" onClick="{{ toggleCapturas }}">
-      <span>{{ capMasLabel }}</span>
-      <span style="display:inline-flex;transform:rotate({{ capMasRot }});transition:transform 0.4s ease;font-size:13px;color:#4F7CFF;">↓</span>
-    </button>
+</section>
+
+<section class="academy-comparison" id="recorrido" data-screen-label="Comparación" aria-labelledby="academy-comparison-title">
+  <div class="academy-comparison-inner">
+    <h2 id="academy-comparison-title">De tu primer proyecto con IA a <em>vender soluciones para negocios</em></h2>
+    <table class="academy-comparison-table" role="table" aria-labelledby="academy-comparison-title">
+      <thead role="rowgroup">
+        <tr role="row">
+          <th role="columnheader" scope="col">Aprender por tu cuenta</th>
+          <th role="columnheader" scope="col"><img src="./uploads/drill-brand-kit/assets/logos/drill-isotipo-flat.svg" alt="" width="24" height="24">Con DRILL Academy</th>
+        </tr>
+      </thead>
+      <tbody role="rowgroup">
+        <tr role="row">
+          <td role="cell"><span class="academy-comparison-item"><span class="academy-comparison-mark" aria-hidden="true">×</span>Vas saltando entre tutoriales y herramientas.</span></td>
+          <td role="cell"><span class="academy-comparison-item"><span class="academy-comparison-mark" aria-hidden="true">✓</span>Elegís un recorrido según tu nivel: desde cero o con experiencia previa.</span></td>
+        </tr>
+        <tr role="row">
+          <td role="cell"><span class="academy-comparison-item"><span class="academy-comparison-mark" aria-hidden="true">×</span>La demo funciona, pero te trabás al publicarla.</span></td>
+          <td role="cell"><span class="academy-comparison-item"><span class="academy-comparison-mark" aria-hidden="true">✓</span>Aprendés a desarrollar y desplegar webs, apps y sistemas internos con IA.</span></td>
+        </tr>
+        <tr role="row">
+          <td role="cell"><span class="academy-comparison-item"><span class="academy-comparison-mark" aria-hidden="true">×</span>Probás agentes y automatizaciones con ejemplos genéricos.</span></td>
+          <td role="cell"><span class="academy-comparison-item"><span class="academy-comparison-mark" aria-hidden="true">✓</span>Aprendés a detectar tareas repetitivas y decidir qué conviene automatizar.</span></td>
+        </tr>
+        <tr role="row">
+          <td role="cell"><span class="academy-comparison-item"><span class="academy-comparison-mark" aria-hidden="true">×</span>Te cuesta llevar lo aprendido a un caso concreto.</span></td>
+          <td role="cell"><span class="academy-comparison-item"><span class="academy-comparison-mark" aria-hidden="true">✓</span>Practicás con proyectos como un CRM, un sistema de reservas o un agente de WhatsApp.</span></td>
+        </tr>
+        <tr role="row">
+          <td role="cell"><span class="academy-comparison-item"><span class="academy-comparison-mark" aria-hidden="true">×</span>Te cuesta explicar qué ofrecés y cuánto cobrar.</span></td>
+          <td role="cell"><span class="academy-comparison-item"><span class="academy-comparison-mark" aria-hidden="true">✓</span>Aprendés a definir el alcance, armar una propuesta y cotizar el proyecto.</span></td>
+        </tr>
+        <tr role="row">
+          <td role="cell"><span class="academy-comparison-item"><span class="academy-comparison-mark" aria-hidden="true">×</span>Dependés de recomendaciones para conseguir proyectos.</span></td>
+          <td role="cell"><span class="academy-comparison-item"><span class="academy-comparison-mark" aria-hidden="true">✓</span>Aprendés a buscar clientes con prospección y contenido, y a presentarles tu solución.</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="academy-comparison-close">Salí con proyectos que puedas mostrar y una oferta que puedas explicar.</p>
   </div>
 </section>
 
 <!-- RESULTADOS -->
-<section id="resultados" data-screen-label="Resultados" style="padding:clamp(64px,10vw,120px) 24px;border-top:1px solid #16161C;">
-  <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:40px;">
-    <h2 style="margin:0;font-size:clamp(26px,3.6vw,38px);font-weight:600;letter-spacing:-0.015em;text-align:center;text-wrap:pretty;">Lo que cuentan los miembros</h2>
+<section id="resultados" data-screen-label="Resultados" style="padding:clamp(64px,10vw,120px) 0;border-top:1px solid var(--drill-line);">
+  <div class="results-inner">
+    <h2 id="member-wins-title" class="member-wins-title">Resultados de <em>la comunidad</em></h2>
+    <div class="member-wins" role="region" aria-labelledby="member-wins-title">
+      <sc-for list="{{ memberWinLayouts }}" as="layout">
+        <div class="{{ layout.className }}">
+          <sc-for list="{{ layout.lanes }}" as="lane">
+            <div class="member-wins-lane" role="group" aria-label="{{ lane.label }}" tabindex="0">
+              <div class="member-wins-track">
+                <sc-for list="{{ lane.groups }}" as="group">
+                  <div class="member-wins-group" aria-hidden="{{ group.hidden }}">
+                    <sc-for list="{{ group.cards }}" as="win">
+                      <article class="member-win" aria-hidden="{{ win.hidden }}">
+                        <p class="member-win-name">
+                          <sc-if value="{{ win.avatar }}">
+                            <img class="member-win-avatar" src="{{ win.avatar }}" alt="" width="36" height="36" loading="lazy" decoding="async">
+                          </sc-if>
+                          <sc-if value="{{ win.initials }}">
+                            <span class="member-win-avatar" aria-hidden="true">{{ win.initials }}</span>
+                          </sc-if>
+                          <span>{{ win.name }}</span>
+                        </p>
+                        <h3>{{ win.title }}</h3>
+                        <p class="member-win-detail">{{ win.detail }}</p>
+                        <sc-if value="{{ win.proof }}">
+                          <a class="member-win-proof" href="{{ win.proof }}" target="_blank" rel="noopener" tabindex="{{ win.proofTabIndex }}">
+                            <img src="{{ win.proof }}" width="{{ win.proofWidth }}" height="{{ win.proofHeight }}" alt="Ver captura del resultado de {{ win.name }}" loading="lazy" decoding="async">
+                          </a>
+                        </sc-if>
+                      </article>
+                    </sc-for>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+    <a class="btn-primary member-wins-cta drill-action" href="https://wa.me/5492922453154?text=Hola%20Gino%2C%20quiero%20entrar%20en%20la%20formacion" target="_blank" rel="noopener">Quiero ser el próximo<span class="drill-action__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></a>
+    <h2 class="res-heading">De aprender a crear a <em>conseguir clientes</em></h2>
     <div class="res-carousel">
       <button class="res-arrow res-arrow--prev" onClick="{{ resPrev }}" aria-label="Testimonio anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
       <div id="res-track" class="res-track">
       <sc-for list="{{ testimonios }}" as="t" hint-placeholder-count="3">
-        <article style="background:#101014;border:1px solid #1E1E26;border-radius:14px;padding:24px;">
+        <article class="res-card">
           <div style="display:flex;flex-direction:column;gap:14px;">
+            <h3>{{ t.resultado }}</h3>
             <div style="display:flex;align-items:center;gap:12px;">
               <div style="width:40px;height:40px;flex:none;"><image-slot id="{{ t.avatarId }}" src="{{ t.avatarSrc }}" fit="cover" shape="circle" placeholder=" " data-avatar="true"></image-slot></div>
               <div style="display:flex;flex-direction:column;">
                 <span style="font-weight:700;font-size:15px;">{{ t.nombre }}</span>
-                <span style="font-size:12.5px;color:#8B8B96;">Miembro de WDN</span>
+                <span style="font-size:12.5px;color:var(--drill-muted);">Miembro de DRILL Academy</span>
               </div>
             </div>
-            <p style="margin:0;font-weight:700;font-size:17px;letter-spacing:-0.01em;line-height:1.3;min-height:2.6em;">{{ t.resultado }}</p>
             <sc-if value="{{ t.hasEmbed }}" hint-placeholder-val="{{ false }}">
-              <div style="position:relative;width:100%;max-width:{{ t.embedMaxWidth }};margin:0 auto;aspect-ratio:{{ t.embedRatio }};border-radius:10px;overflow:hidden;background:#0A0A0D;border:1px solid #1E1E26;">
+              <div class="res-media" style="max-width:{{ t.embedMaxWidth }};aspect-ratio:{{ t.displayRatio }};">
                 <sc-if value="{{ t.embedPlaying }}" hint-placeholder-val="{{ false }}">
-                  <iframe src="{{ t.embedPlaySrc }}" style="width:100%;height:100%;border:0;display:block;" allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen="{{ true }}"></iframe>
+                  <iframe title="Testimonio de {{ t.nombre }}" src="{{ t.embedPlaySrc }}" style="width:100%;height:100%;border:0;display:block;" allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen="{{ true }}"></iframe>
                 </sc-if>
                 <sc-if value="{{ t.embedIdle }}" hint-placeholder-val="{{ true }}">
-                  <div onClick="{{ t.playClick }}" data-video-url="{{ t.embedSrc }}" style="position:absolute;inset:0;cursor:pointer;">
-                    <img src="{{ t.posterSrc }}" alt="Testimonio de {{ t.nombre }}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:contain;display:block;background:#0A0A0D;">
-                    <div style="position:absolute;inset:0;background:rgba(0,0,0,0.32);transition:background 0.3s ease;pointer-events:none;" style-hover="background:rgba(0,0,0,0.14);"></div>
-                    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:#4F7CFF;display:flex;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 6px 20px rgba(79,124,255,0.38);">
-                      <div style="width:0;height:0;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:15px solid #FFFFFF;margin-left:4px;"></div>
+                  <button class="res-preview" type="button" onClick="{{ t.playClick }}" data-video-url="{{ t.embedSrc }}" aria-label="Reproducir testimonio de {{ t.nombre }}">
+                    <img src="{{ t.posterSrc }}" alt="" loading="lazy" decoding="async">
+                    <div class="res-preview-shade" aria-hidden="true" style="position:absolute;inset:0;background:color-mix(in srgb,var(--drill-black) 25%,transparent);transition:opacity .2s ease;pointer-events:none;"></div>
+                    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:var(--drill-accent);display:flex;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 6px 20px color-mix(in srgb,var(--drill-accent) 38%,transparent);">
+                      <div style="width:0;height:0;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:15px solid var(--drill-on-accent);margin-left:4px;"></div>
                     </div>
-                  </div>
+                  </button>
                 </sc-if>
               </div>
             </sc-if>
             <sc-if value="{{ t.playing }}" hint-placeholder-val="{{ false }}">
-              <div style="width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#0A0A0D;">
+              <div style="width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background-color:var(--drill-black);">
                 <iframe src="{{ t.iframeSrc }}" style="width:100%;height:100%;border:0;display:block;" allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen="{{ true }}"></iframe>
               </div>
             </sc-if>
             <sc-if value="{{ t.notPlaying }}" hint-placeholder-val="{{ true }}">
-              <div onClick="{{ t.playClick }}" data-video-url="{{ t.videoUrl }}" style="position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#0A0A0D;border:1px solid #1E1E26;cursor:pointer;">
+              <div onClick="{{ t.playClick }}" data-video-url="{{ t.videoUrl }}" style="position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background-color:var(--drill-black);border:1px solid var(--drill-line);cursor:pointer;">
                 <image-slot id="{{ t.thumbId }}" shape="rect" placeholder="miniatura del video"></image-slot>
-                <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);transition:background 0.3s ease;pointer-events:none;" style-hover="background:rgba(0,0,0,0.15);"></div>
-                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:#4F7CFF;display:flex;align-items:center;justify-content:center;pointer-events:none;">
-                  <div style="width:0;height:0;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:15px solid #FFFFFF;margin-left:4px;"></div>
+                <div style="position:absolute;inset:0;background:color-mix(in srgb,var(--drill-black) 35%,transparent);transition:background 0.3s ease;pointer-events:none;" style-hover="background:color-mix(in srgb,var(--drill-black) 15%,transparent);"></div>
+                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:var(--drill-accent);display:flex;align-items:center;justify-content:center;pointer-events:none;">
+                  <div style="width:0;height:0;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:15px solid var(--drill-text);margin-left:4px;"></div>
                 </div>
               </div>
             </sc-if>
-            <p style="margin:0;font-size:14.5px;color:#A0A0AB;font-style:italic;text-wrap:pretty;">{{ t.cita }}</p>
+            <p style="margin:0;font-size:14.5px;color:var(--drill-text-2);font-style:italic;text-wrap:pretty;">{{ t.cita }}</p>
           </div>
         </article>
       </sc-for>
@@ -388,74 +780,92 @@ window.__resources = {
   </div>
 </section>
 
-<!-- IDENTIFICACIÓN -->
-<section id="identificacion" data-screen-label="Identificación" style="padding:clamp(64px,10vw,120px) 24px;border-top:1px solid #16161C;">
-  <div style="max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:40px;">
-    <h2 style="margin:0;font-size:clamp(28px,4vw,42px);font-weight:700;letter-spacing:-0.02em;line-height:1.12;text-align:center;text-wrap:pretty;">Si estás acá, probablemente <em style="font-style:italic;font-weight:600;color:#4F7CFF;">te pase esto</em></h2>
-    <div style="display:flex;flex-direction:column;gap:14px;">
-      <sc-for list="{{ dolores }}" as="d" hint-placeholder-count="4">
-        <div style="display:flex;gap:16px;align-items:flex-start;background:#101016;border:1px solid #1E1E26;border-radius:14px;padding:20px 22px;">
-          <span style="flex:none;font-size:22px;line-height:1.3;">{{ d.icon }}</span>
-          <p style="margin:0;font-size:16.5px;color:#C9C9D1;text-wrap:pretty;">{{ d.pre }}<em style="font-style:italic;font-weight:600;color:#4F7CFF;">{{ d.hl }}</em>{{ d.post }}</p>
-        </div>
-      </sc-for>
+<section id="recibis" class="academy-includes" data-screen-label="Qué incluye DRILL Academy" aria-labelledby="academy-includes-title">
+  <div class="academy-includes-inner">
+    <div class="academy-includes-header">
+      <h2 id="academy-includes-title">¿Qué incluye <em>DRILL Academy</em>?</h2>
+      <p>Aprendé a crear software con IA y a ofrecerlo como solución a negocios, con proyectos reales, recursos y acompañamiento de Gino.</p>
     </div>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
-      <p style="margin:0;text-align:center;font-size:clamp(19px,2.6vw,23px);font-weight:600;letter-spacing:-0.01em;text-wrap:pretty;">Todos empezamos ahí. La diferencia es <em style="font-style:italic;color:#4F7CFF;">no hacerlo solo</em>.</p>
-      <p style="margin:0;max-width:560px;text-align:center;font-size:16.5px;color:#A0A0AB;text-wrap:pretty;">No te falta talento ni ganas. Te falta un lugar donde aprender con método, mostrar lo que hacés y crecer con gente que ya pasó por donde estás.</p>
-    </div>
-  </div>
-</section>
-
-<!-- TODO LO QUE RECIBÍS -->
-<section id="recibis" data-screen-label="Todo lo que recibís" style="padding:clamp(64px,10vw,120px) 24px;border-top:1px solid #16161C;">
-  <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:44px;">
-    <h2 style="margin:0;font-size:clamp(28px,4vw,42px);font-weight:700;letter-spacing:-0.02em;line-height:1.12;text-align:center;text-wrap:pretty;">Todo lo que recibís <em style="font-style:italic;font-weight:600;color:#4F7CFF;">cuando entrás</em></h2>
-    <div class="bento">
-      <sc-for list="{{ entregables }}" as="e" hint-placeholder-count="7">
-        <article class="bento-card" style="grid-column:span {{ e.span }};">
-          <div class="bento-visual" style="background:{{ e.visual }};"></div>
-          <div class="bento-body">
-            <span style="font-size:11.5px;letter-spacing:0.14em;font-weight:600;color:#4F7CFF;">{{ e.cat }}</span>
-            <h3 style="margin:0;font-size:clamp(18px,2.1vw,21px);font-weight:700;letter-spacing:-0.015em;line-height:1.2;text-wrap:pretty;">{{ e.titulo }}</h3>
-            <p style="margin:0;font-size:15px;color:#A0A0AB;text-wrap:pretty;">{{ e.desc }}</p>
-          </div>
-        </article>
-      </sc-for>
+    <div class="academy-benefits">
+      <article class="academy-benefit">
+        <span class="academy-benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="m10 8 4 2.5-4 2.5zM8 21h8"/></svg></span>
+        <h3>Más de 60 clases en video</h3>
+        <p>Creá sitios web, aplicaciones y software con IA, desde cero o a partir de tus proyectos actuales.</p>
+      </article>
+      <article class="academy-benefit">
+        <span class="academy-benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 7-8m-5 0h5v5"/></svg></span>
+        <h3>Adquisición de clientes y ventas</h3>
+        <p>Definí tu oferta y aprendé a crear contenido, prospectar y cerrar proyectos.</p>
+      </article>
+      <article class="academy-benefit">
+        <span class="academy-benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg></span>
+        <h3>Proyectos reales de negocios</h3>
+        <p>Mirá cómo una necesidad de negocio se convierte en un proyecto de software.</p>
+      </article>
+      <article class="academy-benefit">
+        <span class="academy-benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="13" height="14" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg></span>
+        <h3>Una mentoría grupal en vivo por semana</h3>
+        <p>Traé tus dudas de desarrollo, ventas o proyectos. Cada llamada queda grabada.</p>
+      </article>
+      <article class="academy-benefit">
+        <span class="academy-benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a7.5 7.5 0 0 1-7.5 7.5h-2L5 22l1.5-5A7.5 7.5 0 1 1 21 11.5Z"/><path d="M10 11.5h6"/></svg></span>
+        <h3>Grupo de WhatsApp con Gino</h3>
+        <p>Preguntale directamente a Gino y compartí tus avances con otros miembros.</p>
+      </article>
+      <article class="academy-benefit">
+        <span class="academy-benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h7l5 5v13H8zM14 3v6h6M11 13h6m-6 4h6M4 7v13"/></svg></span>
+        <h3>Recursos listos para implementar</h3>
+        <p>Adaptá prompts, plantillas, automatizaciones y sistemas a tus proyectos.</p>
+      </article>
+      <article class="academy-benefit">
+        <span class="academy-benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5 9-5Zm9 5v8l-9 5-9-5V8m9 5v8"/></svg></span>
+        <h3>Soluciones listas para vender</h3>
+        <p>Adaptá soluciones a cada negocio y sumalas a tu oferta.</p>
+      </article>
+      <article class="academy-benefit">
+        <span class="academy-benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18m-13 5h4m3 0h2"/></svg></span>
+        <h3>Bolsa de trabajo</h3>
+        <p>Encontrá oportunidades de proyectos compartidas en la comunidad.</p>
+      </article>
+      <article class="academy-benefit">
+        <span class="academy-benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 12h7m-7 4h7"/></svg></span>
+        <h3>Kit comercial completo</h3>
+        <p>Usá guiones, plantillas de propuesta y mensajes de seguimiento para vender y cotizar.</p>
+      </article>
     </div>
   </div>
 </section>
 
 <!-- QUIÉN SOY -->
-<section id="quien-soy" data-screen-label="Quién soy" style="padding:clamp(64px,10vw,120px) 24px;border-top:1px solid #16161C;">
+<section id="quien-soy" data-screen-label="Quién soy" style="padding:clamp(64px,10vw,120px) 24px;border-top:1px solid var(--drill-line);">
   <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(36px,5vw,56px);">
     <div style="max-width:640px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;">
-      <h2 style="margin:0;font-size:clamp(28px,4vw,42px);font-weight:700;letter-spacing:-0.02em;line-height:1.12;">Hola, soy <em style="font-style:italic;font-weight:600;color:#4F7CFF;">Gino</em></h2>
-      <p style="margin:0;font-size:16.5px;color:#A0A0AB;text-wrap:pretty;">Hace 4 años arranqué igual que vos: aprendiendo solo y sin saber por dónde empezar. Hoy vivo del desarrollo web, trabajé con más de 80 clientes de todo el mundo y armé esta comunidad para compartir lo que uso todos los días.</p>
+      <h2 style="margin:0;font-size:clamp(28px,4vw,42px);font-weight:700;letter-spacing:-0.02em;line-height:1.12;">Hola, soy <em style="font-style:italic;font-weight:600;color:var(--drill-accent);">Gino</em></h2>
+      <p style="margin:0;font-size:16.5px;color:var(--drill-text-2);text-wrap:pretty;">Hace 4 años arranqué igual que vos: aprendiendo solo y sin saber por dónde empezar. Hoy vivo del desarrollo web, trabajé con más de 80 clientes de todo el mundo y armé esta comunidad para compartir lo que uso todos los días.</p>
     </div>
     <div class="about-grid">
       <div class="about-col">
         <sc-for list="{{ sobreMiIzq }}" as="m" hint-placeholder-count="3">
           <div style="display:flex;flex-direction:column;gap:10px;">
             <div style="display:flex;align-items:center;gap:12px;">
-              <span style="flex:none;width:42px;height:42px;border-radius:12px;background:rgba(79,124,255,0.10);border:1px solid rgba(79,124,255,0.25);display:flex;align-items:center;justify-content:center;font-size:19px;">{{ m.icon }}</span>
+              <span style="flex:none;width:42px;height:42px;border-radius:12px;background:color-mix(in srgb,var(--drill-accent) 10%,transparent);border:1px solid color-mix(in srgb,var(--drill-accent) 25%,transparent);display:flex;align-items:center;justify-content:center;font-size:19px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span>
               <span style="font-size:18px;font-weight:700;letter-spacing:-0.01em;">{{ m.titulo }}</span>
             </div>
-            <p style="margin:0;font-size:15px;color:#A0A0AB;text-wrap:pretty;">{{ m.desc }}</p>
+            <p style="margin:0;font-size:15px;color:var(--drill-text-2);text-wrap:pretty;">{{ m.desc }}</p>
           </div>
         </sc-for>
       </div>
       <div class="about-media">
-        <div style="aspect-ratio:3/4;border-radius:18px;overflow:hidden;border:1px solid #23232C;box-shadow:0 30px 80px rgba(79,124,255,0.12);"><image-slot id="foto-gino" shape="rounded" radius="18" fit="cover" placeholder="foto vertical de Gino"></image-slot></div>
+        <div style="aspect-ratio:3/4;border-radius:18px;overflow:hidden;border:1px solid var(--drill-line);box-shadow:0 30px 80px color-mix(in srgb,var(--drill-accent) 12%,transparent);"><image-slot id="foto-gino" shape="rounded" radius="18" fit="cover" placeholder="foto vertical de Gino"></image-slot></div>
       </div>
       <div class="about-col">
         <sc-for list="{{ sobreMiDer }}" as="m" hint-placeholder-count="3">
           <div style="display:flex;flex-direction:column;gap:10px;">
             <div style="display:flex;align-items:center;gap:12px;">
-              <span style="flex:none;width:42px;height:42px;border-radius:12px;background:rgba(79,124,255,0.10);border:1px solid rgba(79,124,255,0.25);display:flex;align-items:center;justify-content:center;font-size:19px;">{{ m.icon }}</span>
+              <span style="flex:none;width:42px;height:42px;border-radius:12px;background:color-mix(in srgb,var(--drill-accent) 10%,transparent);border:1px solid color-mix(in srgb,var(--drill-accent) 25%,transparent);display:flex;align-items:center;justify-content:center;font-size:19px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span>
               <span style="font-size:18px;font-weight:700;letter-spacing:-0.01em;">{{ m.titulo }}</span>
             </div>
-            <p style="margin:0;font-size:15px;color:#A0A0AB;text-wrap:pretty;">{{ m.desc }}</p>
+            <p style="margin:0;font-size:15px;color:var(--drill-text-2);text-wrap:pretty;">{{ m.desc }}</p>
           </div>
         </sc-for>
       </div>
@@ -464,18 +874,18 @@ window.__resources = {
 </section>
 
 <!-- FAQ -->
-<section id="faq" data-screen-label="FAQ" style="padding:clamp(64px,10vw,120px) 24px;border-top:1px solid #16161C;">
+<section id="faq" data-screen-label="FAQ" style="padding:clamp(64px,10vw,120px) 24px;border-top:1px solid var(--drill-line);">
   <div style="max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:40px;">
     <h2 style="margin:0;font-size:clamp(26px,3.6vw,38px);font-weight:600;letter-spacing:-0.015em;text-align:center;">Preguntas frecuentes</h2>
     <div style="display:flex;flex-direction:column;">
       <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="8">
-        <div style="border-top:1px solid #1E1E26;">
+        <div style="border-top:1px solid var(--drill-line);">
           <button onClick="{{ f.toggle }}" style="all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:center;gap:16px;width:100%;padding:20px 4px;cursor:pointer;font-family:inherit;">
-            <span style="font-size:16.5px;font-weight:500;color:#F2F2F4;">{{ f.q }}</span>
-            <span style="flex:none;font-size:20px;color:#4F7CFF;font-weight:400;">{{ f.symbol }}</span>
+            <span style="font-size:16.5px;font-weight:500;color:var(--drill-text);">{{ f.q }}</span>
+            <span style="flex:none;font-size:20px;color:var(--drill-accent);font-weight:400;">{{ f.symbol }}</span>
           </button>
           <div style="display:{{ f.answerDisplay }};padding:0 4px 22px;">
-            <p style="margin:0;font-size:15px;color:#A0A0AB;text-wrap:pretty;">{{ f.a }}</p>
+            <p style="margin:0;font-size:15px;color:var(--drill-text-2);text-wrap:pretty;">{{ f.a }}</p>
           </div>
         </div>
       </sc-for>
@@ -484,153 +894,34 @@ window.__resources = {
 </section>
 
 <!-- CTA FINAL -->
-<section id="cta-final" data-screen-label="CTA final" style="position:relative;overflow:hidden;background:linear-gradient(rgba(10,10,13,0.62), rgba(10,10,13,0.86) 65%, #0A0A0D), radial-gradient(ellipse 90% 70% at 50% 110%, rgba(79,124,255,0.14), rgba(79,124,255,0) 70%), url('./uploads/cta-image.jpg') center 35% / cover no-repeat, #0A0A0D;padding:clamp(80px,12vw,140px) 24px;border-top:1px solid #16161C;">
+<section id="cta-final" data-screen-label="CTA final" style="position:relative;overflow:hidden;background:linear-gradient(color-mix(in srgb,var(--drill-black) 62%,transparent), color-mix(in srgb,var(--drill-black) 86%,transparent) 65%, var(--drill-black)), radial-gradient(ellipse 90% 70% at 50% 110%, color-mix(in srgb,var(--drill-accent) 14%,transparent), color-mix(in srgb,var(--drill-accent) 0%,transparent) 70%), url('./uploads/cta-image.jpg') center 35% / cover no-repeat, var(--drill-black);padding:clamp(80px,12vw,140px) 24px;border-top:1px solid var(--drill-line);">
   <div style="position:relative;z-index:1;max-width:640px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;">
     <h2 style="margin:0;font-size:clamp(28px,4.4vw,44px);font-weight:600;letter-spacing:-0.02em;text-wrap:pretty;">Aprendé a construir con IA, pero acompañado</h2>
-    <p style="margin:0;font-size:17px;color:#A0A0AB;">Entrás hoy, empezás hoy.</p>
-    <a class="shiny-cta" href="https://wa.me/5492922453154?text=Hola%20Gino%2C%20quiero%20entrar%20en%20la%20formacion" target="_blank" rel="noopener" style="margin-top:10px;"><span>Quiero acceder a la comunidad</span></a>
+    <p style="margin:0;font-size:17px;color:var(--drill-text-2);">Entrás hoy, empezás hoy.</p>
+    <a class="btn-primary hero-cta drill-action" href="https://wa.me/5492922453154?text=Hola%20Gino%2C%20quiero%20entrar%20en%20la%20formacion" target="_blank" rel="noopener" style="margin-top:10px;"><span>Quiero acceder a la comunidad</span><span class="drill-action__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></a>
     <span class="wa-hint" style="margin-top:6px;">¿Tenés dudas?</span>
     <a class="wa-cta" href="https://wa.me/5492922453154?text=Hola%20Gino!%20Tengo%20algunas%20dudas%20de%20la%20comunidad" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.04 21.5h-.01a9.45 9.45 0 0 1-4.82-1.32l-.35-.21-3.58.94.96-3.49-.23-.36a9.43 9.43 0 0 1-1.45-5.03c0-5.22 4.25-9.47 9.48-9.47 2.53 0 4.91.99 6.7 2.78a9.4 9.4 0 0 1 2.77 6.7c0 5.22-4.25 9.46-9.47 9.46zm8.06-17.53A11.33 11.33 0 0 0 12.04.63C5.76.63.65 5.74.65 12.02c0 2 .52 3.96 1.52 5.69L.55 23.6l6.04-1.58a11.37 11.37 0 0 0 5.44 1.39h.01c6.28 0 11.39-5.11 11.39-11.39 0-3.04-1.18-5.9-3.33-8.05z"/></svg>Hablemos por WhatsApp</a>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer id="footer" data-screen-label="Footer" style="border-top:1px solid #16161C;padding:32px 24px;">
+<footer id="footer" data-screen-label="Footer" style="border-top:1px solid var(--drill-line);padding:32px 24px;">
   <div style="max-width:1120px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;">
-    <span style="font-weight:600;font-size:15px;">Web Design Network</span>
-    <span style="font-size:13px;color:#8B8B96;">© 2026 Web Design Network</span>
+    <span style="font-weight:600;font-size:15px;">Drill Academy</span>
+    <span style="font-size:13px;color:var(--drill-muted);">© 2026 Drill Academy</span>
     <div style="display:flex;gap:20px;">
-      <a href="/recursos" style="font-size:13px;color:#8B8B96;" style-hover="color:#4F7CFF;">Recursos</a>
-      <a href="#" style="font-size:13px;color:#8B8B96;" style-hover="color:#4F7CFF;">Términos</a>
-      <a href="#" style="font-size:13px;color:#8B8B96;" style-hover="color:#4F7CFF;">Privacidad</a>
+      <a href="/recursos" style="font-size:13px;color:var(--drill-muted);" style-hover="color:var(--drill-accent);">Recursos</a>
+      <a href="#" style="font-size:13px;color:var(--drill-muted);" style-hover="color:var(--drill-accent);">Términos</a>
+      <a href="#" style="font-size:13px;color:var(--drill-muted);" style-hover="color:var(--drill-accent);">Privacidad</a>
     </div>
   </div>
 </footer>
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{
-  &quot;showHeroVideo&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Hero&quot;}
-}">
+<script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { open: -1, playing: {}, capRatios: {}, heroPlaying: false, capsExpanded: false };
-  componentDidMount() {
-    // mide el ratio natural de cada captura cargada para que el alto de la card salga de la imagen
-    const watch = () => {
-      for (let i = 1; i <= 13; i++) {
-        const id = "post-" + i;
-        const slot = document.querySelector('image-slot[id="' + id + '"]');
-        if (!slot || slot._wdnWatched) continue;
-        slot._wdnWatched = true;
-        const measure = () => {
-          const img = slot.shadowRoot && slot.shadowRoot.querySelector(".frame img");
-          if (!img) return;
-          const apply = () => {
-            if (!img.naturalWidth) return;
-            const r = img.naturalWidth + " / " + img.naturalHeight;
-            if (this.state.capRatios[id] !== r) {
-              // el contenedor pasa a tener el ratio natural: resetear pan/zoom guardado para mostrar la imagen entera
-              if (slot._view && (slot._view.s !== 1 || slot._view.x !== 0 || slot._view.y !== 0)) {
-                slot._view = { s: 1, x: 0, y: 0 };
-                if (slot._commitView) slot._commitView();
-              }
-              this.setState(s => ({ capRatios: { ...s.capRatios, [id]: r } }), () => {
-                // re-render del slot una vez que el wrapper ya tiene el ratio natural
-                setTimeout(() => { if (slot._render) slot._render(); }, 50);
-              });
-            }
-          };
-          if (img.complete && img.naturalWidth) apply();
-          img.addEventListener("load", apply);
-        };
-        new MutationObserver(measure).observe(slot, { attributes: true, attributeFilter: ["data-filled"] });
-        measure();
-      }
-    };
-    watch();
-    const t = setInterval(watch, 1000);
-    setTimeout(() => clearInterval(t), 10000);
-    this.capLightbox();
-  }
-  // visor de capturas: click en una card la abre en grande; flechas / swipe para pasar, Esc para cerrar.
-  // la lista sale del DOM (las filas están duplicadas para el loop, se deduplica por id)
-  capLightbox() {
-    if (document.getElementById("cap-lb")) return;
-    const icon = (d) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + d + '"/></svg>';
-    const lb = document.createElement("div");
-    lb.id = "cap-lb";
-    lb.className = "cap-lb";
-    lb.setAttribute("role", "dialog");
-    lb.setAttribute("aria-modal", "true");
-    lb.setAttribute("aria-label", "Captura ampliada");
-    lb.innerHTML = '<span class="cap-lb__count"></span><img alt="Captura de un resultado">' +
-      '<button class="cap-lb__close" aria-label="Cerrar">' + icon("M18 6L6 18M6 6l12 12") + '</button>' +
-      '<button class="cap-lb__prev" aria-label="Captura anterior">' + icon("M15 18l-6-6 6-6") + '</button>' +
-      '<button class="cap-lb__next" aria-label="Captura siguiente">' + icon("M9 18l6-6-6-6") + '</button>';
-    document.body.appendChild(lb);
-    const img = lb.querySelector("img"), count = lb.querySelector(".cap-lb__count");
-    let items = [], idx = 0, lastFocus = null;
-    const srcOf = (card) => {
-      const slot = card.querySelector("image-slot");
-      const el = slot && slot.shadowRoot && slot.shadowRoot.querySelector(".frame img");
-      return (el && (el.currentSrc || el.src)) || (slot && slot.getAttribute("src")) || "";
-    };
-    const collect = () => {
-      const seen = new Set(), out = [];
-      document.querySelectorAll("#comunidad .cap-card").forEach((c) => {
-        const id = c.getAttribute("data-cap-id"), src = srcOf(c);
-        if (!id || seen.has(id) || !src) return;
-        seen.add(id); out.push({ id, src });
-      });
-      return out;
-    };
-    const show = (i) => {
-      idx = (i + items.length) % items.length;
-      img.src = items[idx].src;
-      count.textContent = (idx + 1) + " / " + items.length;
-    };
-    const open = (card) => {
-      items = collect();
-      const i = items.findIndex((it) => it.id === card.getAttribute("data-cap-id"));
-      if (i < 0) return;
-      lastFocus = document.activeElement;
-      show(i);
-      lb.classList.add("is-open");
-            document.documentElement.style.overflow = "hidden";
-      lb.querySelector(".cap-lb__close").focus();
-    };
-    const close = () => {
-      lb.classList.remove("is-open");
-            document.documentElement.style.overflow = "";
-      if (lastFocus && lastFocus.focus) lastFocus.focus();
-    };
-    document.addEventListener("click", (e) => {
-      const card = e.target.closest && e.target.closest("#comunidad .cap-card");
-      if (card) open(card);
-    });
-    document.addEventListener("keydown", (e) => {
-      if (lb.classList.contains("is-open")) {
-        if (e.key === "Escape") close();
-        else if (e.key === "ArrowLeft") show(idx - 1);
-        else if (e.key === "ArrowRight") show(idx + 1);
-        return;
-      }
-      const card = e.target.closest && e.target.closest("#comunidad .cap-card");
-      if (card && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); open(card); }
-    });
-    lb.addEventListener("click", (e) => { if (e.target === lb) close(); });
-    lb.querySelector(".cap-lb__close").addEventListener("click", close);
-    lb.querySelector(".cap-lb__prev").addEventListener("click", () => show(idx - 1));
-    lb.querySelector(".cap-lb__next").addEventListener("click", () => show(idx + 1));
-    let x0 = null;
-    lb.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, { passive: true });
-    lb.addEventListener("touchend", (e) => {
-      if (x0 === null) return;
-      const dx = e.changedTouches[0].clientX - x0;
-      x0 = null;
-      if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1));
-    });
-  }
+  state = { open: -1, playing: {} };
   // carrusel de resultados: avanza de a una card y da la vuelta en los extremos.
   // al pasar, se cortan los videos que estuvieran sonando
   resScroll = (dir) => {
@@ -645,59 +936,50 @@ class Component extends DCLogic {
     track.scrollTo({ left, behavior: "smooth" });
     if (Object.keys(this.state.playing).length) this.setState({ playing: {} });
   };
-  toggleCapturas = () => {
-    const cerrar = this.state.capsExpanded;
-    this.setState({ capsExpanded: !cerrar });
-    if (cerrar) {
-      const grid = document.querySelector("#comunidad .cap-grid");
-      if (grid) window.scrollTo({ top: grid.getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" });
-    }
-  };
   resPrev = () => this.resScroll(-1);
   resNext = () => this.resScroll(1);
   renderVals() {
-    const emptyRatios = ["16/10", "4/5", "1/1", "16/9", "3/4", "16/10", "2/3", "16/9", "4/5", "1/1", "16/10", "3/4", "16/9"];
-    // el ancho de cada card sale del ratio natural de la imagen (alto fijo por fila)
-    const card = (n) => {
-      const id = "post-" + n;
-      return { id, ratio: this.state.capRatios[id] || emptyRatios[n - 1] || "16/10", label: "screenshot " + n, src: "" };
-    };
-    // capturas cargadas como archivo en uploads/: ratio fijo, no pasan por el medidor de slots
-    const archivo = (id, file, ratio) => ({ id, src: "./uploads/" + file, ratio, label: id });
-    const baseA = [1, 2, 4, 5, 7].map(card).concat([
-      archivo("res-1", "resultado.png", "764 / 612"),
-      archivo("res-2", "resultado-1.png", "772 / 578"),
-    ]);
-    const baseB = [8, 9, 10, 11, 12, 13].map(card).concat([
-      archivo("res-3", "resultado-2.png", "760 / 772"),
-      archivo("res-4", "resultado-3.png", "764 / 734"),
-    ]);
-    // grilla de capturas: se muestran las primeras CAP_VISIBLES y el resto con "Ver las N capturas"
-    const CAP_VISIBLES = 6;
-    const todasCapturas = baseA.concat(baseB);
-    const capturas = todasCapturas.map((c, i) => ({
-      ...c, display: i < CAP_VISIBLES || this.state.capsExpanded ? "block" : "none",
+    const memberWins = [
+      {"name": "Lucio Cristaldi", "title": "US$1.000", "detail": "Vendió una web para una distribuidora de concreto a través de una agencia de México.", "avatar": "./uploads/resultados/lucio-cristaldi.jpg", "proof": "./uploads/resultados/SCR-20261017-sdgp.png", "proofWidth": 764, "proofHeight": 312},
+      {"name": "Ricardo Segura", "title": "US$800", "detail": "Desarrolló una plataforma turística a medida que integra pagos en línea con CardNet.", "avatar": "./uploads/resultados/ricardo-segura.jpg"},
+      {"name": "Alessandra Balconi", "title": "US$650", "detail": "Cerró su primer cliente con una web para una constructora de cabañas y pérgolas.", "avatar": "./uploads/resultados/alessandra.jpg", "proof": "./uploads/resultados/SCR-20261017-rwxj.png", "proofWidth": 756, "proofHeight": 424},
+      {"name": "Matias o Yennerich", "title": "US$700", "detail": "Cobró una landing para Natufarma con seguimiento de conversiones y analítica.", "avatar": "./uploads/resultados/matias.jpg"},
+      {"name": "Santiago Garro", "title": "US$450", "detail": "Cerró un proyecto con una clínica dental usando la presentación de propuesta compartida en la comunidad.", "initials": "SG"},
+      {"name": "Lucio Cristaldi", "title": "€500", "detail": "Creó una landing para una agencia española a la que contactó por su cuenta.", "avatar": "./uploads/resultados/lucio-cristaldi.jpg", "proof": "./uploads/resultados/SCR-20261017-rvxy.png", "proofWidth": 764, "proofHeight": 300},
+      {"name": "Matias o Yennerich", "title": "US$600", "detail": "Diseñó, desarrolló y desplegó una landing para un estudio jurídico en 48 horas.", "avatar": "./uploads/resultados/matias.jpg"},
+      {"name": "Lucio Cristaldi", "title": "US$800", "detail": "Desarrolló una web institucional a medida para una agencia de Uruguay.", "avatar": "./uploads/resultados/lucio-cristaldi.jpg", "proof": "./uploads/resultados/SCR-20261017-sdmh.png", "proofWidth": 772, "proofHeight": 284},
+      {"name": "Mateo Narducci", "title": "Cerró su primer cliente", "detail": "Preparó una demo de reservas y contactó negocios por Instagram. Su primer cliente contrató la landing.", "avatar": "./uploads/resultados/mateo-narducci.jpg"},
+      {"name": "Santo Sampaolesi", "title": "Recibió su primer pago", "detail": "Empezó a desarrollar la web de un complejo turístico y recibió el primer pago mientras el proyecto seguía en curso.", "initials": "SS"},
+      {"name": "Gissela Belen Santana Mora", "title": "Agendó una llamada", "detail": "Consiguió una reunión con un potencial cliente. En el mismo reto, uno de sus videos superó las 2.500 visualizaciones.", "initials": "GM"},
+      {"name": "Angel Lopez", "title": "Consiguió un proyecto en la comunidad", "detail": "Se postuló a una oportunidad publicada en Skool y le aceptaron la propuesta para diseñar una landing.", "avatar": "./uploads/resultados/angel.jpg"},
+      {"name": "Hernan Bugner", "title": "Negoció una landing en italiano", "detail": "Se reunió con un potencial cliente en italiano y acordó presentarle un wireframe antes del primer pago.", "avatar": "./uploads/hernan.jpg"},
+      {"name": "Sebastian Bendezu", "title": "Creó su primera landing", "detail": "Compartió la primera versión de una web para un consultorio dental de Lima y pidió feedback para mejorarla.", "avatar": "./uploads/resultados/sebastian-vendezu.jpeg"},
+      {"name": "Matias Grande", "title": "Su primer cliente 100% online", "detail": "El contacto llegó por Instagram. Después de una reunión recibió una seña del 50% para empezar la landing.", "avatar": "./uploads/resultados/matias%20grande.jpg"},
+      {"name": "Bautista Morales", "title": "Cerró su primer cliente", "detail": "Contactó en frío por WhatsApp y compartió una demo como parte de su propuesta.", "initials": "BM", "proof": "./uploads/resultados/SCR-20261017-rxbl.png", "proofWidth": 756, "proofHeight": 310},
+      {"name": "Lore Castro", "title": "Cobró su primera web en Framer", "detail": "Terminó la web de un psiquiatra que había empezado a planear con la comunidad.", "avatar": "./uploads/lorena-castro.jpg"},
+      {"name": "Lucio Cristaldi", "title": "Web para un centro fitness", "detail": "Armó una web institucional administrable en WordPress para un centro fitness de Barcelona.", "avatar": "./uploads/resultados/lucio-cristaldi.jpg"},
+      {"name": "Lucio Cristaldi", "title": "Entregó una web institucional", "detail": "Terminó una web para una agencia de España a partir de una oportunidad que llegó por la comunidad.", "avatar": "./uploads/resultados/lucio-cristaldi.jpg"},
+      {"name": "Bautista Morales", "title": "Creó su primera web de agencia", "detail": "Armó el primer prototipo de la web de su agencia de diseño y lo compartió para recibir feedback.", "initials": "BM"},
+      {"name": "Agustin Purici", "title": "Web para una empresa de seguridad", "detail": "Desarrolló una web institucional para que su cliente pudiera mostrar sus servicios en línea.", "avatar": "./uploads/resultados/Agustin%20Purici.jpg"},
+    ];
+    const memberWinLayouts = [5, 2].map(count => ({
+      className: count === 5 ? "member-wins-desktop" : "member-wins-mobile",
+      lanes: Array.from({ length: count }, (_, laneIndex) => {
+        const laneCards = memberWins.filter((_, index) => index % count === laneIndex);
+        const cards = count === 5
+          ? Array.from({ length: Math.max(laneCards.length, 6) }, (_, index) =>
+              laneCards[index] || { ...memberWins[(laneIndex + index * count) % memberWins.length], hidden: true, proofTabIndex: -1 })
+          : laneCards;
+        return {
+          label: "Resultados, carrusel " + (laneIndex + 1),
+          groups: [
+            { cards },
+            { hidden: true, cards: cards.map(card => ({ ...card, proofTabIndex: -1 })) },
+          ],
+        };
+      }),
     }));
-    const capOcultas = Math.max(0, todasCapturas.length - CAP_VISIBLES);
-    const stats = [
-      { valor: "+300", label: "personas aprendiendo" },
-      { valor: "+15", label: "países" },
-      { valor: "2", label: "mentorías en vivo por semana" },
-      { valor: "5.0 ⭐", label: "en Google Reviews" },
-    ];
-    const showHeroVideo = this.props.showHeroVideo ?? true;
-    // el hero arranca con una miniatura estática: el iframe de Loom (player + bundle)
-    // recién se monta cuando alguien hace click en play
-    const heroPlaying = this.state.heroPlaying;
-    const heroSrc = "https://www.loom.com/embed/1f91a720b1694bbbaaacde6bbbfe328b?autoplay=1";
-    const heroPlay = () => this.setState({ heroPlaying: true });
-    // cada dolor se parte en pre/hl/post: hl es la parte resaltada en azul
-    const dolores = [
-      { icon: "🤖", pre: "Ves todo lo que se hace con IA y ", hl: "no sabés por dónde empezar", post: "" },
-      { icon: "🧩", pre: "Probaste herramientas sueltas, pero ", hl: "te falta un método", post: " para construir algo completo" },
-      { icon: "💸", pre: "Sabés hacer webs, pero ", hl: "no sabés cómo conseguir clientes", post: " que te paguen por eso" },
-      { icon: "🏝️", pre: "Aprendés solo y ", hl: "no tenés a quién preguntarle", post: " cuando te trabás" },
-    ];
+
     const titulares = [
       "[Titular del resultado 1]", "[Titular del resultado 2]", "[Titular del resultado 3]", "[Titular del resultado 4]",
       "[Titular del resultado 5]", "[Titular del resultado 6]", "[Titular del resultado 7]", "[Titular del resultado 8]",
@@ -707,19 +989,19 @@ class Component extends DCLogic {
       0: {
         src: "https://www.loom.com/embed/0854d9925c244017b23d6bf40bb38e3b", poster: "./uploads/loom-thumbs/vinicius.jpg", ratio: "9/16",
         nombre: "Vinicius", avatar: "./uploads/vinicius.jpg",
-        resultado: "Arrancó con Framer y la comunidad fue un cambio rotundo",
+        resultado: "Empezó a crear webs con Framer",
         cita: "“La gente que está ahí es muy, muy amable, siempre está predispuesta a ayudarte.”",
       },
       1: {
         src: "https://www.loom.com/embed/082b1db400a04356ba7b9a8ec9e0d29c", poster: "./uploads/loom-thumbs/joel.jpg", ratio: "9/16",
         nombre: "Joel Soria", avatar: "./uploads/joel.jpg",
-        resultado: "Consiguió su primer cliente en menos de dos semanas",
+        resultado: "Primer cliente en menos de dos semanas",
         cita: "“Había mandado más de 2000 mensajes en frío antes de entrar en la comunidad.”",
       },
       2: {
         src: "https://www.loom.com/embed/4cfbc98beb8049868fe1bd28ff62e237", poster: "./uploads/loom-thumbs/tomas.jpg", ratio: "9/16",
         nombre: "Tomás Espinosa", avatar: "./uploads/tomas-espinosa.jpeg",
-        resultado: "Cerró su primer cliente en menos de 21 días",
+        resultado: "Primer cliente en menos de 21 días",
         cita: "“Era un estudiante de programación frustrado.”",
       },
       3: {
@@ -763,7 +1045,7 @@ class Component extends DCLogic {
         resultado: (embed && embed.resultado) || resultado,
         cita: (embed && embed.cita) || "“Cita corta de ejemplo, una o dos líneas del testimonio.”",
         videoUrl: "",
-        hasEmbed: !!embed, embedSrc: embed ? embed.src : "", embedRatio: embed ? embed.ratio : "16/9",
+        hasEmbed: !!embed, embedSrc: embed ? embed.src : "", displayRatio: embed && playingUrl ? embed.ratio : "4/5",
         embedMaxWidth: embed && embed.ratio === "9/16" ? "300px" : "100%",
         // mismo trato que el hero: miniatura hasta el click, después el iframe
         posterSrc: (embed && embed.poster) || "",
@@ -777,32 +1059,15 @@ class Component extends DCLogic {
         },
       };
     });
-    // bento: span = columnas sobre una grilla de 6; visual = fondo decorativo de la card
-    const entregables = [
-      { span: 4, cat: "FORMACIÓN", titulo: "10 módulos progresivos · +100 clases", desc: "De los fundamentos a construir webs y sistemas con IA y saber venderlos. Cada clase termina con un ejercicio práctico, no con teoría.",
-        visual: "linear-gradient(rgba(10,10,13,0.45), rgba(10,10,13,0.88) 70%), radial-gradient(ellipse 70% 80% at 15% 10%, rgba(79,124,255,0.26), rgba(79,124,255,0) 60%), url('./uploads/card-1.png') center top / cover no-repeat, #0E0E13" },
-      { span: 2, cat: "FORMACIÓN", titulo: "Webs y sistemas con IA", desc: "Construís webs y herramientas con IA aunque nunca hayas diseñado ni programado. Claude, Framer y el flujo exacto que uso.",
-        visual: "linear-gradient(rgba(10,10,13,0.72), rgba(10,10,13,0.93) 70%), radial-gradient(ellipse 90% 70% at 50% 0%, rgba(79,124,255,0.22), rgba(79,124,255,0) 65%), url('./uploads/card-2.jpeg') center 30% / cover no-repeat, #0E0E13" },
-      { span: 2, cat: "FORMACIÓN", titulo: "Conseguir clientes", desc: "Cómo encontrar, presentar y cerrar tus proyectos, aunque sientas que todavía no estás listo.",
-        visual: "linear-gradient(rgba(10,10,13,0.5), rgba(10,10,13,0.9) 70%), radial-gradient(ellipse 80% 70% at 80% 5%, rgba(0,200,255,0.16), rgba(0,200,255,0) 62%), url('./uploads/card-3.jpg') center 20% / cover no-repeat, #0E0E13" },
-      { span: 4, cat: "COMUNIDAD", titulo: "Mentorías en vivo todas las semanas", desc: "Lunes técnica + negocio, miércoles ventas. Q&A sobre tu caso real, todas grabadas y disponibles para siempre.",
-        visual: "linear-gradient(rgba(10,10,13,0.5), rgba(10,10,13,0.9) 70%), radial-gradient(ellipse 65% 75% at 85% 10%, rgba(79,124,255,0.24), rgba(79,124,255,0) 60%), url('./uploads/card-4.JPG') center 40% / cover no-repeat, #0E0E13" },
-      { span: 3, cat: "OPORTUNIDADES", titulo: "Bolsa de trabajo de la comunidad", desc: "Proyectos reales que publico yo y otros miembros. Tus primeros clientes sin depender solo de tu prospección.",
-        visual: "linear-gradient(rgba(10,10,13,0.52), rgba(10,10,13,0.9) 70%), radial-gradient(ellipse 75% 70% at 20% 5%, rgba(140,110,255,0.20), rgba(140,110,255,0) 62%), url('./uploads/card-5.jpg') center 30% / cover no-repeat, #0E0E13" },
-      { span: 3, cat: "DOCUMENTOS", titulo: "Kit comercial completo", desc: "Script de venta, documento de propuesta, secuencia de WhatsApp, contratos y propuestas ganadoras.",
-        visual: "linear-gradient(rgba(10,10,13,0.45), rgba(10,10,13,0.9) 70%), radial-gradient(ellipse 75% 70% at 80% 5%, rgba(79,124,255,0.20), rgba(79,124,255,0) 62%), url('./uploads/card-6.jpg') center 45% / cover no-repeat, #0E0E13" },
-      { span: 6, cat: "FEEDBACK", titulo: "Comunidad privada + feedback real", desc: "Gente en tu misma situación con la que compartís avances y trabas. Subís tu web o tu propuesta y recibís feedback concreto, no likes vacíos.",
-        visual: "linear-gradient(rgba(10,10,13,0.5), rgba(10,10,13,0.92) 72%), radial-gradient(ellipse 45% 90% at 12% 0%, rgba(79,124,255,0.22), rgba(79,124,255,0) 60%), url('./uploads/card-7.JPG') center 38% / cover no-repeat, #0E0E13" },
-    ];
     const sobreMiIzq = [
-      { icon: "🤝", titulo: "+80 clientes cerrados", desc: "Webs entregadas para clientes de todo el mundo. Lo que enseño lo cobré antes de enseñarlo." },
-      { icon: "🌎", titulo: "+10 países", desc: "Miembros trabajando desde Argentina, España, México, Colombia, Chile y más." },
-      { icon: "⏱️", titulo: "4 años en esto", desc: "Arranqué sin cartera, sin contactos y sin experiencia. El camino corto es el que te muestro." },
+      { titulo: "+80 clientes cerrados", desc: "Webs entregadas para clientes de todo el mundo. Lo que enseño lo cobré antes de enseñarlo." },
+      { titulo: "+10 países", desc: "Miembros trabajando desde Argentina, España, México, Colombia, Chile y más." },
+      { titulo: "4 años en esto", desc: "Arranqué sin cartera, sin contactos y sin experiencia. El camino corto es el que te muestro." },
     ];
     const sobreMiDer = [
-      { icon: "👥", titulo: "+250 miembros", desc: "Una comunidad activa donde se comparte lo que está funcionando esta semana, no el año pasado." },
-      { icon: "⚡", titulo: "Enseño lo que uso", desc: "El mismo flujo con IA que uso con mis clientes. Sin teoría de manual." },
-      { icon: "💬", titulo: "Te respondo yo", desc: "Feedback directo mío sobre tu web, tu propuesta y tu precio. No hay soporte tercerizado." },
+      { titulo: "+250 miembros", desc: "Una comunidad activa donde se comparte lo que está funcionando esta semana, no el año pasado." },
+      { titulo: "Enseño lo que uso", desc: "El mismo flujo con IA que uso con mis clientes. Sin teoría de manual." },
+      { titulo: "Te respondo yo", desc: "Feedback directo mío sobre tu web, tu propuesta y tu precio. No hay soporte tercerizado." },
     ];
     const checks = ["Todos los módulos y clases", "Mentorías en vivo semanales", "Kit comercial completo", "Comunidad privada y feedback"];
     const preguntas = [
@@ -829,15 +1094,9 @@ class Component extends DCLogic {
       toggle: () => this.setState(s => ({ open: s.open === i ? -1 : i })),
     }));
     return {
-      showHeroVideo, heroPlaying, heroIdle: !heroPlaying, heroSrc, heroPlay,
-      dolores, testimonios: testimoniosAll, entregables, checks, faqs,
+      memberWinLayouts, testimonios: testimoniosAll, checks, faqs,
       sobreMiIzq, sobreMiDer,
       resPrev: this.resPrev, resNext: this.resNext,
-      capturas, stats,
-      toggleCapturas: this.toggleCapturas,
-      capMasDisplay: capOcultas === 0 ? "none" : "flex",
-      capMasLabel: this.state.capsExpanded ? "Ver menos" : ("Ver las " + todasCapturas.length + " capturas"),
-      capMasRot: this.state.capsExpanded ? "180deg" : "0deg",
     };
   }
 }

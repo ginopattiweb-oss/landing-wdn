@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="es">
+<html data-brand="academy" lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tabulador de cobro para diseñadores y desarrolladores web — Web Design Network</title>
+<title>Tabulador de cobro para diseñadores y desarrolladores web — Drill Academy</title>
+<link rel="stylesheet" href="/uploads/drill-brand-kit/tokens.css">
+<link rel="stylesheet" href="/drill-buttons.css">
+<link rel="icon" type="image/svg+xml" href="/uploads/drill-brand-kit/assets/logos/drill-isotipo-flat.svg">
 <meta name="description" content="Poné cuánto querés ganar por hora y descubrí qué precio debería tener cada proyecto web: landing, institucional o tienda online. Gratis y sin vueltas.">
 <link rel="canonical" href="https://comunidad.southprojects.dev/recursos/tabulador">
 
@@ -61,13 +64,11 @@
 })();
 </script>
 <!-- End Analytics -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 
 <style>
 /* ==========================================================================
-   Tabulador de cobro — Web Design Network
+   Tabulador de cobro — Drill Academy
    Archivo autocontenido: todo el CSS y el JS viven acá.
    Los tokens son los mismos que /recursos/styles.css para que las dos
    mitades del sitio se lean como una sola pieza.
@@ -75,28 +76,28 @@
 
 :root{
   /* --- color --- */
-  --wdn-bg:#0A0A0D;
-  --wdn-bg-rgb:10,10,13;
-  --wdn-surface:#101016;
-  --wdn-surface-2:#0E0E13;
-  --wdn-surface-3:#16161C;
-  --wdn-border:#1E1E26;
-  --wdn-border-soft:#16161C;
-  --wdn-text:#F2F2F4;
-  --wdn-muted:#A0A0AB;
-  --wdn-muted-2:#8B8B96;
-  --wdn-accent:#4F7CFF;
-  --wdn-accent-2:#8FA9FF;
-  --wdn-accent-rgb:79,124,255;
-  --wdn-success:#3DD68C;
+  --wdn-bg:var(--drill-black);
+  --wdn-bg-rgb:5,8,7;
+  --wdn-surface:var(--drill-graphite);
+  --wdn-surface-2:var(--drill-graphite);
+  --wdn-surface-3:var(--drill-line);
+  --wdn-border:var(--drill-line);
+  --wdn-border-soft:var(--drill-line);
+  --wdn-text:var(--drill-text);
+  --wdn-muted:var(--drill-text-2);
+  --wdn-muted-2:var(--drill-muted);
+  --wdn-accent:var(--drill-accent);
+  --wdn-accent-2:var(--drill-ice);
+  --wdn-accent-rgb:92,240,138;
+  --wdn-success:var(--drill-accent);
   --wdn-success-rgb:61,214,140;
   --wdn-danger:#FF6B6B;
-  --wdn-on-accent:#0A0A0D;
+  --wdn-on-accent:var(--drill-on-accent);
   --wdn-shadow-rgb:0,0,0;
 
   /* --- forma --- */
-  --wdn-radius:16px;
-  --wdn-radius-sm:12px;
+  --wdn-radius:var(--drill-radius-card);
+  --wdn-radius-sm:var(--drill-radius-input);
   --wdn-radius-xs:8px;
   --wdn-radius-pill:999px;
 
@@ -111,8 +112,8 @@
   --wdn-slow:250ms;
 
   /* --- tipografía --- */
-  --wdn-font-display:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --wdn-font-text:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --wdn-font-display:var(--drill-font);
+  --wdn-font-text:var(--drill-font);
 
   /* --- espaciado (escala de 4px) --- */
   --wdn-s1:4px; --wdn-s2:8px; --wdn-s3:12px; --wdn-s4:16px;
@@ -660,16 +661,13 @@ src="https://www.facebook.com/tr?id=2324488668354184&ev=PageView&noscript=1"
 
 <header class="site-header">
   <div class="site-header__inner">
-    <a class="brand" href="/" aria-label="Web Design Network — inicio">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-        <path d="M3 6.5 8 18l4-8 4 8 5-11.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span>Web Design Network</span>
+    <a class="brand" href="/" aria-label="Drill Academy — inicio">
+      <img src="/uploads/drill-brand-kit/assets/logos/drill-academy-dark-bg.svg" alt="Drill Academy" width="1118" height="157" style="width:198px;height:auto">
     </a>
     <nav class="site-nav">
       <a class="nav-link" href="/">Inicio</a>
       <a class="nav-link" href="/recursos">Recursos</a>
-      <a class="nav-cta" href="https://chat.whatsapp.com/HKfcNbTwEGUHTFibcTQouX" target="_blank" rel="noopener">Sumate a WDN</a>
+      <a class="nav-cta drill-action drill-action--compact" href="https://chat.whatsapp.com/HKfcNbTwEGUHTFibcTQouX" target="_blank" rel="noopener">Quiero entrar<span class="drill-action__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></a>
     </nav>
   </div>
 </header>
@@ -941,7 +939,7 @@ src="https://www.facebook.com/tr?id=2324488668354184&ev=PageView&noscript=1"
                 <div class="field">
                   <label class="opt opt--check" style="align-items:center">
                     <input type="checkbox" id="lead-consent" checked><span class="opt__mark"></span>
-                    <span class="opt__txt"><span class="opt__name">Quiero recibir recursos de Web Design Network por email.</span></span>
+                    <span class="opt__txt"><span class="opt__name">Quiero recibir recursos de Drill Academy por email.</span></span>
                   </label>
                 </div>
                 <p class="fine" style="margin-top:16px">No compartimos tu email con nadie. Podés darte de baja cuando quieras.</p>
@@ -981,12 +979,9 @@ src="https://www.facebook.com/tr?id=2324488668354184&ev=PageView&noscript=1"
               </div>
 
               <div class="result__actions">
-                <button type="button" class="btn btn--primary" id="btn-png">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <button type="button" class="btn btn--primary drill-action" id="btn-png">Descargar como imagen<span class="drill-action__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                     <path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke-linecap="round"/>
-                  </svg>
-                  Descargar como imagen
-                </button>
+                  </svg></span></button>
                 <button type="button" class="btn btn--ghost" id="btn-reset">Empezar de nuevo</button>
                 <a class="btn btn--ghost" href="https://chat.whatsapp.com/HKfcNbTwEGUHTFibcTQouX" target="_blank" rel="noopener">Sumate a la comunidad de WDN</a>
               </div>
@@ -997,7 +992,7 @@ src="https://www.facebook.com/tr?id=2324488668354184&ev=PageView&noscript=1"
 
         <div class="wizcard__foot" id="wiz-foot">
           <button type="button" class="btn btn--ghost" id="btn-atras">Atrás</button>
-          <button type="button" class="btn btn--primary" id="btn-siguiente">Siguiente</button>
+          <button type="button" class="btn btn--primary drill-action" id="btn-siguiente"><span class="drill-action__label">Siguiente</span><span class="drill-action__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></button>
         </div>
       </div>
     </div>
@@ -1006,8 +1001,8 @@ src="https://www.facebook.com/tr?id=2324488668354184&ev=PageView&noscript=1"
 
 <footer class="site-footer">
   <div class="site-footer__inner">
-    <strong>Web Design Network</strong>
-    <span>© 2026 Web Design Network</span>
+    <strong>Drill Academy</strong>
+    <span>© 2026 Drill Academy</span>
     <div class="site-footer__links">
       <a href="/recursos">Recursos</a>
       <a href="/">Inicio</a>
@@ -1053,7 +1048,7 @@ src="https://www.facebook.com/tr?id=2324488668354184&ev=PageView&noscript=1"
     </div>
 
     <div class="modal__actions">
-      <button type="button" class="btn btn--primary" id="m-usar">Usar esta tarifa</button>
+      <button type="button" class="btn btn--primary drill-action" id="m-usar">Usar esta tarifa<span class="drill-action__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></button>
       <button type="button" class="btn btn--ghost" data-cerrar-modal>Cerrar</button>
     </div>
   </div>
@@ -1414,7 +1409,7 @@ src="https://www.facebook.com/tr?id=2324488668354184&ev=PageView&noscript=1"
       });
     });
     window.addEventListener("resize", moverIndicador);
-    // Cuando termina de cargar DM Sans cambia el ancho de los tabs.
+    // Cuando termina de cargar la fuente cambia el ancho de los tabs.
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(moverIndicador);
   }
 
@@ -1547,7 +1542,7 @@ src="https://www.facebook.com/tr?id=2324488668354184&ev=PageView&noscript=1"
       });
       $("#wiz-label").textContent = "Paso " + n + " de " + PASO_FINAL;
       btnAtras.disabled = n === 1;
-      btnSig.textContent = n === PASO_FINAL ? "Ver mi presupuesto" : "Siguiente";
+      btnSig.querySelector(".drill-action__label").textContent = n === PASO_FINAL ? "Ver mi presupuesto" : "Siguiente";
     }
 
     ajustarAltura();
@@ -1885,7 +1880,7 @@ src="https://www.facebook.com/tr?id=2324488668354184&ev=PageView&noscript=1"
     // Marca.
     ctx.fillStyle = col("--wdn-accent");
     ctx.font = "700 15px " + F;
-    ctx.fillText("WEB DESIGN NETWORK · TABULADOR DE COBRO", M, y);
+    ctx.fillText("DRILL ACADEMY · TABULADOR DE COBRO", M, y);
     y += 62;
 
     // Encabezado.
